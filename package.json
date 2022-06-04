@@ -1,0 +1,19 @@
+{
+  "name": "louvain-webviz",
+  "version": "0.1.0",
+  "description": "An interactive visualization of the louvain method for educational purposes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Moomboh/louvain-webviz.git"
+  },
+  "author": "Elias Kahl <contact@elias.works>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Moomboh/louvain-webviz/issues"
+  },
+  "homepage": "https://github.com/Moomboh/louvain-webviz#readme"
+}
