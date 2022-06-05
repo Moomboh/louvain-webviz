@@ -4,7 +4,13 @@
   "description": "An interactive visualization of the louvain method for educational purposes",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "concurrently npm:dev npm:serve",
+    "build": "node esbuild.mjs",
+    "dev": "NODE_ENV=development node esbuild.mjs --watch",
+    "serve": "live-server --no-browser --port=8080 dist",
+    "lint": "eslint src/**/*.ts --max-warnings 0",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -15,5 +21,18 @@
   "bugs": {
     "url": "https://github.com/Moomboh/louvain-webviz/issues"
   },
-  "homepage": "https://github.com/Moomboh/louvain-webviz#readme"
+  "homepage": "https://github.com/Moomboh/louvain-webviz#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^17.0.2",
+    "@commitlint/config-angular": "^17.0.0",
+    "@commitlint/config-conventional": "^17.0.2",
+    "@craftamap/esbuild-plugin-html": "^0.4.0",
+    "@typescript-eslint/eslint-plugin": "^5.27.0",
+    "@typescript-eslint/parser": "^5.27.0",
+    "concurrently": "^7.2.1",
+    "esbuild": "^0.14.42",
+    "eslint": "^8.17.0",
+    "husky": "^8.0.1",
+    "live-server": "^1.2.2"
+  }
 }
