@@ -37,8 +37,13 @@ export function graphToCommunityGraph(graph: Graph): CommunityGraph {
   );
 
   for (const edge of graph.edges) {
-    matrix[nodes.indexOf(edge.source)][nodes.indexOf(edge.target)] =
-      edge.weight || 1;
+    const i = nodes.indexOf(edge.source);
+    const j = nodes.indexOf(edge.target);
+
+    const weight = edge.weight || 1;
+
+    matrix[i][j] = weight;
+    matrix[j][i] = weight;
   }
 
   const communites = nodes.map((n) => new Set([n]));
@@ -54,13 +59,19 @@ export function communityGraphToGraph(communityGraph: CommunityGraph): Graph {
   const communityNodes = communityGraph.communites.map((_, i) => ({
     id: `c${i}`,
   }));
-  const nodes = [
-    ...communityNodes,
-    ...communityGraph.nodes.map((id) => ({
+
+  let nodes: { id: string; parent?: string }[] = communityGraph.nodes.map(
+    (id) => ({
       id,
       parent: `c${communityGraph.communites.findIndex((c) => c.has(id))}`,
-    })),
+    })
+  );
+
+  nodes = [
+    ...communityNodes.filter((_, i) => communityGraph.communites[i].size > 0),
+    ...nodes,
   ];
+
   const edges: Edge[] = [];
 
   for (let i = 0; i < communityGraph.nodes.length; i++) {
@@ -85,7 +96,11 @@ export function renderGraph(graph: Graph, el: Element) {
     container: el,
 
     ready() {
-      this.layout({ name: "cose-bilkent", animationDuration: 0 }).run();
+      this.layout({
+        name: "cose-bilkent",
+        animationDuration: 0,
+        randomize: false,
+      }).run();
     },
 
     elements: [

@@ -4,6 +4,7 @@ import {
   graphToCommunityGraph,
   communityGraphToGraph,
 } from "./graph";
+import { initLouvainState, louvainStep } from "./louvain";
 
 const nodes = ["A", "B", "C", "D", "E", "F"];
 
@@ -21,7 +22,30 @@ const graph: Graph = {
   ],
 };
 
+const communityGraph = graphToCommunityGraph(graph);
+
 renderGraph(
-  communityGraphToGraph(graphToCommunityGraph(graph)),
+  communityGraphToGraph(communityGraph),
   document.getElementById("graph")
 );
+
+let louvainState = initLouvainState(communityGraph);
+
+const button = document.createElement("button");
+button.innerText = "Step";
+button.addEventListener("click", () => {
+  louvainState = louvainStep(louvainState);
+
+  renderGraph(
+    communityGraphToGraph(louvainState.graph),
+    document.getElementById("graph")
+  );
+
+  if (louvainState.finished) {
+    button.innerText = "Finished";
+    button.disabled = true;
+  }
+});
+
+const controls = document.getElementById("controls");
+controls.appendChild(button);
