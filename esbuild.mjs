@@ -2,6 +2,7 @@
 /* eslint-env node */
 import esbuild from "esbuild";
 import { htmlPlugin } from "@craftamap/esbuild-plugin-html";
+import { copy } from "esbuild-plugin-copy";
 import { readFileSync } from "fs";
 
 const isDev = process.env.NODE_ENV === "development";
@@ -22,6 +23,13 @@ await esbuild.build({
           htmlTemplate: readFileSync("src/index.html", "utf8"),
         },
       ],
+    }),
+    copy({
+      resolveFrom: "cwd",
+      assets: {
+        from: ["./node_modules/normalize.css/normalize.css"],
+        to: ["./dist/normalize.css"],
+      },
     }),
   ],
   watch: isWatch && {
