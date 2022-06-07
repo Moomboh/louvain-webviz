@@ -104,7 +104,7 @@ export function initLouvainState(
 }
 
 export function louvainStep(state: LouvainState): LouvainState {
-  if (state.deltaModularities.length < state.neighbourCommunities.length) {
+  while (state.deltaModularities.length < state.neighbourCommunities.length) {
     state.deltaModularities.push(
       moveDeltaModularity(
         state.graph,
@@ -115,8 +115,6 @@ export function louvainStep(state: LouvainState): LouvainState {
         ]
       )
     );
-
-    return state;
   }
 
   if (state.deltaModularities.length === state.neighbourCommunities.length) {

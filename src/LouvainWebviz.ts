@@ -59,20 +59,37 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
     .main {
       flex: 1;
       display: flex;
+      flex-wrap: wrap;
     }
 
-    .left-panel {
+    .left-panel,
+    .right-panel {
       background-color: #f4f4f4;
       padding: 1em;
-      height: 100%;
-      width: 400px;
+      width: 100%;
       display: flex;
       flex-direction: column;
     }
 
     .graph-container {
-      height: 99%;
+      pointer-events: none;
+      padding: 1em;
       flex: 1;
+    }
+
+    @media (min-width: 800px) {
+      .left-panel {
+        width: 300px;
+      }
+
+      .right-panel {
+        width: 200px;
+      }
+
+      .graph-container {
+        pointer-events: initial;
+        height: calc(100vh - 64px);
+      }
     }
 
     .mb-1 {
@@ -119,6 +136,9 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
     graphToCommunityGraph(defaultGraph)
   );
 
+  @state()
+  private _lastState: LouvainState | null = null;
+
   private __rndGenNodes = 10;
 
   @state()
@@ -128,7 +148,7 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
 
   private set _rndGenNodes(value) {
     this.__rndGenNodes = value;
-    if (this._rndGenMaxEdges > this._rndGenEdges) {
+    if (this._rndGenMaxEdges < this._rndGenEdges) {
       this._rndGenEdges = this._rndGenMaxEdges;
     }
   }
@@ -142,8 +162,14 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
   @state()
   private _rndGenMaxWeight = 20;
 
+  @state()
   private get _rndGenMaxEdges() {
     return (this._rndGenNodes * (this._rndGenNodes - 1)) / 2;
+  }
+
+  @state()
+  private get _lastNode() {
+    return this._lastState?.graph.nodes[this._lastState.currentNodeIndex];
   }
 
   render() {
@@ -287,11 +313,31 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
             .graph=${this._state.graph}
           ></louvain-webviz-graph>
         </div>
+        <div class="right-panel">
+          ${this._lastState !== null
+            ? html`
+                <span class="section-title mb-1">Last step</span>
+                <span>Node: <strong>${this._lastNode}</strong></span>
+                ${this._lastState.deltaModularities.map(
+                  (deltaModularity, i) => html`
+                    <span>
+                      A&rarr;c${this._lastState?.neighbourCommunities[i]}:
+                      &Delta;G =
+                      <strong
+                        >${Math.round(deltaModularity * 1000) / 1000}</strong
+                      >
+                    </span>
+                  `
+                )}
+              `
+            : html``}
+        </div>
       </main>
     `;
   }
 
   private _handleStep() {
+    this._lastState = this._state;
     this._state = { ...louvainStep(this._state) };
     this._state.graph = { ...this._state.graph };
   }
