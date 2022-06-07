@@ -49,6 +49,97 @@
               "kind": "field",
               "name": "scopedElements",
               "static": true
+            },
+            {
+              "kind": "field",
+              "name": "graph"
+            },
+            {
+              "kind": "field",
+              "name": "_graph",
+              "type": {
+                "text": "Graph"
+              },
+              "privacy": "private",
+              "default": "{\n  nodes: ['A', 'B', 'C', 'D', 'E', 'F'],\n  edges: [\n    { source: 'A', target: 'B', weight: 5 },\n    { source: 'A', target: 'C', weight: 4 },\n    { source: 'A', target: 'E', weight: 1 },\n    { source: 'B', target: 'C', weight: 2 },\n    { source: 'C', target: 'D', weight: 7 },\n    { source: 'D', target: 'F', weight: 3 },\n    { source: 'E', target: 'F', weight: 8 },\n  ],\n}"
+            },
+            {
+              "kind": "field",
+              "name": "_state",
+              "type": {
+                "text": "LouvainState"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "_lastState",
+              "type": {
+                "text": "LouvainState | null"
+              },
+              "privacy": "private",
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "__rndGenNodes",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "private",
+              "default": "10"
+            },
+            {
+              "kind": "field",
+              "name": "_rndGenNodes",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "_rndGenEdges",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "private",
+              "default": "10"
+            },
+            {
+              "kind": "field",
+              "name": "_rndGenMinWeight",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "private",
+              "default": "1"
+            },
+            {
+              "kind": "field",
+              "name": "_rndGenMaxWeight",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "private",
+              "default": "20"
+            },
+            {
+              "kind": "field",
+              "name": "_rndGenMaxEdges",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "_lastNode",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "_handleStep",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "_handleGenerateRandomGraph",
+              "privacy": "private"
             }
           ],
           "mixins": [
@@ -91,16 +182,7 @@
               "type": {
                 "text": "CommunityGraph"
               },
-              "default": "{\n    nodes: [],\n    matrix: [],\n    communites: [],\n  }"
-            },
-            {
-              "kind": "field",
-              "name": "graphEl",
-              "type": {
-                "text": "HTMLElement | null"
-              },
-              "privacy": "private",
-              "default": "null"
+              "default": "{\n    nodes: [],\n    matrix: [],\n    communities: [],\n  }"
             },
             {
               "kind": "method",
@@ -180,6 +262,41 @@
               }
             }
           ]
+        },
+        {
+          "kind": "function",
+          "name": "generateRandomGraph",
+          "return": {
+            "type": {
+              "text": "Graph"
+            }
+          },
+          "parameters": [
+            {
+              "name": "nNodes",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "nEdges",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "minWeight",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "maxWeight",
+              "type": {
+                "text": "number"
+              }
+            }
+          ]
         }
       ],
       "exports": [
@@ -206,14 +323,16 @@
             "name": "renderGraph",
             "module": "src/graph.ts"
           }
+        },
+        {
+          "kind": "js",
+          "name": "generateRandomGraph",
+          "declaration": {
+            "name": "generateRandomGraph",
+            "module": "src/graph.ts"
+          }
         }
       ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/index.ts",
-      "declarations": [],
-      "exports": []
     },
     {
       "kind": "javascript-module",
@@ -385,6 +504,82 @@
               "kind": "field",
               "name": "scopedElements",
               "static": true
+            },
+            {
+              "kind": "field",
+              "name": "graph"
+            },
+            {
+              "kind": "field",
+              "name": "_rndGenNodes"
+            },
+            {
+              "kind": "field",
+              "name": "_rndGenMaxEdges"
+            },
+            {
+              "kind": "field",
+              "name": "_lastNode"
+            },
+            {
+              "kind": "method",
+              "name": "_handleStep"
+            },
+            {
+              "kind": "method",
+              "name": "_handleGenerateRandomGraph"
+            },
+            {
+              "kind": "field",
+              "name": "_graph",
+              "default": "{\n    nodes: ['A', 'B', 'C', 'D', 'E', 'F'],\n    edges: [\n        { source: 'A', target: 'B', weight: 5 },\n        { source: 'A', target: 'C', weight: 4 },\n        { source: 'A', target: 'E', weight: 1 },\n        { source: 'B', target: 'C', weight: 2 },\n        { source: 'C', target: 'D', weight: 7 },\n        { source: 'D', target: 'F', weight: 3 },\n        { source: 'E', target: 'F', weight: 8 },\n    ],\n}",
+              "type": {
+                "text": "object"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "_state"
+            },
+            {
+              "kind": "field",
+              "name": "_lastState",
+              "type": {
+                "text": "null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "__rndGenNodes",
+              "type": {
+                "text": "number"
+              },
+              "default": "10"
+            },
+            {
+              "kind": "field",
+              "name": "_rndGenEdges",
+              "type": {
+                "text": "number"
+              },
+              "default": "10"
+            },
+            {
+              "kind": "field",
+              "name": "_rndGenMinWeight",
+              "type": {
+                "text": "number"
+              },
+              "default": "1"
+            },
+            {
+              "kind": "field",
+              "name": "_rndGenMaxWeight",
+              "type": {
+                "text": "number"
+              },
+              "default": "20"
             }
           ],
           "mixins": [
@@ -431,15 +626,7 @@
               "type": {
                 "text": "object"
               },
-              "default": "{\n            nodes: [],\n            matrix: [],\n            communites: [],\n        }"
-            },
-            {
-              "kind": "field",
-              "name": "graphEl",
-              "type": {
-                "text": "null"
-              },
-              "default": "null"
+              "default": "{\n            nodes: [],\n            matrix: [],\n            communities: [],\n        }"
             }
           ],
           "superclass": {
@@ -493,6 +680,24 @@
               "name": "el"
             }
           ]
+        },
+        {
+          "kind": "function",
+          "name": "generateRandomGraph",
+          "parameters": [
+            {
+              "name": "nNodes"
+            },
+            {
+              "name": "nEdges"
+            },
+            {
+              "name": "minWeight"
+            },
+            {
+              "name": "maxWeight"
+            }
+          ]
         }
       ],
       "exports": [
@@ -517,6 +722,14 @@
           "name": "renderGraph",
           "declaration": {
             "name": "renderGraph",
+            "module": "out-tsc/src/graph.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "generateRandomGraph",
+          "declaration": {
+            "name": "generateRandomGraph",
             "module": "out-tsc/src/graph.js"
           }
         }
