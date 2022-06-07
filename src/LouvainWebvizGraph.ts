@@ -11,7 +11,7 @@ export class LouvainWebvizGraph extends LitElement {
     #graph {
       position: relative;
       width: 100%;
-      height: 80vh;
+      height: 100%;
     }
   `;
 

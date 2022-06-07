@@ -99,6 +99,7 @@ export function renderGraph(graph: Graph, el: Element) {
         name: 'cose-bilkent',
         animationDuration: 0,
         randomize: false,
+        idealEdgeLength: 200,
       }).run();
     },
 
@@ -162,4 +163,38 @@ export function renderGraph(graph: Graph, el: Element) {
       },
     ],
   });
+}
+
+export function generateRandomGraph(
+  nNodes: number,
+  nEdges: number,
+  minWeight: number,
+  maxWeight: number
+): Graph {
+  const nodes: string[] = [];
+  const edges: Edge[] = [];
+
+  for (let i = 0; i < nNodes; i += 1) {
+    nodes.push(`n${i}`);
+  }
+
+  for (let i = 0; i < nEdges; i += 1) {
+    const source = Math.floor(Math.random() * nNodes);
+    const target = Math.floor(Math.random() * nNodes);
+    const weight = Math.floor(
+      Math.random() * (maxWeight - minWeight + 1) + minWeight
+    );
+
+    edges.push({
+      id: `e${i}`,
+      source: `n${source}`,
+      target: `n${target}`,
+      weight,
+    });
+  }
+
+  return {
+    nodes,
+    edges,
+  };
 }

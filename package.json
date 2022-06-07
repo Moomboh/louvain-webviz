@@ -12,9 +12,14 @@
     "build": "rimraf dist && tsc && rollup -c rollup.config.js && npm run analyze -- --exclude dist",
     "start:build": "web-dev-server --root-dir dist --app-index index.html --open",
     "analyze": "cem analyze --litelement",
-    "start": "tsc && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wds --hmr\""
+    "start": "tsc && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wds\""
   },
   "dependencies": {
+    "@material/mwc-button": "^0.26.1",
+    "@material/mwc-formfield": "^0.26.1",
+    "@material/mwc-slider": "^0.26.1",
+    "@material/mwc-textfield": "^0.26.1",
+    "@material/mwc-top-app-bar": "^0.26.1",
     "@open-wc/scoped-elements": "^2.1.1",
     "cytoscape": "^3.21.1",
     "cytoscape-cose-bilkent": "^4.1.0",
