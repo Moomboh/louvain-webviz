@@ -321,7 +321,8 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
                 ${this._lastState.deltaModularities.map(
                   (deltaModularity, i) => html`
                     <span>
-                      A&rarr;c${this._lastState?.neighbourCommunities[i]}:
+                      ${this._lastNode}&rarr;c${this._lastState
+                        ?.neighbourCommunities[i]}:
                       &Delta;G =
                       <strong
                         >${Math.round(deltaModularity * 1000) / 1000}</strong
