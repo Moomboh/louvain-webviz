@@ -1,0 +1,601 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "out-vendors/vendors.bundle.js",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "cytoscape$1",
+          "default": "cytoscape_"
+        },
+        {
+          "kind": "variable",
+          "name": "coseBilkent",
+          "default": "coseBilkent_"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "coseBilkent",
+          "declaration": {
+            "name": "coseBilkent",
+            "module": "out-vendors/vendors.bundle.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "cytoscape",
+          "declaration": {
+            "name": "cytoscape$1",
+            "module": "out-vendors/vendors.bundle.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/LouvainWebviz.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "LouvainWebviz",
+          "members": [
+            {
+              "kind": "field",
+              "name": "scopedElements",
+              "static": true
+            }
+          ],
+          "mixins": [
+            {
+              "name": "ScopedElementsMixin",
+              "package": "@open-wc/scoped-elements"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "louvain-webviz",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "LouvainWebviz",
+          "declaration": {
+            "name": "LouvainWebviz",
+            "module": "src/LouvainWebviz.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/LouvainWebvizGraph.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "LouvainWebvizGraph",
+          "members": [
+            {
+              "kind": "field",
+              "name": "graph",
+              "type": {
+                "text": "CommunityGraph"
+              },
+              "default": "{\n    nodes: [],\n    matrix: [],\n    communites: [],\n  }"
+            },
+            {
+              "kind": "field",
+              "name": "graphEl",
+              "type": {
+                "text": "HTMLElement | null"
+              },
+              "privacy": "private",
+              "default": "null"
+            },
+            {
+              "kind": "method",
+              "name": "renderGraph"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "LouvainWebvizGraph",
+          "declaration": {
+            "name": "LouvainWebvizGraph",
+            "module": "src/LouvainWebvizGraph.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/graph.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "graphToCommunityGraph",
+          "return": {
+            "type": {
+              "text": "CommunityGraph"
+            }
+          },
+          "parameters": [
+            {
+              "name": "graph",
+              "type": {
+                "text": "Graph"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "communityGraphToGraph",
+          "return": {
+            "type": {
+              "text": "Graph"
+            }
+          },
+          "parameters": [
+            {
+              "name": "communityGraph",
+              "type": {
+                "text": "CommunityGraph"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "renderGraph",
+          "parameters": [
+            {
+              "name": "graph",
+              "type": {
+                "text": "Graph"
+              }
+            },
+            {
+              "name": "el",
+              "type": {
+                "text": "Element"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "graphToCommunityGraph",
+          "declaration": {
+            "name": "graphToCommunityGraph",
+            "module": "src/graph.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "communityGraphToGraph",
+          "declaration": {
+            "name": "communityGraphToGraph",
+            "module": "src/graph.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "renderGraph",
+          "declaration": {
+            "name": "renderGraph",
+            "module": "src/graph.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/index.ts",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/louvain-webviz.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "louvain-webviz",
+          "declaration": {
+            "name": "LouvainWebviz",
+            "module": "/src/LouvainWebviz.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/louvain.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "initLouvainState",
+          "return": {
+            "type": {
+              "text": "LouvainState"
+            }
+          },
+          "parameters": [
+            {
+              "name": "graph",
+              "type": {
+                "text": "CommunityGraph"
+              }
+            },
+            {
+              "name": "nodeIndex",
+              "default": "0"
+            },
+            {
+              "name": "communitiesChanged",
+              "default": "false"
+            },
+            {
+              "name": "finished",
+              "default": "false"
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "louvainStep",
+          "return": {
+            "type": {
+              "text": "LouvainState"
+            }
+          },
+          "parameters": [
+            {
+              "name": "state",
+              "type": {
+                "text": "LouvainState"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "initLouvainState",
+          "declaration": {
+            "name": "initLouvainState",
+            "module": "src/louvain.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "louvainStep",
+          "declaration": {
+            "name": "louvainStep",
+            "module": "src/louvain.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/vendors.d.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "cytoscape",
+          "type": {
+            "text": "any"
+          }
+        },
+        {
+          "kind": "variable",
+          "name": "coseBilkent",
+          "type": {
+            "text": "any"
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "cytoscape",
+          "declaration": {
+            "name": "cytoscape",
+            "module": "src/vendors.d.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "coseBilkent",
+          "declaration": {
+            "name": "coseBilkent",
+            "module": "src/vendors.d.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/vendors.js",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "cytoscape",
+          "default": "cytoscape_"
+        },
+        {
+          "kind": "variable",
+          "name": "coseBilkent",
+          "default": "coseBilkent_"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "cytoscape",
+          "declaration": {
+            "name": "cytoscape",
+            "module": "src/vendors.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "coseBilkent",
+          "declaration": {
+            "name": "coseBilkent",
+            "module": "src/vendors.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "out-tsc/src/LouvainWebviz.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "LouvainWebviz",
+          "members": [
+            {
+              "kind": "field",
+              "name": "scopedElements",
+              "static": true
+            }
+          ],
+          "mixins": [
+            {
+              "name": "ScopedElementsMixin",
+              "package": "@open-wc/scoped-elements"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "louvain-webviz",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "LouvainWebviz",
+          "declaration": {
+            "name": "LouvainWebviz",
+            "module": "out-tsc/src/LouvainWebviz.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "out-tsc/src/LouvainWebvizGraph.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "LouvainWebvizGraph",
+          "members": [
+            {
+              "kind": "method",
+              "name": "renderGraph"
+            },
+            {
+              "kind": "field",
+              "name": "graph",
+              "type": {
+                "text": "object"
+              },
+              "default": "{\n            nodes: [],\n            matrix: [],\n            communites: [],\n        }"
+            },
+            {
+              "kind": "field",
+              "name": "graphEl",
+              "type": {
+                "text": "null"
+              },
+              "default": "null"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "LouvainWebvizGraph",
+          "declaration": {
+            "name": "LouvainWebvizGraph",
+            "module": "out-tsc/src/LouvainWebvizGraph.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "out-tsc/src/graph.js",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "graphToCommunityGraph",
+          "parameters": [
+            {
+              "name": "graph"
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "communityGraphToGraph",
+          "parameters": [
+            {
+              "name": "communityGraph"
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "renderGraph",
+          "parameters": [
+            {
+              "name": "graph"
+            },
+            {
+              "name": "el"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "graphToCommunityGraph",
+          "declaration": {
+            "name": "graphToCommunityGraph",
+            "module": "out-tsc/src/graph.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "communityGraphToGraph",
+          "declaration": {
+            "name": "communityGraphToGraph",
+            "module": "out-tsc/src/graph.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "renderGraph",
+          "declaration": {
+            "name": "renderGraph",
+            "module": "out-tsc/src/graph.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "out-tsc/src/index.js",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "out-tsc/src/louvain-webviz.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "louvain-webviz",
+          "declaration": {
+            "name": "LouvainWebviz",
+            "module": "/out-tsc/src/LouvainWebviz.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "out-tsc/src/louvain.js",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "initLouvainState",
+          "parameters": [
+            {
+              "name": "graph"
+            },
+            {
+              "name": "nodeIndex",
+              "default": "0"
+            },
+            {
+              "name": "communitiesChanged",
+              "default": "false"
+            },
+            {
+              "name": "finished",
+              "default": "false"
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "louvainStep",
+          "parameters": [
+            {
+              "name": "state"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "initLouvainState",
+          "declaration": {
+            "name": "initLouvainState",
+            "module": "out-tsc/src/louvain.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "louvainStep",
+          "declaration": {
+            "name": "louvainStep",
+            "module": "out-tsc/src/louvain.js"
+          }
+        }
+      ]
+    }
+  ]
+}

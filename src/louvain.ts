@@ -1,4 +1,4 @@
-import { CommunityGraph } from "./graph";
+import { CommunityGraph } from './graph.js';
 
 export interface LouvainState {
   graph: CommunityGraph;
@@ -17,8 +17,8 @@ function indexOfMaxValue(a: number[]) {
 function weightSum(graph: CommunityGraph): number {
   let sum = 0;
 
-  for (let i = 0; i < graph.matrix.length; i++) {
-    for (let j = i; j < graph.matrix.length; j++) {
+  for (let i = 0; i < graph.matrix.length; i += 1) {
+    for (let j = i; j < graph.matrix.length; j += 1) {
       sum += graph.matrix[i][j];
     }
   }
@@ -30,13 +30,13 @@ function neighbourCommunities(graph: CommunityGraph, node: string): number[] {
   const communities = new Set<number>();
   const nodeIndex = graph.nodes.indexOf(node);
 
-  for (let i = 0; i < graph.nodes.length; i++) {
+  for (let i = 0; i < graph.nodes.length; i += 1) {
     if (graph.matrix[i][nodeIndex] > 0) {
-      communities.add(graph.communites.findIndex((c) => c.has(graph.nodes[i])));
+      communities.add(graph.communities.findIndex(c => c.has(graph.nodes[i])));
     }
   }
 
-  communities.delete(graph.communites.findIndex((c) => c.has(node)));
+  communities.delete(graph.communities.findIndex(c => c.has(node)));
 
   return Array.from(communities);
 }
@@ -68,6 +68,7 @@ function moveDeltaModularity(
 
   for (const node of fromCommunity) {
     if (node === moveNode) {
+      // eslint-disable-next-line no-continue
       continue;
     }
 
@@ -83,14 +84,33 @@ function moveDeltaModularity(
   return deltaRemove + deltaAdd;
 }
 
+export function initLouvainState(
+  graph: CommunityGraph,
+  nodeIndex = 0,
+  communitiesChanged = false,
+  finished = false
+): LouvainState {
+  return {
+    graph,
+    currentNodeIndex: nodeIndex,
+    currentCommunityIndex: graph.communities.findIndex(c =>
+      c.has(graph.nodes[nodeIndex])
+    ),
+    neighbourCommunities: neighbourCommunities(graph, graph.nodes[nodeIndex]),
+    deltaModularities: [],
+    communitiesChanged,
+    finished,
+  };
+}
+
 export function louvainStep(state: LouvainState): LouvainState {
   if (state.deltaModularities.length < state.neighbourCommunities.length) {
     state.deltaModularities.push(
       moveDeltaModularity(
         state.graph,
         state.graph.nodes[state.currentNodeIndex],
-        state.graph.communites[state.currentCommunityIndex],
-        state.graph.communites[
+        state.graph.communities[state.currentCommunityIndex],
+        state.graph.communities[
           state.neighbourCommunities[state.deltaModularities.length]
         ]
       )
@@ -104,13 +124,14 @@ export function louvainStep(state: LouvainState): LouvainState {
     const maxCommunityIndex = state.neighbourCommunities[maxModularityIndex];
 
     if (state.deltaModularities[maxModularityIndex] > 0) {
-      state.graph.communites[state.currentCommunityIndex].delete(
+      state.graph.communities[state.currentCommunityIndex].delete(
         state.graph.nodes[state.currentNodeIndex]
       );
-      state.graph.communites[maxCommunityIndex].add(
+      state.graph.communities[maxCommunityIndex].add(
         state.graph.nodes[state.currentNodeIndex]
       );
 
+      // eslint-disable-next-line no-param-reassign
       state.communitiesChanged = true;
     }
 
@@ -127,24 +148,5 @@ export function louvainStep(state: LouvainState): LouvainState {
     return initLouvainState(state.graph, 0, false, true);
   }
 
-  throw new Error("Unexpected state");
-}
-
-export function initLouvainState(
-  graph: CommunityGraph,
-  nodeIndex = 0,
-  communitiesChanged = false,
-  finished = false
-): LouvainState {
-  return {
-    graph,
-    currentNodeIndex: nodeIndex,
-    currentCommunityIndex: graph.communites.findIndex((c) =>
-      c.has(graph.nodes[nodeIndex])
-    ),
-    neighbourCommunities: neighbourCommunities(graph, graph.nodes[nodeIndex]),
-    deltaModularities: [],
-    communitiesChanged,
-    finished,
-  };
+  throw new Error('Unexpected state');
 }

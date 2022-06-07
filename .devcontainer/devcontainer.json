@@ -14,5 +14,6 @@
     "joshbolduc.commitlint",
     "eamodio.gitlens",
     "ms-azuretools.vscode-docker",
+    "ritwickdey.LiveServer"
   ]
 }
