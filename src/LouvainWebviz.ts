@@ -139,6 +139,7 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
   @state()
   private _lastState: LouvainState | null = null;
 
+  @state()
   private __rndGenNodes = 10;
 
   @state()
@@ -152,6 +153,9 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
       this._rndGenEdges = this._rndGenMaxEdges;
     }
   }
+
+  @state()
+  private _rndGenMaxNodes = 20;
 
   @state()
   private _rndGenEdges = 10;
@@ -187,7 +191,7 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
               discrete
               step="1"
               min="3"
-              max="100"
+              max="${this._rndGenMaxNodes}"
               value="${this._rndGenNodes}"
               @input="${(e: CustomEvent) => {
                 this._rndGenNodes = e.detail.value;
