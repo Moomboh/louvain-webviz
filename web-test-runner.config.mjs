@@ -1,6 +1,13 @@
 import { playwrightLauncher } from '@web/test-runner-playwright';
+import { rollupAdapter } from '@web/dev-server-rollup';
+import alias from '@rollup/plugin-alias';
 
-const filteredLogs = ['Running in dev mode', 'lit-html is in dev mode'];
+const filteredLogs = [
+  'Running in dev mode',
+  'lit-html is in dev mode',
+  'Lit is in dev mode',
+  'scheduled an update (generally because a property was set) after an update completed',
+];
 
 export default /** @type {import("@web/test-runner").TestRunnerConfig} */ ({
   /** Test files to run */
@@ -10,6 +17,19 @@ export default /** @type {import("@web/test-runner").TestRunnerConfig} */ ({
   nodeResolve: {
     exportConditions: ['browser', 'development'],
   },
+
+  plugins: [
+    rollupAdapter(
+      alias({
+        entries: [
+          {
+            find: '_vendors',
+            replacement: `${process.cwd()}/out-vendors/vendors.bundle.js`,
+          },
+        ],
+      })
+    ),
+  ],
 
   /** Filter out lit dev mode logs */
   filterBrowserLogs(log) {
