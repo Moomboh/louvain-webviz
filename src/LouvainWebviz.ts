@@ -50,6 +50,10 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
       font-family: sans-serif;
     }
 
+    h1 {
+      font-size: 1.75rem;
+    }
+
     #graph {
       display: block;
       width: 99%; /* 99% because otherwise we get weird overflow issues */
@@ -179,7 +183,7 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
   render() {
     return html`
       <mwc-top-app-bar>
-        <div slot="title">Louvain Method Visualization</div>
+        <h1 slot="title">Louvain Method Visualization</h1>
       </mwc-top-app-bar>
       <main class="main">
         <div class="left-panel">
