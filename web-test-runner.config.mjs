@@ -50,6 +50,10 @@ export default /** @type {import("@web/test-runner").TestRunnerConfig} */ ({
   /** Amount of test files per browser to test concurrently */
   concurrency: 1,
 
+  coverageConfig: {
+    exclude: ['**/node_modules/**/*', '**/out-vendors/**/*'],
+  },
+
   /** Browsers to run tests on */
   browsers: [
     playwrightLauncher({ product: 'chromium' }),

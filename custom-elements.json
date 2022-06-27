@@ -96,6 +96,15 @@
             },
             {
               "kind": "field",
+              "name": "_rndGenMaxNodes",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "private",
+              "default": "20"
+            },
+            {
+              "kind": "field",
               "name": "_rndGenEdges",
               "type": {
                 "text": "number"
@@ -139,6 +148,11 @@
             {
               "kind": "method",
               "name": "_handleGenerateRandomGraph",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "_handleCommunityAggregation",
               "privacy": "private"
             }
           ],
@@ -193,6 +207,7 @@
             "name": "LitElement",
             "package": "lit"
           },
+          "tagName": "louvain-webviz-graph",
           "customElement": true
         }
       ],
@@ -336,6 +351,21 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/louvain-webviz-graph.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "louvain-webviz-graph",
+          "declaration": {
+            "name": "LouvainWebvizGraph",
+            "module": "/src/LouvainWebvizGraph.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/louvain-webviz.ts",
       "declarations": [],
       "exports": [
@@ -398,6 +428,23 @@
               }
             }
           ]
+        },
+        {
+          "kind": "function",
+          "name": "communityAggregation",
+          "return": {
+            "type": {
+              "text": "CommunityGraph"
+            }
+          },
+          "parameters": [
+            {
+              "name": "graph",
+              "type": {
+                "text": "CommunityGraph"
+              }
+            }
+          ]
         }
       ],
       "exports": [
@@ -414,6 +461,14 @@
           "name": "louvainStep",
           "declaration": {
             "name": "louvainStep",
+            "module": "src/louvain.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "communityAggregation",
+          "declaration": {
+            "name": "communityAggregation",
             "module": "src/louvain.ts"
           }
         }
@@ -493,6 +548,24 @@
     },
     {
       "kind": "javascript-module",
+      "path": "coverage/lcov-report/block-navigation.js",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "coverage/lcov-report/prettify.js",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "coverage/lcov-report/sorter.js",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
       "path": "out-tsc/src/LouvainWebviz.js",
       "declarations": [
         {
@@ -530,6 +603,10 @@
               "name": "_handleGenerateRandomGraph"
             },
             {
+              "kind": "method",
+              "name": "_handleCommunityAggregation"
+            },
+            {
               "kind": "field",
               "name": "_graph",
               "default": "{\n    nodes: ['A', 'B', 'C', 'D', 'E', 'F'],\n    edges: [\n        { source: 'A', target: 'B', weight: 5 },\n        { source: 'A', target: 'C', weight: 4 },\n        { source: 'A', target: 'E', weight: 1 },\n        { source: 'B', target: 'C', weight: 2 },\n        { source: 'C', target: 'D', weight: 7 },\n        { source: 'D', target: 'F', weight: 3 },\n        { source: 'E', target: 'F', weight: 8 },\n    ],\n}",
@@ -556,6 +633,14 @@
                 "text": "number"
               },
               "default": "10"
+            },
+            {
+              "kind": "field",
+              "name": "_rndGenMaxNodes",
+              "type": {
+                "text": "number"
+              },
+              "default": "20"
             },
             {
               "kind": "field",
@@ -633,6 +718,7 @@
             "name": "LitElement",
             "package": "lit"
           },
+          "tagName": "louvain-webviz-graph",
           "customElement": true
         }
       ],
@@ -743,6 +829,21 @@
     },
     {
       "kind": "javascript-module",
+      "path": "out-tsc/src/louvain-webviz-graph.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "louvain-webviz-graph",
+          "declaration": {
+            "name": "LouvainWebvizGraph",
+            "module": "/out-tsc/src/LouvainWebvizGraph.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "out-tsc/src/louvain-webviz.js",
       "declarations": [],
       "exports": [
@@ -789,6 +890,15 @@
               "name": "state"
             }
           ]
+        },
+        {
+          "kind": "function",
+          "name": "communityAggregation",
+          "parameters": [
+            {
+              "name": "graph"
+            }
+          ]
         }
       ],
       "exports": [
@@ -805,6 +915,14 @@
           "name": "louvainStep",
           "declaration": {
             "name": "louvainStep",
+            "module": "out-tsc/src/louvain.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "communityAggregation",
+          "declaration": {
+            "name": "communityAggregation",
             "module": "out-tsc/src/louvain.js"
           }
         }

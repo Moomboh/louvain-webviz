@@ -8,7 +8,7 @@ import alias from '@rollup/plugin-alias';
 
 export default [
   {
-    input: './src/vendors.js',
+    input: 'src/vendors.js',
     treeshake: false,
     output: [
       {
@@ -20,7 +20,7 @@ export default [
     plugins: [nodeResolve(), commonjs({ transformMixedEsModules: true })],
   },
   {
-    input: 'index.html',
+    input: 'src/index.html',
     output: {
       entryFileNames: '[hash].js',
       chunkFileNames: '[hash].js',
@@ -42,6 +42,7 @@ export default [
       /** Enable using HTML as rollup entrypoint */
       html({
         minify: true,
+        publicPath: process.env.LIT_APP_PUBLIC_PATH || '/',
       }),
       /** Resolve bare module imports */
       nodeResolve(),
