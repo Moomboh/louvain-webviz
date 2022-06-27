@@ -6,7 +6,7 @@ import alias from '@rollup/plugin-alias';
 const hmr = process.argv.includes('--hmr');
 
 export default /** @type {import('@web/dev-server').DevServerConfig} */ ({
-  open: '/',
+  open: '/src',
   watch: !hmr,
   nodeResolve: {
     exportConditions: ['browser', 'development'],
