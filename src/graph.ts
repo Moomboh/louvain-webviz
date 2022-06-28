@@ -99,7 +99,9 @@ export function renderGraph(graph: Graph, el: Element) {
         name: 'cose-bilkent',
         animationDuration: 0,
         randomize: false,
-        idealEdgeLength: 200,
+        nodeDimensionsIncludeLabels: true,
+        edgeElasticity: 0.2,
+        nodeRepulsion: 1000000,
       }).run();
     },
 
@@ -157,7 +159,7 @@ export function renderGraph(graph: Graph, el: Element) {
           'line-color': '#222',
           'text-background-color': '#fff',
           'text-background-shape': 'round-rectangle',
-          'text-background-opacity': 1,
+          'text-background-opacity': 0.75,
           'curve-style': 'bezier',
         },
       },
