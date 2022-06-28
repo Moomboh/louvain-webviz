@@ -213,6 +213,7 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
               outlined
               value="${this._rndGenNodes}"
               class="slider-input"
+              id="rndgen-n-nodes"
               @input="${(e: InputEvent) => {
                 this._rndGenNodes = parseInt(
                   (e.target as HTMLInputElement).value,
@@ -242,6 +243,7 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
               min="3"
               value="${this._rndGenEdges}"
               class="slider-input"
+              id="rndgen-n-edges"
               @input="${(e: InputEvent) => {
                 this._rndGenEdges = parseInt(
                   (e.target as HTMLInputElement).value,
@@ -261,6 +263,7 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
               outlined
               value="${this._rndGenMinWeight}"
               class="slider-input"
+              id="rndgen-min-weight"
               @change="${(e: InputEvent) => {
                 this._rndGenMinWeight = parseInt(
                   (e.target as HTMLInputElement).value,
@@ -295,6 +298,7 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
               outlined
               value="${this._rndGenMaxWeight}"
               class="slider-input"
+              id="rndgen-max-weight"
               @change="${(e: InputEvent) => {
                 this._rndGenMaxWeight = parseInt(
                   (e.target as HTMLInputElement).value,
@@ -308,6 +312,7 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
             @click=${this._handleGenerateRandomGraph}
             outlined
             class="mb-1"
+            id="rndgen-generate"
           >
             Generate random graph
           </mwc-button>

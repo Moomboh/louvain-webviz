@@ -1,9 +1,14 @@
 import { expect } from '@open-wc/testing';
-import { communityAggregation } from '../src/louvain.js';
+import { CommunityGraph, Graph, graphToCommunityGraph } from '../src/graph.js';
+import {
+  communityAggregation,
+  initLouvainState,
+  louvainStep,
+} from '../src/louvain.js';
 
 describe('communityAggregation', () => {
   it('correctly aggregates communities', () => {
-    const graph = {
+    const graph: CommunityGraph = {
       nodes: ['A', 'B', 'C', 'D', 'E'],
       matrix: [
         [1, 5, 4, 0, 0],
@@ -22,5 +27,36 @@ describe('communityAggregation', () => {
       [15, 2],
       [2, 9],
     ]);
+  });
+});
+
+describe('louvainStep', () => {
+  it('creates expected communities', () => {
+    const graph: Graph = {
+      nodes: ['A', 'B', 'C', 'D', 'E', 'F'],
+      edges: [
+        { source: 'A', target: 'B', weight: 5 },
+        { source: 'A', target: 'C', weight: 4 },
+        { source: 'A', target: 'E', weight: 1 },
+        { source: 'B', target: 'C', weight: 2 },
+        { source: 'C', target: 'D', weight: 7 },
+        { source: 'D', target: 'F', weight: 3 },
+        { source: 'E', target: 'F', weight: 8 },
+      ],
+    };
+
+    const communityGraph = graphToCommunityGraph(graph);
+
+    let state = initLouvainState(communityGraph);
+
+    while (!state.finished) {
+      state = louvainStep(state);
+    }
+
+    expect(
+      new Set(state.graph.communities.filter(c => c.size > 0))
+    ).to.deep.equal(
+      new Set([new Set(['A', 'B']), new Set(['C', 'D']), new Set(['E', 'F'])])
+    );
   });
 });
