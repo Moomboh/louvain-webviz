@@ -9,7 +9,12 @@ import { Formfield } from '@material/mwc-formfield';
 import { TextField } from '@material/mwc-textfield';
 import { LouvainWebvizGraph } from './LouvainWebvizGraph.js';
 import { generateRandomGraph, Graph, graphToCommunityGraph } from './graph.js';
-import { initLouvainState, LouvainState, louvainStep } from './louvain.js';
+import {
+  communityAggregation,
+  initLouvainState,
+  LouvainState,
+  louvainStep,
+} from './louvain.js';
 
 const defaultGraph: Graph = {
   nodes: ['A', 'B', 'C', 'D', 'E', 'F'],
@@ -311,8 +316,18 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
             @click=${this._handleStep}
             ?disabled=${this._state.finished}
             raised
+            class="mb-1"
           >
             ${this._state.finished ? 'Finished' : 'Step'}
+          </mwc-button>
+
+          <mwc-button
+            @click=${this._handleCommunityAggregation}
+            ?disabled=${!this._state.finished}
+            raised
+            class="mb-1"
+          >
+            Community Aggregation
           </mwc-button>
         </div>
         <div class="graph-container">
@@ -358,5 +373,11 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
       this._rndGenMinWeight,
       this._rndGenMaxWeight
     );
+  }
+
+  private _handleCommunityAggregation() {
+    this._state = initLouvainState({
+      ...communityAggregation(this._state.graph),
+    });
   }
 }

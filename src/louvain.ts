@@ -1,4 +1,5 @@
-import { CommunityGraph } from './graph.js';
+import { CommunityGraph, Graph, graphToCommunityGraph } from './graph.js';
+import { cartesianProduct } from './util.js';
 
 export interface LouvainState {
   graph: CommunityGraph;
@@ -147,4 +148,48 @@ export function louvainStep(state: LouvainState): LouvainState {
   }
 
   throw new Error('Unexpected state');
+}
+
+export function communityAggregation(graph: CommunityGraph): CommunityGraph {
+  const newGraph: Graph = {
+    nodes: [],
+    edges: [],
+  };
+
+  for (const [i, community] of graph.communities.entries()) {
+    if (community.size > 0) {
+      newGraph.nodes.push(`ac${i}`);
+    }
+  }
+
+  const communityEntries = [...graph.communities.entries()];
+
+  for (const [cai, ca, cbi, cb] of cartesianProduct(
+    communityEntries,
+    communityEntries
+  )) {
+    let weight = cartesianProduct([...ca], [...cb]).reduce(
+      (acc, [a, b]) =>
+        acc + graph.matrix[graph.nodes.indexOf(a)][graph.nodes.indexOf(b)],
+      0
+    );
+
+    if (cai === cbi) {
+      for (const node of ca) {
+        const nodeIndex = graph.nodes.indexOf(node);
+        weight += graph.matrix[nodeIndex][nodeIndex];
+      }
+      weight /= 2;
+    }
+
+    if (weight > 0) {
+      newGraph.edges.push({
+        source: `ac${cai}`,
+        target: `ac${cbi}`,
+        weight,
+      });
+    }
+  }
+
+  return graphToCommunityGraph(newGraph);
 }
