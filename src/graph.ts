@@ -156,10 +156,9 @@ export function renderGraph(graph: Graph, el: Element) {
         style: {
           width: 2,
           label: 'data(label)',
-          'line-color': '#222',
-          'text-background-color': '#fff',
-          'text-background-shape': 'round-rectangle',
-          'text-background-opacity': 0.75,
+          color: '#260',
+          'font-weight': 'bold',
+          'font-size': '20px',
           'curve-style': 'bezier',
         },
       },
