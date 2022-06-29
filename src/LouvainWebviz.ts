@@ -8,7 +8,12 @@ import { SliderRange } from '@material/mwc-slider/slider-range';
 import { Formfield } from '@material/mwc-formfield';
 import { TextField } from '@material/mwc-textfield';
 import { LouvainWebvizGraph } from './LouvainWebvizGraph.js';
-import { generateRandomGraph, Graph, graphToCommunityGraph } from './graph.js';
+import {
+  CommunityGraph,
+  generateRandomGraph,
+  Graph,
+  graphToCommunityGraph,
+} from './graph.js';
 import {
   communityAggregation,
   initLouvainState,
@@ -48,6 +53,7 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
     }
 
     :host {
+      font-size: 20px;
       height: 100vh;
       width: 100vw;
       display: flex;
@@ -84,15 +90,16 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
       pointer-events: none;
       padding: 1em;
       flex: 1;
+      height: 80vh;
     }
 
-    @media (min-width: 800px) {
+    @media (min-width: 1200px) {
       .left-panel {
-        width: 300px;
+        width: 400px;
       }
 
       .right-panel {
-        width: 200px;
+        width: 300px;
       }
 
       .graph-container {
@@ -127,6 +134,9 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
     }
   `;
 
+  @state()
+  private _graph: Graph = defaultGraph;
+
   @property({ attribute: false })
   get graph() {
     return this._graph;
@@ -134,19 +144,48 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
 
   set graph(graph: Graph) {
     this._graph = graph;
-    this._state = initLouvainState(graphToCommunityGraph(graph));
+    this._stateHistory = [initLouvainState(graphToCommunityGraph(graph))];
+    // eslint-disable-next-line prefer-destructuring
+    this.currentState = this._stateHistory[0];
   }
 
   @state()
-  private _graph: Graph = defaultGraph;
+  private _stateHistory: LouvainState[] = [
+    initLouvainState(graphToCommunityGraph(this._graph)),
+  ];
 
   @state()
-  private _state: LouvainState = initLouvainState(
-    graphToCommunityGraph(defaultGraph)
-  );
+  private _currentState = this._stateHistory[0];
+
+  @property({ attribute: false })
+  get currentState() {
+    return this._currentState;
+  }
+
+  set currentState(s: LouvainState) {
+    // need to spread all nested objects to make sure lit updates
+    this._currentState = { ...s };
+    this._currentNode = s.graph.nodes[s.currentNodeIndex];
+    this._currentGraph = { ...s.graph };
+    this._currentDeltaModularities = [...s.deltaModularities];
+    this._currentNeighbourCommunities = [...s.neighbourCommunities];
+  }
 
   @state()
-  private _lastState: LouvainState | null = null;
+  private _currentGraph: CommunityGraph = {
+    nodes: [],
+    matrix: [],
+    communities: [],
+  };
+
+  @state()
+  private _currentNode = '';
+
+  @state()
+  private _currentDeltaModularities: number[] = [];
+
+  @state()
+  private _currentNeighbourCommunities: number[] = [];
 
   @state()
   private __rndGenNodes = 10;
@@ -182,7 +221,12 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
 
   @state()
   private get _lastNode() {
-    return this._lastState?.graph.nodes[this._lastState.currentNodeIndex];
+    return this._currentState?.graph.nodes[this._currentState.currentNodeIndex];
+  }
+
+  constructor() {
+    super();
+    this.graph = defaultGraph;
   }
 
   render() {
@@ -190,185 +234,190 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
       <mwc-top-app-bar>
         <h1 slot="title">Louvain Method Visualization</h1>
       </mwc-top-app-bar>
-      <main class="main">
-        <div class="left-panel">
-          <span class="section-title mb-1">Generate random graph</span>
+      ${this._currentState
+        ? html` <main class="main">
+            <div class="left-panel">
+              <span class="section-title mb-1">Generate random graph</span>
 
-          <span class="label">Number of nodes</span>
-          <div class="slider-group mb-1">
-            <mwc-slider
-              discrete
-              step="1"
-              min="3"
-              max="${this._rndGenMaxNodes}"
-              value="${this._rndGenNodes}"
-              @input="${(e: CustomEvent) => {
-                this._rndGenNodes = e.detail.value;
-              }}"
-              class="slider"
-            >
-            </mwc-slider>
-            <mwc-textfield
-              type="number"
-              outlined
-              value="${this._rndGenNodes}"
-              class="slider-input"
-              id="rndgen-n-nodes"
-              @input="${(e: InputEvent) => {
-                this._rndGenNodes = parseInt(
-                  (e.target as HTMLInputElement).value,
-                  10
-                );
-              }}"
-            ></mwc-textfield>
-          </div>
+              <span class="label">Number of nodes</span>
+              <div class="slider-group mb-1">
+                <mwc-slider
+                  discrete
+                  step="1"
+                  min="3"
+                  max="${this._rndGenMaxNodes}"
+                  value="${this._rndGenNodes}"
+                  @input="${(e: CustomEvent) => {
+                    this._rndGenNodes = e.detail.value;
+                  }}"
+                  class="slider"
+                >
+                </mwc-slider>
+                <mwc-textfield
+                  type="number"
+                  outlined
+                  value="${this._rndGenNodes}"
+                  class="slider-input"
+                  id="rndgen-n-nodes"
+                  @input="${(e: InputEvent) => {
+                    this._rndGenNodes = parseInt(
+                      (e.target as HTMLInputElement).value,
+                      10
+                    );
+                  }}"
+                ></mwc-textfield>
+              </div>
 
-          <span class="label">Number of edges</span>
-          <div class="slider-group mb-1">
-            <mwc-slider
-              discrete
-              step="1"
-              min="3"
-              max="${this._rndGenMaxEdges}"
-              value="${this._rndGenEdges}"
-              @input="${(e: CustomEvent) => {
-                this._rndGenEdges = e.detail.value;
-              }}"
-              class="slider"
-            >
-            </mwc-slider>
-            <mwc-textfield
-              type="number"
-              outlined
-              min="3"
-              value="${this._rndGenEdges}"
-              class="slider-input"
-              id="rndgen-n-edges"
-              @input="${(e: InputEvent) => {
-                this._rndGenEdges = parseInt(
-                  (e.target as HTMLInputElement).value,
-                  10
-                );
-              }}"
-            ></mwc-textfield>
-          </div>
+              <span class="label">Number of edges</span>
+              <div class="slider-group mb-1">
+                <mwc-slider
+                  discrete
+                  step="1"
+                  min="3"
+                  max="${this._rndGenMaxEdges}"
+                  value="${this._rndGenEdges}"
+                  @input="${(e: CustomEvent) => {
+                    this._rndGenEdges = e.detail.value;
+                  }}"
+                  class="slider"
+                >
+                </mwc-slider>
+                <mwc-textfield
+                  type="number"
+                  outlined
+                  min="3"
+                  value="${this._rndGenEdges}"
+                  class="slider-input"
+                  id="rndgen-n-edges"
+                  @input="${(e: InputEvent) => {
+                    this._rndGenEdges = parseInt(
+                      (e.target as HTMLInputElement).value,
+                      10
+                    );
+                  }}"
+                ></mwc-textfield>
+              </div>
 
-          <span class="label mb-1">Range of edge weights</span>
-          <div class="slider-group mb-1">
-            <mwc-textfield
-              type="number"
-              min="1"
-              max="100"
-              label="min"
-              outlined
-              value="${this._rndGenMinWeight}"
-              class="slider-input"
-              id="rndgen-min-weight"
-              @change="${(e: InputEvent) => {
-                this._rndGenMinWeight = parseInt(
-                  (e.target as HTMLInputElement).value,
-                  10
-                );
-              }}"
-            ></mwc-textfield>
-            <mwc-slider-range
-              min="1"
-              max="100"
-              valueStart="${this._rndGenMinWeight}"
-              valueEnd="${this._rndGenMaxWeight}"
-              class="slider mb-1"
-              @input="${(e: CustomEvent) => {
-                const { value, thumb } = e.detail;
+              <span class="label mb-1">Range of edge weights</span>
+              <div class="slider-group mb-1">
+                <mwc-textfield
+                  type="number"
+                  min="1"
+                  max="100"
+                  label="min"
+                  outlined
+                  value="${this._rndGenMinWeight}"
+                  class="slider-input"
+                  id="rndgen-min-weight"
+                  @change="${(e: InputEvent) => {
+                    this._rndGenMinWeight = parseInt(
+                      (e.target as HTMLInputElement).value,
+                      10
+                    );
+                  }}"
+                ></mwc-textfield>
+                <mwc-slider-range
+                  min="1"
+                  max="100"
+                  valueStart="${this._rndGenMinWeight}"
+                  valueEnd="${this._rndGenMaxWeight}"
+                  class="slider mb-1"
+                  @input="${(e: CustomEvent) => {
+                    const { value, thumb } = e.detail;
 
-                if (thumb === 1) {
-                  this._rndGenMinWeight = value;
-                }
+                    if (thumb === 1) {
+                      this._rndGenMinWeight = value;
+                    }
 
-                if (thumb === 2) {
-                  this._rndGenMaxWeight = value;
-                }
-              }}"
-            >
-            </mwc-slider-range>
-            <mwc-textfield
-              type="number"
-              min="1"
-              max="100"
-              label="max"
-              outlined
-              value="${this._rndGenMaxWeight}"
-              class="slider-input"
-              id="rndgen-max-weight"
-              @change="${(e: InputEvent) => {
-                this._rndGenMaxWeight = parseInt(
-                  (e.target as HTMLInputElement).value,
-                  10
-                );
-              }}"
-            ></mwc-textfield>
-          </div>
+                    if (thumb === 2) {
+                      this._rndGenMaxWeight = value;
+                    }
+                  }}"
+                >
+                </mwc-slider-range>
+                <mwc-textfield
+                  type="number"
+                  min="1"
+                  max="100"
+                  label="max"
+                  outlined
+                  value="${this._rndGenMaxWeight}"
+                  class="slider-input"
+                  id="rndgen-max-weight"
+                  @change="${(e: InputEvent) => {
+                    this._rndGenMaxWeight = parseInt(
+                      (e.target as HTMLInputElement).value,
+                      10
+                    );
+                  }}"
+                ></mwc-textfield>
+              </div>
 
-          <mwc-button
-            @click=${this._handleGenerateRandomGraph}
-            outlined
-            class="mb-1"
-            id="rndgen-generate"
-          >
-            Generate random graph
-          </mwc-button>
+              <mwc-button
+                @click=${this._handleGenerateRandomGraph}
+                outlined
+                class="mb-1"
+                id="rndgen-generate"
+              >
+                Generate random graph
+              </mwc-button>
 
-          <mwc-button
-            @click=${this._handleStep}
-            ?disabled=${this._state.finished}
-            raised
-            class="mb-1"
-          >
-            ${this._state.finished ? 'Finished' : 'Step'}
-          </mwc-button>
+              <mwc-button
+                @click=${this._handleStep}
+                ?disabled=${this._currentState.finished}
+                raised
+                class="mb-1"
+              >
+                ${this._currentState.finished ? 'Finished' : 'Step'}
+              </mwc-button>
 
-          <mwc-button
-            @click=${this._handleCommunityAggregation}
-            ?disabled=${!this._state.finished}
-            raised
-            class="mb-1"
-          >
-            Community Aggregation
-          </mwc-button>
-        </div>
-        <div class="graph-container">
-          <louvain-webviz-graph
-            id="graph"
-            .graph=${this._state.graph}
-          ></louvain-webviz-graph>
-        </div>
-        <div class="right-panel">
-          ${this._lastState !== null
-            ? html`
-                <span class="section-title mb-1">Last step</span>
-                <span>Node: <strong>${this._lastNode}</strong></span>
-                ${this._lastState.deltaModularities.map(
-                  (deltaModularity, i) => html`
-                    <span>
-                      ${this._lastNode}&rarr;c${this._lastState
-                        ?.neighbourCommunities[i]}:
-                      &Delta;G =
-                      <strong
-                        >${Math.round(deltaModularity * 1000) / 1000}</strong
-                      >
-                    </span>
+              <mwc-button
+                @click=${this._handleCommunityAggregation}
+                ?disabled=${!this._currentState.finished}
+                raised
+                class="mb-1"
+              >
+                Community Aggregation
+              </mwc-button>
+            </div>
+            <div class="graph-container">
+              <louvain-webviz-graph
+                id="graph"
+                .graph=${this._currentGraph}
+              ></louvain-webviz-graph>
+            </div>
+            <div class="right-panel">
+              ${!this._currentState.finished
+                ? html`
+                    <span class="section-title mb-1">Current step</span>
+                    <span>Node: <strong>${this._currentNode}</strong></span>
+                    ${this._currentDeltaModularities.map(
+                      (deltaModularity, i) => html`
+                        <span>
+                          ${this._currentNode}&rarr;c${this
+                            ._currentNeighbourCommunities[i]}:
+                          &Delta;G =
+                          <strong
+                            >${Math.round(deltaModularity * 1000) /
+                            1000}</strong
+                          >
+                        </span>
+                      `
+                    )}
                   `
-                )}
-              `
-            : html``}
-        </div>
-      </main>
+                : html``}
+            </div>
+          </main>`
+        : html``}
     `;
   }
 
   private _handleStep() {
-    this._lastState = this._state;
-    this._state = { ...louvainStep(this._state) };
-    this._state.graph = { ...this._state.graph };
+    this._stateHistory = [
+      ...this._stateHistory,
+      { ...louvainStep(this._currentState) },
+    ];
+    this.currentState = this._stateHistory[this._stateHistory.length - 1];
   }
 
   private _handleGenerateRandomGraph() {
@@ -381,8 +430,15 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
   }
 
   private _handleCommunityAggregation() {
-    this._state = initLouvainState({
-      ...communityAggregation(this._state.graph),
-    });
+    this._stateHistory = [
+      ...this._stateHistory,
+      {
+        ...initLouvainState({
+          ...communityAggregation(this._currentState.graph),
+        }),
+      },
+    ];
+
+    this.currentState = this._stateHistory[this._stateHistory.length - 1];
   }
 }
