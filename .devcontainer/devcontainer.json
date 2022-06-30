@@ -7,6 +7,8 @@
     "docker.showExplorer": false
   },
   "containerUser": "node",
+  "workspaceFolder": "/workspaces/louvain-webviz",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/louvain-webviz,type=bind,consistency=cached",
   "extensions": [
     "runem.lit-plugin",
     "esbenp.prettier-vscode",
@@ -15,5 +17,6 @@
     "eamodio.gitlens",
     "ms-azuretools.vscode-docker",
     "ritwickdey.LiveServer"
-  ]
+  ],
+  "postCreateCommand": "npx install playwright"
 }

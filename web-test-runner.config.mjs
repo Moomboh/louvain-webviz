@@ -45,10 +45,10 @@ export default /** @type {import("@web/test-runner").TestRunnerConfig} */ ({
   esbuildTarget: 'auto',
 
   /** Amount of browsers to run concurrently */
-  concurrentBrowsers: 2,
+  concurrentBrowsers: 3,
 
   /** Amount of test files per browser to test concurrently */
-  concurrency: 1,
+  concurrency: 4,
 
   coverageConfig: {
     exclude: ['**/node_modules/**/*', '**/out-vendors/**/*'],

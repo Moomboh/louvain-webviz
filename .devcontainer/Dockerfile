@@ -5,7 +5,7 @@ FROM ubuntu:20.04
 # see also https://github.com/nodesource/distributions/blob/master/README.md
 ARG NODESOURCE_VERSION=18.x 
 
-ARG PLAYWRIGHT_VERSION=1.20.2
+ARG PLAYWRIGHT_VERSION=1.23
 
 ARG DEBIAN_FRONTEND=noninteractive
 RUN set -ex \
@@ -18,12 +18,14 @@ RUN set -ex \
     nodejs \
     && rm -rf /var/lib/apt/lists/* \
     # install playwright dependencies
+    && npx playwright@${PLAYWRIGHT_VERSION} install-deps \
     && npm install --global playwright@${PLAYWRIGHT_VERSION} \
-    && npx playwright install-deps \
     # add non root user
     && useradd -ms /bin/bash node
 
 # switch to no root user for better security
 USER node
-# install playwright browser binaries
-RUN npx playwright install 
+
+WORKDIR /workspaces/louvain-webviz
+
+RUN npx playwright@${PLAYWRIGHT_VERSION} install
