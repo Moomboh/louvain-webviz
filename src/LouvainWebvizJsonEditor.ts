@@ -228,7 +228,7 @@ export class LouvainWebvizJsonEditor extends LitElement {
     _changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
   ): void {
     if (_changedProperties.has('json') && this._editor === null) {
-      const jsonEditorEl = this.shadowRoot?.querySelector('#json-editor')!;
+      const jsonEditorEl = this.shadowRoot!.querySelector('#json-editor')!;
 
       const content = {
         text: JSON.stringify(this.json, null, 2),

@@ -33,10 +33,7 @@ export class LouvainWebvizGraph extends LitElement {
   }
 
   renderGraph() {
-    const graphEl = this.shadowRoot?.querySelector('#graph') ?? null;
-
-    if (graphEl !== null) {
-      renderGraph(communityGraphToGraph(this.graph), graphEl);
-    }
+    const graphEl = this.shadowRoot!.querySelector('#graph')!;
+    renderGraph(communityGraphToGraph(this.graph), graphEl);
   }
 }
