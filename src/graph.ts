@@ -120,7 +120,7 @@ export function renderGraph(graph: Graph, el: Element) {
       ...graph.edges.map(edge => ({
         data: {
           id: edge.id || `${edge.source}-${edge.target}`,
-          label: edge.label || edge.weight || edge.id,
+          label: edge.label || edge.weight || edge.id || '',
           source: edge.source,
           target: edge.target,
         },
