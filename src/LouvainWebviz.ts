@@ -8,7 +8,7 @@ import { SliderRange } from '@material/mwc-slider/slider-range';
 import { Formfield } from '@material/mwc-formfield';
 import { TextField } from '@material/mwc-textfield';
 import { LouvainWebvizGraph } from './LouvainWebvizGraph.js';
-import { LouvainWebvizCollapse } from './LouvainWebvizCollapse.js';
+import { LouvainWebvizCollapsible } from './LouvainWebvizCollapsible.js';
 import { LouvainWebvizJsonEditor } from './LouvainWebvizJsonEditor.js';
 import {
   CommunityGraph,
@@ -40,7 +40,7 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
   static get scopedElements() {
     return {
       'louvain-webviz-graph': LouvainWebvizGraph,
-      'louvain-webviz-collapse': LouvainWebvizCollapse,
+      'louvain-webviz-collapsible': LouvainWebvizCollapsible,
       'louvain-webviz-json-editor': LouvainWebvizJsonEditor,
       'mwc-button': Button,
       'mwc-top-app-bar': TopAppBar,
@@ -249,7 +249,7 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
       ${this._currentState
         ? html` <main class="main">
             <div class="left-sidebar">
-              <louvain-webviz-collapse
+              <louvain-webviz-collapsible
                 heading="Generate random graph"
                 class="mb-1"
               >
@@ -375,14 +375,17 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
                 >
                   Generate random graph
                 </mwc-button>
-              </louvain-webviz-collapse>
+              </louvain-webviz-collapsible>
 
-              <louvain-webviz-collapse heading="Edit graph JSON" class="mb-2">
+              <louvain-webviz-collapsible
+                heading="Edit graph JSON"
+                class="mb-2"
+              >
                 <louvain-webviz-json-editor
                   .json="${this.graph}"
                   @json-editor-change="${this._handleJsonEditorChange}"
                 ></louvain-webviz-json-editor>
-              </louvain-webviz-collapse>
+              </louvain-webviz-collapsible>
 
               <mwc-button
                 @click=${this._handleStep}

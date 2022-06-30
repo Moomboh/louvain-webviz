@@ -178,15 +178,6 @@
               "privacy": "private"
             },
             {
-              "kind": "field",
-              "name": "_showRndGen",
-              "type": {
-                "text": "boolean"
-              },
-              "privacy": "private",
-              "default": "false"
-            },
-            {
               "kind": "method",
               "name": "_handleStep",
               "privacy": "private"
@@ -200,6 +191,19 @@
               "kind": "method",
               "name": "_handleCommunityAggregation",
               "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "_handleJsonEditorChange",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "CustomEvent"
+                  }
+                }
+              ]
             }
           ],
           "mixins": [
@@ -223,6 +227,71 @@
           "declaration": {
             "name": "LouvainWebviz",
             "module": "src/LouvainWebviz.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/LouvainWebvizCollapsible.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "LouvainWebvizCollapsible",
+          "members": [
+            {
+              "kind": "field",
+              "name": "heading",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "heading"
+            },
+            {
+              "kind": "field",
+              "name": "show",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "show"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "heading",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "heading"
+            },
+            {
+              "name": "show",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "show"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "louvain-webviz-collapsible",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "LouvainWebvizCollapsible",
+          "declaration": {
+            "name": "LouvainWebvizCollapsible",
+            "module": "src/LouvainWebvizCollapsible.ts"
           }
         }
       ]
@@ -264,6 +333,70 @@
           "declaration": {
             "name": "LouvainWebvizGraph",
             "module": "src/LouvainWebvizGraph.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/LouvainWebvizJsonEditor.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "LouvainWebvizJsonEditor",
+          "members": [
+            {
+              "kind": "field",
+              "name": "json",
+              "type": {
+                "text": "any"
+              },
+              "default": "{}"
+            },
+            {
+              "kind": "field",
+              "name": "_editor",
+              "type": {
+                "text": "JSONEditor | null"
+              },
+              "privacy": "private",
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "_ajvValidator",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "_validator",
+              "privacy": "private",
+              "default": "(json: any): ValidationError[] => {\n    const errors: ValidationError[] = this._ajvValidator(json);\n\n    if (errors.length) {\n      return errors;\n    }\n\n    const graph = json as Graph;\n\n    for (const [i, edge] of json.edges.entries()) {\n      if (!graph.nodes.includes(edge.source)) {\n        errors.push({\n          message: `Edge ${i} has invalid source node`,\n          path: ['edges', `${i}`, 'source'],\n        });\n      }\n\n      if (!graph.nodes.includes(edge.target)) {\n        errors.push({\n          message: `Edge ${i} has invalid target node. Must be one of \"${graph.nodes.join(\n            '\", \"'\n          )}\"`,\n          path: ['edges', `${i}`, 'target'],\n        });\n      }\n    }\n\n    return errors;\n  }"
+            }
+          ],
+          "events": [
+            {
+              "name": "json-editor-change",
+              "type": {
+                "text": "CustomEvent"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "LouvainWebvizJsonEditor",
+          "declaration": {
+            "name": "LouvainWebvizJsonEditor",
+            "module": "src/LouvainWebvizJsonEditor.ts"
           }
         }
       ]
@@ -391,6 +524,21 @@
           "declaration": {
             "name": "generateRandomGraph",
             "module": "src/graph.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/louvain-webviz-collapsible.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "louvain-webviz-collapsible",
+          "declaration": {
+            "name": "LouvainWebvizCollapsible",
+            "module": "/src/LouvainWebvizCollapsible.js"
           }
         }
       ]
@@ -685,6 +833,15 @@
               "name": "_handleCommunityAggregation"
             },
             {
+              "kind": "method",
+              "name": "_handleJsonEditorChange",
+              "parameters": [
+                {
+                  "name": "e"
+                }
+              ]
+            },
+            {
               "kind": "field",
               "name": "_graph",
               "default": "{\n    nodes: ['A', 'B', 'C', 'D', 'E', 'F'],\n    edges: [\n        { source: 'A', target: 'B', weight: 5 },\n        { source: 'A', target: 'C', weight: 4 },\n        { source: 'A', target: 'E', weight: 1 },\n        { source: 'B', target: 'C', weight: 2 },\n        { source: 'C', target: 'D', weight: 7 },\n        { source: 'D', target: 'F', weight: 3 },\n        { source: 'E', target: 'F', weight: 8 },\n    ],\n}",
@@ -776,14 +933,6 @@
                 "text": "number"
               },
               "default": "20"
-            },
-            {
-              "kind": "field",
-              "name": "_showRndGen",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false"
             }
           ],
           "mixins": [
@@ -807,6 +956,51 @@
           "declaration": {
             "name": "LouvainWebviz",
             "module": "out-tsc/src/LouvainWebviz.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "out-tsc/src/LouvainWebvizCollapsible.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "LouvainWebvizCollapsible",
+          "members": [
+            {
+              "kind": "field",
+              "name": "heading",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "kind": "field",
+              "name": "show",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "louvain-webviz-collapsible",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "LouvainWebvizCollapsible",
+          "declaration": {
+            "name": "LouvainWebvizCollapsible",
+            "module": "out-tsc/src/LouvainWebvizCollapsible.js"
           }
         }
       ]
@@ -848,6 +1042,67 @@
           "declaration": {
             "name": "LouvainWebvizGraph",
             "module": "out-tsc/src/LouvainWebvizGraph.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "out-tsc/src/LouvainWebvizJsonEditor.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "LouvainWebvizJsonEditor",
+          "members": [
+            {
+              "kind": "field",
+              "name": "json",
+              "type": {
+                "text": "object"
+              },
+              "default": "{}"
+            },
+            {
+              "kind": "field",
+              "name": "_editor",
+              "type": {
+                "text": "null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "_ajvValidator"
+            },
+            {
+              "kind": "field",
+              "name": "_validator",
+              "default": "(json) => {\n            const errors = this._ajvValidator(json);\n            if (errors.length) {\n                return errors;\n            }\n            const graph = json;\n            for (const [i, edge] of json.edges.entries()) {\n                if (!graph.nodes.includes(edge.source)) {\n                    errors.push({\n                        message: `Edge ${i} has invalid source node`,\n                        path: ['edges', `${i}`, 'source'],\n                    });\n                }\n                if (!graph.nodes.includes(edge.target)) {\n                    errors.push({\n                        message: `Edge ${i} has invalid target node. Must be one of \"${graph.nodes.join('\", \"')}\"`,\n                        path: ['edges', `${i}`, 'target'],\n                    });\n                }\n            }\n            return errors;\n        }"
+            }
+          ],
+          "events": [
+            {
+              "name": "json-editor-change",
+              "type": {
+                "text": "CustomEvent"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "LouvainWebvizJsonEditor",
+          "declaration": {
+            "name": "LouvainWebvizJsonEditor",
+            "module": "out-tsc/src/LouvainWebvizJsonEditor.js"
           }
         }
       ]
@@ -942,9 +1197,18 @@
     },
     {
       "kind": "javascript-module",
-      "path": "out-tsc/src/index.js",
+      "path": "out-tsc/src/louvain-webviz-collapsible.js",
       "declarations": [],
-      "exports": []
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "louvain-webviz-collapsible",
+          "declaration": {
+            "name": "LouvainWebvizCollapsible",
+            "module": "/out-tsc/src/LouvainWebvizCollapsible.js"
+          }
+        }
+      ]
     },
     {
       "kind": "javascript-module",
@@ -1071,18 +1335,6 @@
           }
         }
       ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "out-tsc/test/louvain.js",
-      "declarations": [],
-      "exports": []
-    },
-    {
-      "kind": "javascript-module",
-      "path": "out-tsc/test/louvain.spec.js",
-      "declarations": [],
-      "exports": []
     }
   ]
 }

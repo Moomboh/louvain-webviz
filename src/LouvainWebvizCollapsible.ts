@@ -2,7 +2,7 @@ import { LitElement, html, css } from 'lit';
 import { cache } from 'lit/directives/cache.js';
 import { property } from 'lit/decorators.js';
 
-export class LouvainWebvizCollapse extends LitElement {
+export class LouvainWebvizCollapsible extends LitElement {
   static styles = css`
     :host {
       font-family: sans-serif;
@@ -46,7 +46,7 @@ export class LouvainWebvizCollapse extends LitElement {
           >${cache(this.show ? 'expand_less' : 'expand_more')}</mwc-icon
         >
       </button>
-      ${this.show ? html` <slot></slot> ` : ''}
+      <slot style="${this.show ? 'display: block;' : 'display: none;'}"></slot>
     `;
   }
 }
