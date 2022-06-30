@@ -1,0 +1,273 @@
+import { LitElement, html, css, PropertyValueMap } from 'lit';
+import { property } from 'lit/decorators.js';
+import {
+  JSONEditor,
+  TextContent,
+  createAjvValidator,
+  ValidationError,
+} from 'svelte-jsoneditor/dist/jsoneditor.js';
+import { Graph } from './graph.js';
+
+export class LouvainWebvizJsonEditor extends LitElement {
+  static styles = css`
+    :host {
+      font-family: sans-serif;
+
+      /* TODO: --jse theme vars should be imported from file.
+               These are copied from node_modules/svelte-jsoneditor/themes/jse-theme-default.css 
+               because @import doesn't work here and should be moved to a separate
+               stylesheet.
+      */
+      /* over all fonts, sizes, and colors */
+      --jse-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+        Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+      /* "consolas" for Windows, "menlo" for Mac with fallback to "monaco", 'Ubuntu Mono' for Ubuntu */
+      /* (at Mac this font looks too large at 14px, but 13px is too small for the font on Windows) */
+      --jse-font-family-mono: consolas, menlo, monaco, 'Ubuntu Mono',
+        'source-code-pro', monospace;
+      --jse-font-size-mono: 14px;
+      --jse-font-size: 16px;
+      --jse-font-size-code-mode-search: 80%;
+      --jse-line-height: calc(1em + 4px);
+      --jse-indent-size: calc(1em + 4px);
+      --jse-color-picker-button-size: 1em;
+      --jse-padding: 10px;
+      --jse-theme-color: #3883fa;
+      --jse-theme-color-highlight: #5f9dff;
+      --jse-background-color: #fff;
+      --jse-text-color: #4d4d4d;
+      --jse-text-color-inverse: #fff;
+      --jse-error-color: #ee5341;
+      --jse-warning-color: #fdc539;
+
+      /* main, menu, modal */
+      --jse-main-border: 1px solid #d7d7d7;
+      --jse-menu-color: var(--jse-text-color-inverse);
+      --jse-menu-button-size: 32px;
+      --jse-modal-background: #f5f5f5;
+      --jse-modal-overlay-background: rgba(0, 0, 0, 0.3);
+      --jse-modal-code-background: rgba(0, 0, 0, 0.05);
+
+      /* panels: navigation bar, gutter, search box */
+      --jse-panel-background: #ebebeb;
+      --jse-panel-color: var(--jse-text-color);
+      --jse-panel-color-readonly: #b2b2b2;
+      --jse-panel-border: var(--jse-main-border);
+      --jse-panel-button-color: inherit;
+      --jse-panel-button-background: transparent;
+      --jse-panel-button-color-highlight: var(--jse-text-color);
+      --jse-panel-button-background-highlight: #e0e0e0;
+
+      /* navigation-bar */
+      --jse-navigation-bar-color: #656565;
+      --jse-navigation-bar-background: var(--jse-background-color);
+      --jse-navigation-bar-background-highlight: #e5e5e5;
+      --jse-navigation-bar-dropdown-color: #656565;
+
+      /* context menu */
+      --jse-context-menu-background: #656565;
+      --jse-context-menu-background-highlight: #7a7a7a;
+      --jse-context-menu-color: var(--jse-text-color-inverse);
+      --jse-context-menu-color-disabled: #9d9d9d;
+      --jse-context-menu-separator-color: #7a7a7a;
+      --jse-context-menu-button-background: var(--jse-context-menu-background);
+      --jse-context-menu-button-background-highlight: var(
+        --jse-context-menu-background-highlight
+      );
+      --jse-context-menu-button-color: var(--jse-context-menu-color);
+      --jse-context-menu-button-size: calc(1em + 4px);
+      --jse-context-menu-tip-background: rgba(255, 255, 255, 0.2);
+      --jse-context-menu-tip-color: inherit;
+
+      /* contents: json key and values */
+      --jse-key-color: #1a1a1a;
+      --jse-value-color: #1a1a1a;
+      --jse-value-color-number: #ee422e;
+      --jse-value-color-boolean: #ff8c00;
+      --jse-value-color-null: #004ed0;
+      --jse-value-color-string: #008000;
+      --jse-value-color-url: #008000;
+      --jse-delimiter-color: rgba(0, 0, 0, 0.38);
+      --jse-edit-outline: 2px solid #656565;
+
+      /* contents: selected or hovered */
+      --jse-hover-background-color: rgba(0, 0, 0, 0.06);
+      --jse-selection-background-color: #d3d3d3;
+      --jse-selection-background-light-color: #e8e8e8;
+
+      /* contents: section of collapsed items in an array */
+      --jse-collapsed-items-background-color: #f5f5f5;
+      --jse-collapsed-items-selected-background-color: #c2c2c2;
+      --jse-collapsed-items-link-color: rgba(0, 0, 0, 0.38);
+      --jse-collapsed-items-link-color-highlight: #ee5341;
+
+      /* contents: highlighting of search matches */
+      --jse-search-match-color: #ffe665;
+      --jse-search-match-outline: 1px solid #ffd700;
+      --jse-search-match-active-color: #ffd700;
+      --jse-search-match-active-outline: 1px solid #e1be00;
+
+      /* contents: inline tags inside the JSON document */
+      --jse-tag-background: rgba(0, 0, 0, 0.2);
+      --jse-tag-color: var(--jse-text-color-inverse);
+
+      /* controls in modals: inputs, buttons, and a */
+      --jse-controls-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.24);
+      --jse-input-background: var(--jse-background-color);
+      --jse-input-background-readonly: transparent;
+      --jse-input-border: 1px solid #d8dbdf;
+      --jse-input-border-focus: 1px solid var(--jse-theme-color);
+      --jse-input-radius: 3px;
+      --jse-button-background: #e0e0e0;
+      --jse-button-background-highlight: #e7e7e7;
+      --jse-button-color: var(--jse-text-color);
+      --jse-button-primary-background: var(--jse-theme-color);
+      --jse-button-primary-background-highlight: var(
+        --jse-theme-color-highlight
+      );
+      --jse-button-primary-background-disabled: #9d9d9d;
+      --jse-button-primary-color: var(--jse-text-color-inverse);
+      --jse-a-color: #156fc5;
+      --jse-a-color-highlight: #0f508d;
+
+      /* messages */
+      --jse-message-error-background: var(--jse-error-color);
+      --jse-message-error-color: var(--jse-text-color-inverse);
+      --jse-message-warning-background: #ffde5c;
+      --jse-message-warning-color: var(--jse-text-color);
+      --jse-message-success-background: #9ac45d;
+      --jse-message-success-color: var(--jse-text-color-inverse);
+      --jse-message-info-background: #9d9d9d;
+      --jse-message-info-color: var(--jse-text-color-inverse);
+      --jse-message-action-background: rgba(255, 255, 255, 0.2);
+      --jse-message-action-background-highlight: rgba(255, 255, 255, 0.3);
+
+      /* svelte-select */
+      --itemIsActiveBG: #3883fa;
+      --border: 1px solid #d8dbdf;
+      --borderRadius: 3px;
+      --background: #fff;
+
+      /* color picker */
+      --jse-color-picker-background: var(--jse-panel-background);
+      --jse-color-picker-border-box-shadow: #cbcbcb 0 0 0 1px;
+    }
+  `;
+
+  @property({ attribute: false })
+  json: any = {};
+
+  private _editor: JSONEditor | null = null;
+
+  private _ajvValidator = createAjvValidator({
+    type: 'object',
+    properties: {
+      nodes: {
+        type: 'array',
+        items: {
+          type: 'string',
+          minLength: 1,
+        },
+      },
+      edges: {
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            source: {
+              type: 'string',
+            },
+            target: {
+              type: 'string',
+            },
+            weight: {
+              type: 'number',
+              exclusiveMinimum: 0,
+            },
+          },
+        },
+      },
+    },
+  });
+
+  private _validator = (json: any): ValidationError[] => {
+    const errors: ValidationError[] = this._ajvValidator(json);
+
+    if (errors.length) {
+      return errors;
+    }
+
+    const graph = json as Graph;
+
+    for (const [i, edge] of json.edges.entries()) {
+      if (!graph.nodes.includes(edge.source)) {
+        errors.push({
+          message: `Edge ${i} has invalid source node`,
+          path: ['edges', `${i}`, 'source'],
+        });
+      }
+
+      if (!graph.nodes.includes(edge.target)) {
+        errors.push({
+          message: `Edge ${i} has invalid target node. Must be one of "${graph.nodes.join(
+            '", "'
+          )}"`,
+          path: ['edges', `${i}`, 'target'],
+        });
+      }
+    }
+
+    return errors;
+  };
+
+  render() {
+    return html`<div id="json-editor"></div>`;
+  }
+
+  protected updated(
+    _changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
+  ): void {
+    if (_changedProperties.has('json') && this._editor === null) {
+      const jsonEditorEl = this.shadowRoot?.querySelector('#json-editor')!;
+
+      const content = {
+        text: JSON.stringify(this.json, null, 2),
+      } as TextContent;
+
+      this._editor = new JSONEditor({
+        target: jsonEditorEl,
+        props: {
+          mode: 'code',
+          content,
+          onChange: updatedContent => {
+            try {
+              const newJson = JSON.parse((updatedContent as TextContent).text);
+              if (this._validator(newJson).length === 0) {
+                this.json = newJson;
+                this.dispatchEvent(
+                  new CustomEvent('json-editor-change', {
+                    detail: {
+                      json: this.json,
+                    },
+                  })
+                );
+              }
+              // eslint-disable-next-line no-empty
+            } catch {}
+          },
+          validator: this._validator,
+        },
+      });
+    }
+
+    if (_changedProperties.has('json') && this._editor !== null) {
+      const content = {
+        text: JSON.stringify(this.json, null, 2),
+      } as TextContent;
+
+      if (content.text !== (this._editor.get() as TextContent).text) {
+        this._editor.set(content);
+      }
+    }
+  }
+}

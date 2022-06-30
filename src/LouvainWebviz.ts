@@ -9,6 +9,7 @@ import { Formfield } from '@material/mwc-formfield';
 import { TextField } from '@material/mwc-textfield';
 import { LouvainWebvizGraph } from './LouvainWebvizGraph.js';
 import { LouvainWebvizCollapse } from './LouvainWebvizCollapse.js';
+import { LouvainWebvizJsonEditor } from './LouvainWebvizJsonEditor.js';
 import {
   CommunityGraph,
   generateRandomGraph,
@@ -40,6 +41,7 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
     return {
       'louvain-webviz-graph': LouvainWebvizGraph,
       'louvain-webviz-collapse': LouvainWebvizCollapse,
+      'louvain-webviz-json-editor': LouvainWebvizJsonEditor,
       'mwc-button': Button,
       'mwc-top-app-bar': TopAppBar,
       'mwc-slider': Slider,
@@ -249,7 +251,7 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
             <div class="left-sidebar">
               <louvain-webviz-collapse
                 heading="Generate random graph"
-                class="mb-2"
+                class="mb-1"
               >
                 <span class="label">Number of nodes</span>
                 <div class="slider-group mb-1">
@@ -375,6 +377,13 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
                 </mwc-button>
               </louvain-webviz-collapse>
 
+              <louvain-webviz-collapse heading="Edit graph JSON" class="mb-2">
+                <louvain-webviz-json-editor
+                  .json="${this.graph}"
+                  @json-editor-change="${this._handleJsonEditorChange}"
+                ></louvain-webviz-json-editor>
+              </louvain-webviz-collapse>
+
               <mwc-button
                 @click=${this._handleStep}
                 ?disabled=${this._currentState.finished}
@@ -456,5 +465,9 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
     ];
 
     this.currentState = this._stateHistory[this._stateHistory.length - 1];
+  }
+
+  private _handleJsonEditorChange(e: CustomEvent) {
+    this.graph = e.detail.json;
   }
 }
