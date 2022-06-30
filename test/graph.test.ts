@@ -4,10 +4,11 @@ import {
   communityGraphToGraph,
   Graph,
   graphToCommunityGraph,
+  renderGraph,
 } from '../src/graph.js';
 
 const graph: Graph = {
-  nodes: ['A', 'B', 'C'],
+  nodes: [{ id: 'A' }, { id: 'B' }, { id: 'C' }],
   edges: [
     { source: 'A', target: 'A', weight: 3 },
     { source: 'A', target: 'B', weight: 5 },
@@ -43,9 +44,29 @@ const graphFromCommunityGraph: Graph = {
   ],
 };
 
+const graphWithoutIdsAndWeights: Graph = {
+  nodes: ['A', 'B', 'C'],
+  edges: [
+    { source: 'A', target: 'B' },
+    { source: 'B', target: 'C' },
+  ],
+};
+
 describe('graphToCommunityGraph', () => {
   it('correctly converts Graph to CommunityGraph', () => {
     expect(graphToCommunityGraph(graph)).to.deep.equal(communityGraph);
+  });
+
+  it('correctly converts Graph without ids and weights to CommunityGraph', () => {
+    expect(graphToCommunityGraph(graphWithoutIdsAndWeights)).to.deep.equal({
+      nodes: ['A', 'B', 'C'],
+      matrix: [
+        [0, 1, 0],
+        [1, 0, 1],
+        [0, 1, 0],
+      ],
+      communities: [new Set(['A']), new Set(['B']), new Set(['C'])],
+    });
   });
 });
 
@@ -54,5 +75,25 @@ describe('communityGraphToGraph', () => {
     expect(communityGraphToGraph(communityGraph)).to.deep.equal(
       graphFromCommunityGraph
     );
+  });
+});
+
+describe('renderGraph', () => {
+  let element: HTMLElement;
+
+  beforeEach(() => {
+    element = document.createElement('div');
+    element.id = 'graph';
+    document.body.appendChild(element);
+  });
+
+  it('renders graph succesfully', () => {
+    renderGraph(graph, element);
+    expect(element.querySelector('canvas')).to.exist;
+  });
+
+  it('renders graph without ids and weights succesfully', () => {
+    renderGraph(graphWithoutIdsAndWeights, element);
+    expect(element.querySelector('canvas')).to.exist;
   });
 });
