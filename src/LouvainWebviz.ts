@@ -8,6 +8,7 @@ import { SliderRange } from '@material/mwc-slider/slider-range';
 import { Formfield } from '@material/mwc-formfield';
 import { TextField } from '@material/mwc-textfield';
 import { LouvainWebvizGraph } from './LouvainWebvizGraph.js';
+import { LouvainWebvizCollapse } from './LouvainWebvizCollapse.js';
 import {
   CommunityGraph,
   generateRandomGraph,
@@ -38,6 +39,7 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
   static get scopedElements() {
     return {
       'louvain-webviz-graph': LouvainWebvizGraph,
+      'louvain-webviz-collapse': LouvainWebvizCollapse,
       'mwc-button': Button,
       'mwc-top-app-bar': TopAppBar,
       'mwc-slider': Slider,
@@ -77,10 +79,15 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
       flex-wrap: wrap;
     }
 
-    .left-panel,
-    .right-panel {
+    .left-sidebar {
       background-color: #f4f4f4;
       padding: 1em;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar-panel {
       width: 100%;
       display: flex;
       flex-direction: column;
@@ -94,12 +101,8 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
     }
 
     @media (min-width: 1200px) {
-      .left-panel {
+      .left-sidebar {
         width: 400px;
-      }
-
-      .right-panel {
-        width: 300px;
       }
 
       .graph-container {
@@ -108,8 +111,20 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
       }
     }
 
+    .mb-0_5 {
+      margin-bottom: 0.5em;
+    }
+
     .mb-1 {
       margin-bottom: 1em;
+    }
+
+    .mb-1_5 {
+      margin-bottom: 1.5em;
+    }
+
+    .mb-2 {
+      margin-bottom: 2em;
     }
 
     .section-title {
@@ -219,11 +234,6 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
     return (this._rndGenNodes * (this._rndGenNodes - 1)) / 2;
   }
 
-  @state()
-  private get _lastNode() {
-    return this._currentState?.graph.nodes[this._currentState.currentNodeIndex];
-  }
-
   constructor() {
     super();
     this.graph = defaultGraph;
@@ -236,137 +246,140 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
       </mwc-top-app-bar>
       ${this._currentState
         ? html` <main class="main">
-            <div class="left-panel">
-              <span class="section-title mb-1">Generate random graph</span>
-
-              <span class="label">Number of nodes</span>
-              <div class="slider-group mb-1">
-                <mwc-slider
-                  discrete
-                  step="1"
-                  min="3"
-                  max="${this._rndGenMaxNodes}"
-                  value="${this._rndGenNodes}"
-                  @input="${(e: CustomEvent) => {
-                    this._rndGenNodes = e.detail.value;
-                  }}"
-                  class="slider"
-                >
-                </mwc-slider>
-                <mwc-textfield
-                  type="number"
-                  outlined
-                  value="${this._rndGenNodes}"
-                  class="slider-input"
-                  id="rndgen-n-nodes"
-                  @input="${(e: InputEvent) => {
-                    this._rndGenNodes = parseInt(
-                      (e.target as HTMLInputElement).value,
-                      10
-                    );
-                  }}"
-                ></mwc-textfield>
-              </div>
-
-              <span class="label">Number of edges</span>
-              <div class="slider-group mb-1">
-                <mwc-slider
-                  discrete
-                  step="1"
-                  min="3"
-                  max="${this._rndGenMaxEdges}"
-                  value="${this._rndGenEdges}"
-                  @input="${(e: CustomEvent) => {
-                    this._rndGenEdges = e.detail.value;
-                  }}"
-                  class="slider"
-                >
-                </mwc-slider>
-                <mwc-textfield
-                  type="number"
-                  outlined
-                  min="3"
-                  value="${this._rndGenEdges}"
-                  class="slider-input"
-                  id="rndgen-n-edges"
-                  @input="${(e: InputEvent) => {
-                    this._rndGenEdges = parseInt(
-                      (e.target as HTMLInputElement).value,
-                      10
-                    );
-                  }}"
-                ></mwc-textfield>
-              </div>
-
-              <span class="label mb-1">Range of edge weights</span>
-              <div class="slider-group mb-1">
-                <mwc-textfield
-                  type="number"
-                  min="1"
-                  max="100"
-                  label="min"
-                  outlined
-                  value="${this._rndGenMinWeight}"
-                  class="slider-input"
-                  id="rndgen-min-weight"
-                  @change="${(e: InputEvent) => {
-                    this._rndGenMinWeight = parseInt(
-                      (e.target as HTMLInputElement).value,
-                      10
-                    );
-                  }}"
-                ></mwc-textfield>
-                <mwc-slider-range
-                  min="1"
-                  max="100"
-                  valueStart="${this._rndGenMinWeight}"
-                  valueEnd="${this._rndGenMaxWeight}"
-                  class="slider mb-1"
-                  @input="${(e: CustomEvent) => {
-                    const { value, thumb } = e.detail;
-
-                    if (thumb === 1) {
-                      this._rndGenMinWeight = value;
-                    }
-
-                    if (thumb === 2) {
-                      this._rndGenMaxWeight = value;
-                    }
-                  }}"
-                >
-                </mwc-slider-range>
-                <mwc-textfield
-                  type="number"
-                  min="1"
-                  max="100"
-                  label="max"
-                  outlined
-                  value="${this._rndGenMaxWeight}"
-                  class="slider-input"
-                  id="rndgen-max-weight"
-                  @change="${(e: InputEvent) => {
-                    this._rndGenMaxWeight = parseInt(
-                      (e.target as HTMLInputElement).value,
-                      10
-                    );
-                  }}"
-                ></mwc-textfield>
-              </div>
-
-              <mwc-button
-                @click=${this._handleGenerateRandomGraph}
-                outlined
-                class="mb-1"
-                id="rndgen-generate"
+            <div class="left-sidebar">
+              <louvain-webviz-collapse
+                heading="Generate random graph"
+                class="mb-2"
               >
-                Generate random graph
-              </mwc-button>
+                <span class="label">Number of nodes</span>
+                <div class="slider-group mb-1">
+                  <mwc-slider
+                    discrete
+                    step="1"
+                    min="3"
+                    max="${this._rndGenMaxNodes}"
+                    value="${this._rndGenNodes}"
+                    @input="${(e: CustomEvent) => {
+                      this._rndGenNodes = e.detail.value;
+                    }}"
+                    class="slider"
+                  >
+                  </mwc-slider>
+                  <mwc-textfield
+                    type="number"
+                    outlined
+                    value="${this._rndGenNodes}"
+                    class="slider-input"
+                    id="rndgen-n-nodes"
+                    @input="${(e: InputEvent) => {
+                      this._rndGenNodes = parseInt(
+                        (e.target as HTMLInputElement).value,
+                        10
+                      );
+                    }}"
+                  ></mwc-textfield>
+                </div>
+
+                <span class="label">Number of edges</span>
+                <div class="slider-group mb-1">
+                  <mwc-slider
+                    discrete
+                    step="1"
+                    min="3"
+                    max="${this._rndGenMaxEdges}"
+                    value="${this._rndGenEdges}"
+                    @input="${(e: CustomEvent) => {
+                      this._rndGenEdges = e.detail.value;
+                    }}"
+                    class="slider"
+                  >
+                  </mwc-slider>
+                  <mwc-textfield
+                    type="number"
+                    outlined
+                    min="3"
+                    value="${this._rndGenEdges}"
+                    class="slider-input"
+                    id="rndgen-n-edges"
+                    @input="${(e: InputEvent) => {
+                      this._rndGenEdges = parseInt(
+                        (e.target as HTMLInputElement).value,
+                        10
+                      );
+                    }}"
+                  ></mwc-textfield>
+                </div>
+
+                <span class="label mb-1">Range of edge weights</span>
+                <div class="slider-group mb-1">
+                  <mwc-textfield
+                    type="number"
+                    min="1"
+                    max="100"
+                    label="min"
+                    outlined
+                    value="${this._rndGenMinWeight}"
+                    class="slider-input"
+                    id="rndgen-min-weight"
+                    @change="${(e: InputEvent) => {
+                      this._rndGenMinWeight = parseInt(
+                        (e.target as HTMLInputElement).value,
+                        10
+                      );
+                    }}"
+                  ></mwc-textfield>
+                  <mwc-slider-range
+                    min="1"
+                    max="100"
+                    valueStart="${this._rndGenMinWeight}"
+                    valueEnd="${this._rndGenMaxWeight}"
+                    class="slider mb-1"
+                    @input="${(e: CustomEvent) => {
+                      const { value, thumb } = e.detail;
+
+                      if (thumb === 1) {
+                        this._rndGenMinWeight = value;
+                      }
+
+                      if (thumb === 2) {
+                        this._rndGenMaxWeight = value;
+                      }
+                    }}"
+                  >
+                  </mwc-slider-range>
+                  <mwc-textfield
+                    type="number"
+                    min="1"
+                    max="100"
+                    label="max"
+                    outlined
+                    value="${this._rndGenMaxWeight}"
+                    class="slider-input"
+                    id="rndgen-max-weight"
+                    @change="${(e: InputEvent) => {
+                      this._rndGenMaxWeight = parseInt(
+                        (e.target as HTMLInputElement).value,
+                        10
+                      );
+                    }}"
+                  ></mwc-textfield>
+                </div>
+
+                <mwc-button
+                  @click=${this._handleGenerateRandomGraph}
+                  class="mb-1"
+                  outlined
+                  id="rndgen-generate"
+                >
+                  Generate random graph
+                </mwc-button>
+              </louvain-webviz-collapse>
 
               <mwc-button
                 @click=${this._handleStep}
                 ?disabled=${this._currentState.finished}
                 raised
-                class="mb-1"
+                class="mb-0_5"
               >
                 ${this._currentState.finished ? 'Finished' : 'Step'}
               </mwc-button>
@@ -379,33 +392,36 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
               >
                 Community Aggregation
               </mwc-button>
+
+              ${!this._currentState.finished
+                ? html`
+                    <div class="sidebar-panel">
+                      <span
+                        >Current node:
+                        <strong>${this._currentNode}</strong></span
+                      >
+                      ${this._currentDeltaModularities.map(
+                        (deltaModularity, i) => html`
+                          <span>
+                            ${this._currentNode}&rarr;c${this
+                              ._currentNeighbourCommunities[i]}:
+                            &Delta;G =
+                            <strong
+                              >${Math.round(deltaModularity * 1000) /
+                              1000}</strong
+                            >
+                          </span>
+                        `
+                      )}
+                    </div>
+                  `
+                : html``}
             </div>
             <div class="graph-container">
               <louvain-webviz-graph
                 id="graph"
                 .graph=${this._currentGraph}
               ></louvain-webviz-graph>
-            </div>
-            <div class="right-panel">
-              ${!this._currentState.finished
-                ? html`
-                    <span class="section-title mb-1">Current step</span>
-                    <span>Node: <strong>${this._currentNode}</strong></span>
-                    ${this._currentDeltaModularities.map(
-                      (deltaModularity, i) => html`
-                        <span>
-                          ${this._currentNode}&rarr;c${this
-                            ._currentNeighbourCommunities[i]}:
-                          &Delta;G =
-                          <strong
-                            >${Math.round(deltaModularity * 1000) /
-                            1000}</strong
-                          >
-                        </span>
-                      `
-                    )}
-                  `
-                : html``}
             </div>
           </main>`
         : html``}

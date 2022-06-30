@@ -52,10 +52,6 @@
             },
             {
               "kind": "field",
-              "name": "graph"
-            },
-            {
-              "kind": "field",
               "name": "_graph",
               "type": {
                 "text": "Graph"
@@ -65,20 +61,66 @@
             },
             {
               "kind": "field",
-              "name": "_state",
+              "name": "graph",
+              "default": "{\n  nodes: ['A', 'B', 'C', 'D', 'E', 'F'],\n  edges: [\n    { source: 'A', target: 'B', weight: 5 },\n    { source: 'A', target: 'C', weight: 4 },\n    { source: 'A', target: 'E', weight: 1 },\n    { source: 'B', target: 'C', weight: 2 },\n    { source: 'C', target: 'D', weight: 7 },\n    { source: 'D', target: 'F', weight: 3 },\n    { source: 'E', target: 'F', weight: 8 },\n  ],\n}",
               "type": {
-                "text": "LouvainState"
-              },
-              "privacy": "private"
+                "text": "Graph"
+              }
             },
             {
               "kind": "field",
-              "name": "_lastState",
+              "name": "_stateHistory",
               "type": {
-                "text": "LouvainState | null"
+                "text": "LouvainState[]"
               },
               "privacy": "private",
-              "default": "null"
+              "default": "[\n    initLouvainState(graphToCommunityGraph(this._graph)),\n  ]"
+            },
+            {
+              "kind": "field",
+              "name": "_currentState",
+              "privacy": "private",
+              "default": "this._stateHistory[0]"
+            },
+            {
+              "kind": "field",
+              "name": "currentState"
+            },
+            {
+              "kind": "field",
+              "name": "_currentGraph",
+              "type": {
+                "text": "CommunityGraph"
+              },
+              "privacy": "private",
+              "default": "{\n    nodes: [],\n    matrix: [],\n    communities: [],\n  }"
+            },
+            {
+              "kind": "field",
+              "name": "_currentNode",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private",
+              "default": "''"
+            },
+            {
+              "kind": "field",
+              "name": "_currentDeltaModularities",
+              "type": {
+                "text": "number[]"
+              },
+              "privacy": "private",
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "_currentNeighbourCommunities",
+              "type": {
+                "text": "number[]"
+              },
+              "privacy": "private",
+              "default": "[]"
             },
             {
               "kind": "field",
@@ -137,8 +179,12 @@
             },
             {
               "kind": "field",
-              "name": "_lastNode",
-              "privacy": "private"
+              "name": "_showRndGen",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
             },
             {
               "kind": "method",
@@ -476,6 +522,34 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/util.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "cartesianProduct",
+          "parameters": [
+            {
+              "name": "args",
+              "type": {
+                "text": "any[][]"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "cartesianProduct",
+          "declaration": {
+            "name": "cartesianProduct",
+            "module": "src/util.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/vendors.d.ts",
       "declarations": [
         {
@@ -580,7 +654,15 @@
             },
             {
               "kind": "field",
-              "name": "graph"
+              "name": "graph",
+              "default": "{\n    nodes: ['A', 'B', 'C', 'D', 'E', 'F'],\n    edges: [\n        { source: 'A', target: 'B', weight: 5 },\n        { source: 'A', target: 'C', weight: 4 },\n        { source: 'A', target: 'E', weight: 1 },\n        { source: 'B', target: 'C', weight: 2 },\n        { source: 'C', target: 'D', weight: 7 },\n        { source: 'D', target: 'F', weight: 3 },\n        { source: 'E', target: 'F', weight: 8 },\n    ],\n}",
+              "type": {
+                "text": "object"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "currentState"
             },
             {
               "kind": "field",
@@ -589,10 +671,6 @@
             {
               "kind": "field",
               "name": "_rndGenMaxEdges"
-            },
-            {
-              "kind": "field",
-              "name": "_lastNode"
             },
             {
               "kind": "method",
@@ -616,15 +694,48 @@
             },
             {
               "kind": "field",
-              "name": "_state"
+              "name": "_stateHistory",
+              "type": {
+                "text": "array"
+              },
+              "default": "[\n            initLouvainState(graphToCommunityGraph(this._graph)),\n        ]"
             },
             {
               "kind": "field",
-              "name": "_lastState",
+              "name": "_currentState",
+              "default": "this._stateHistory[0]"
+            },
+            {
+              "kind": "field",
+              "name": "_currentGraph",
               "type": {
-                "text": "null"
+                "text": "object"
               },
-              "default": "null"
+              "default": "{\n            nodes: [],\n            matrix: [],\n            communities: [],\n        }"
+            },
+            {
+              "kind": "field",
+              "name": "_currentNode",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "kind": "field",
+              "name": "_currentDeltaModularities",
+              "type": {
+                "text": "array"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "_currentNeighbourCommunities",
+              "type": {
+                "text": "array"
+              },
+              "default": "[]"
             },
             {
               "kind": "field",
@@ -665,6 +776,14 @@
                 "text": "number"
               },
               "default": "20"
+            },
+            {
+              "kind": "field",
+              "name": "_showRndGen",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
             }
           ],
           "mixins": [
@@ -927,6 +1046,43 @@
           }
         }
       ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "out-tsc/src/util.js",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "cartesianProduct",
+          "parameters": [
+            {
+              "name": "args"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "cartesianProduct",
+          "declaration": {
+            "name": "cartesianProduct",
+            "module": "out-tsc/src/util.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "out-tsc/test/louvain.js",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "out-tsc/test/louvain.spec.js",
+      "declarations": [],
+      "exports": []
     }
   ]
 }
