@@ -5,7 +5,7 @@ import {
   Graph,
   graphToCommunityGraph,
   renderGraph,
-} from '../src/graph.js';
+} from '../src/lib/graph.js';
 
 const graph: Graph = {
   nodes: [{ id: 'A' }, { id: 'B' }, { id: 'C' }],

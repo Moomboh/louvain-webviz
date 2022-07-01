@@ -1,18 +1,18 @@
 import { html } from 'lit';
 import { fixture, expect } from '@open-wc/testing';
 
-import { LouvainWebvizJsonEditor } from '../src/LouvainWebvizJsonEditor.js';
-import '../src/louvain-webviz-json-editor.js';
-import { defaultGraph } from '../src/LouvainWebviz.js';
+import { LwvJsonEditor } from '../src/components/LwvJsonEditor.js';
+import '../src/components/lwv-json-editor.js';
+import { defaultGraph } from '../src/LwvApp.js';
 
-describe('LouvainWebvizJsonEditor', () => {
-  let element: LouvainWebvizJsonEditor;
+describe('LwvJsonEditor', () => {
+  let element: LwvJsonEditor;
   let editable: HTMLElement;
 
   beforeEach(async () => {
-    element = await fixture(html`<louvain-webviz-json-editor
+    element = await fixture(html`<lwv-json-editor
       .json=${defaultGraph}
-    ></louvain-webviz-json-editor>`);
+    ></lwv-json-editor>`);
     editable = element.shadowRoot!.querySelector('[contenteditable="true"]')!;
   });
 

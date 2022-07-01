@@ -7,21 +7,21 @@ import { Slider } from '@material/mwc-slider';
 import { SliderRange } from '@material/mwc-slider/slider-range';
 import { Formfield } from '@material/mwc-formfield';
 import { TextField } from '@material/mwc-textfield';
-import { LouvainWebvizGraph } from './LouvainWebvizGraph.js';
-import { LouvainWebvizCollapsible } from './LouvainWebvizCollapsible.js';
-import { LouvainWebvizJsonEditor } from './LouvainWebvizJsonEditor.js';
+import { LwvGraph } from './components/LwvGraph.js';
+import { LwvCollapsible } from './components/LwvCollapsible.js';
+import { LwvJsonEditor } from './components/LwvJsonEditor.js';
 import {
   CommunityGraph,
   generateRandomGraph,
   Graph,
   graphToCommunityGraph,
-} from './graph.js';
+} from './lib/graph.js';
 import {
   communityAggregation,
   initLouvainState,
   LouvainState,
   louvainStep,
-} from './louvain.js';
+} from './lib/louvain.js';
 
 export const defaultGraph: Graph = {
   nodes: ['A', 'B', 'C', 'D', 'E', 'F'],
@@ -36,12 +36,12 @@ export const defaultGraph: Graph = {
   ],
 };
 
-export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
+export class LwvApp extends ScopedElementsMixin(LitElement) {
   static get scopedElements() {
     return {
-      'louvain-webviz-graph': LouvainWebvizGraph,
-      'louvain-webviz-collapsible': LouvainWebvizCollapsible,
-      'louvain-webviz-json-editor': LouvainWebvizJsonEditor,
+      'lwv-graph': LwvGraph,
+      'lwv-collapsible': LwvCollapsible,
+      'lwv-json-editor': LwvJsonEditor,
       'mwc-button': Button,
       'mwc-top-app-bar': TopAppBar,
       'mwc-slider': Slider,
@@ -248,7 +248,7 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
       </mwc-top-app-bar>
       <main class="main">
         <div class="left-sidebar">
-          <louvain-webviz-collapsible
+          <lwv-collapsible
             heading="Generate random graph"
             class="mb-1 rndgen-collapsible"
           >
@@ -369,14 +369,14 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
             >
               Generate random graph
             </mwc-button>
-          </louvain-webviz-collapsible>
+          </lwv-collapsible>
 
-          <louvain-webviz-collapsible heading="Edit graph JSON" class="mb-2">
-            <louvain-webviz-json-editor
+          <lwv-collapsible heading="Edit graph JSON" class="mb-2">
+            <lwv-json-editor
               .json="${this.graph}"
               @json-editor-change="${this._handleJsonEditorChange}"
-            ></louvain-webviz-json-editor>
-          </louvain-webviz-collapsible>
+            ></lwv-json-editor>
+          </lwv-collapsible>
 
           <mwc-button
             @click=${this._handleStep}
@@ -419,10 +419,7 @@ export class LouvainWebviz extends ScopedElementsMixin(LitElement) {
             : html``}
         </div>
         <div class="graph-container">
-          <louvain-webviz-graph
-            id="graph"
-            .graph=${this._currentGraph}
-          ></louvain-webviz-graph>
+          <lwv-graph id="graph" .graph=${this._currentGraph}></lwv-graph>
         </div>
       </main>
     `;

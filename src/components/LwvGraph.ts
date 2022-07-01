@@ -1,8 +1,12 @@
 import { LitElement, html, css, PropertyValues } from 'lit';
 import { property } from 'lit/decorators.js';
-import { CommunityGraph, renderGraph, communityGraphToGraph } from './graph.js';
+import {
+  CommunityGraph,
+  renderGraph,
+  communityGraphToGraph,
+} from '../lib/graph.js';
 
-export class LouvainWebvizGraph extends LitElement {
+export class LwvGraph extends LitElement {
   static styles = css`
     :host {
       font-family: sans-serif;

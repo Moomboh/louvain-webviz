@@ -1,19 +1,19 @@
 import { html } from 'lit';
 import { fixture, expect } from '@open-wc/testing';
 
-import { LouvainWebvizCollapsible } from '../src/LouvainWebvizCollapsible.js';
+import { LwvCollapsible } from '../src/components/LwvCollapsible.js';
 
-import '../src/louvain-webviz-collapsible.js';
+import '../src/components/lwv-collapsible.js';
 
-describe('LouvainWebvizCollapsible', () => {
-  let element: LouvainWebvizCollapsible;
+describe('LwvCollapsible', () => {
+  let element: LwvCollapsible;
   let slottedContent: HTMLElement;
 
   beforeEach(async () => {
     element = await fixture(
-      html`<louvain-webviz-collapsible heading="Collapsible test">
+      html`<lwv-collapsible heading="Collapsible test">
         <span id="slotted-content">Slotted content</span>
-      </louvain-webviz-collapsible>`
+      </lwv-collapsible>`
     );
 
     slottedContent = element

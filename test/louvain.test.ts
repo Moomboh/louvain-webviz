@@ -1,10 +1,14 @@
 import { expect } from '@open-wc/testing';
-import { CommunityGraph, Graph, graphToCommunityGraph } from '../src/graph.js';
+import {
+  CommunityGraph,
+  Graph,
+  graphToCommunityGraph,
+} from '../src/lib/graph.js';
 import {
   communityAggregation,
   initLouvainState,
   louvainStep,
-} from '../src/louvain.js';
+} from '../src/lib/louvain.js';
 
 describe('communityAggregation', () => {
   it('correctly aggregates communities', () => {

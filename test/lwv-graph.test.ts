@@ -1,9 +1,13 @@
 import { html } from 'lit';
 import { fixture, expect } from '@open-wc/testing';
 
-import { Graph, CommunityGraph, graphToCommunityGraph } from '../src/graph.js';
-import { LouvainWebvizGraph } from '../src/LouvainWebvizGraph.js';
-import '../src/louvain-webviz-graph.js';
+import {
+  Graph,
+  CommunityGraph,
+  graphToCommunityGraph,
+} from '../src/lib/graph.js';
+import { LwvGraph } from '../src/components/LwvGraph.js';
+import '../src/components/lwv-graph.js';
 
 const graphFixture: Graph = {
   nodes: ['A', 'B', 'C', 'D', 'E', 'F'],
@@ -21,14 +25,12 @@ const graphFixture: Graph = {
 const communityGraphFixture: CommunityGraph =
   graphToCommunityGraph(graphFixture);
 
-describe('LouvainWebvizGraph', () => {
-  let element: LouvainWebvizGraph;
+describe('LwvGraph', () => {
+  let element: LwvGraph;
 
   beforeEach(async () => {
     element = await fixture(
-      html`<louvain-webviz-graph
-        .graph=${communityGraphFixture}
-      ></louvain-webviz-graph>`
+      html`<lwv-graph .graph=${communityGraphFixture}></lwv-graph>`
     );
   });
 

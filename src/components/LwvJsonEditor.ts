@@ -6,9 +6,9 @@ import {
   createAjvValidator,
   ValidationError,
 } from 'svelte-jsoneditor/dist/jsoneditor.js';
-import { Graph } from './graph.js';
+import { Graph } from '../lib/graph.js';
 
-export class LouvainWebvizJsonEditor extends LitElement {
+export class LwvJsonEditor extends LitElement {
   static styles = css`
     :host {
       font-family: sans-serif;

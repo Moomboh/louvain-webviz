@@ -2,7 +2,7 @@ import { LitElement, html, css } from 'lit';
 import { cache } from 'lit/directives/cache.js';
 import { property } from 'lit/decorators.js';
 
-export class LouvainWebvizCollapsible extends LitElement {
+export class LwvCollapsible extends LitElement {
   static styles = css`
     :host {
       font-family: sans-serif;

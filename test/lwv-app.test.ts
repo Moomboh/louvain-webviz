@@ -4,16 +4,16 @@ import { fixture, expect } from '@open-wc/testing';
 import { Slider } from '@material/mwc-slider';
 import { SliderRange } from '@material/mwc-slider/slider-range.js';
 
-import { defaultGraph, LouvainWebviz } from '../src/LouvainWebviz.js';
-import { LouvainWebvizGraph } from '../src/LouvainWebvizGraph.js';
-import '../src/louvain-webviz.js';
-import { graphToCommunityGraph } from '../src/graph.js';
-import { LouvainState } from '../src/louvain.js';
+import { defaultGraph, LwvApp } from '../src/LwvApp.js';
+import { LwvGraph } from '../src/components/LwvGraph.js';
+import '../src/lwv-app.js';
+import { graphToCommunityGraph } from '../src/lib/graph.js';
+import { LouvainState } from '../src/lib/louvain.js';
 
-describe('LouvainWebviz', () => {
-  let element: LouvainWebviz;
+describe('Lwv', () => {
+  let element: LwvApp;
   beforeEach(async () => {
-    element = await fixture(html`<louvain-webviz></louvain-webviz>`);
+    element = await fixture(html`<lwv-app></lwv-app>`);
   });
 
   it('renders a h1', () => {
@@ -58,15 +58,10 @@ describe('LouvainWebviz', () => {
 
     expect(graph).to.exist;
 
-    const louvainWebvizGraph = element.shadowRoot!.querySelector(
-      'louvain-webviz-graph'
-    ) as LouvainWebvizGraph;
+    const lwvGraph = element.shadowRoot!.querySelector('lwv-graph') as LwvGraph;
 
-    expect(louvainWebvizGraph.graph).to.deep.equal(
-      graphToCommunityGraph(graph)
-    );
-    expect(louvainWebvizGraph.shadowRoot!.querySelector('#graph canvas')).to
-      .exist;
+    expect(lwvGraph.graph).to.deep.equal(graphToCommunityGraph(graph));
+    expect(lwvGraph.shadowRoot!.querySelector('#graph canvas')).to.exist;
 
     expect(graph.nodes.length).to.equal(15);
     expect(graph.edges.length).to.equal(20);
@@ -204,15 +199,13 @@ describe('LouvainWebviz', () => {
   });
 
   it('correctly updates graph when JSON is changed', async () => {
-    element
-      .shadowRoot!.querySelector('louvain-webviz-json-editor')!
-      .dispatchEvent(
-        new CustomEvent('json-editor-change', {
-          detail: {
-            json: defaultGraph,
-          },
-        })
-      );
+    element.shadowRoot!.querySelector('lwv-json-editor')!.dispatchEvent(
+      new CustomEvent('json-editor-change', {
+        detail: {
+          json: defaultGraph,
+        },
+      })
+    );
 
     await element.updateComplete;
 
