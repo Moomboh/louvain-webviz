@@ -3,7 +3,7 @@ import { fixture, expect } from '@open-wc/testing';
 
 import { LwvJsonEditor } from '../src/components/LwvJsonEditor.js';
 import '../src/components/lwv-json-editor.js';
-import { defaultGraph } from '../src/LwvApp.js';
+import { defaultGraph } from '../src/pages/visualization/lwv-page-visualization.js';
 
 describe('LwvJsonEditor', () => {
   let element: LwvJsonEditor;

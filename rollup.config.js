@@ -5,6 +5,8 @@ import { importMetaAssets } from '@web/rollup-plugin-import-meta-assets';
 import { terser } from 'rollup-plugin-terser';
 import commonjs from '@rollup/plugin-commonjs';
 import alias from '@rollup/plugin-alias';
+import copy from 'rollup-plugin-copy';
+import path from 'path';
 
 export default [
   {
@@ -14,21 +16,13 @@ export default [
       {
         file: 'out-vendors/vendors.bundle.js',
         format: 'esm',
-        // name: '_vendors',
       },
     ],
     plugins: [nodeResolve(), commonjs({ transformMixedEsModules: true })],
   },
   {
-    input: 'src/index.html',
-    output: {
-      entryFileNames: '[hash].js',
-      chunkFileNames: '[hash].js',
-      assetFileNames: '[hash][extname]',
-      format: 'es',
-      dir: 'dist',
-    },
-    preserveEntrySignatures: false,
+    input: '**/*.html',
+    output: { dir: 'dist' },
 
     plugins: [
       alias({
@@ -42,7 +36,18 @@ export default [
       /** Enable using HTML as rollup entrypoint */
       html({
         minify: true,
-        publicPath: process.env.LIT_APP_PUBLIC_PATH || '/',
+        rootDir: path.join(process.cwd(), 'src/pages'),
+        flattenOutput: false,
+        // TODO: find a way to dedupe or even better completely generate HTML files for
+        //       all pages in src/pages
+      }),
+      copy({
+        targets: [
+          {
+            src: 'assets/fonts/material-icons/MaterialIcons-Regular.woff2',
+            dest: 'dist/assets',
+          },
+        ],
       }),
       /** Resolve bare module imports */
       nodeResolve(),

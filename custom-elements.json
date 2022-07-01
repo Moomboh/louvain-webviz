@@ -38,12 +38,1414 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/LouvainWebviz.ts",
+      "path": "src/LwvApp.ts",
       "declarations": [
         {
           "kind": "class",
           "description": "",
-          "name": "LouvainWebviz",
+          "name": "LwvApp",
+          "members": [
+            {
+              "kind": "field",
+              "name": "scopedElements",
+              "static": true
+            },
+            {
+              "kind": "field",
+              "name": "routeDepth",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "attribute": "route-depth"
+            },
+            {
+              "kind": "field",
+              "name": "_baseHref",
+              "privacy": "private"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "route-depth",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "fieldName": "routeDepth"
+            }
+          ],
+          "mixins": [
+            {
+              "name": "ScopedElementsMixin",
+              "package": "@open-wc/scoped-elements"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "lwv-app",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "LwvApp",
+          "declaration": {
+            "name": "LwvApp",
+            "module": "src/LwvApp.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/lwv-app.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "lwv-app",
+          "declaration": {
+            "name": "LwvApp",
+            "module": "/src/LwvApp.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/vendors.d.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "cytoscape",
+          "type": {
+            "text": "any"
+          }
+        },
+        {
+          "kind": "variable",
+          "name": "coseBilkent",
+          "type": {
+            "text": "any"
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "cytoscape",
+          "declaration": {
+            "name": "cytoscape",
+            "module": "src/vendors.d.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "coseBilkent",
+          "declaration": {
+            "name": "coseBilkent",
+            "module": "src/vendors.d.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/vendors.js",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "cytoscape",
+          "default": "cytoscape_"
+        },
+        {
+          "kind": "variable",
+          "name": "coseBilkent",
+          "default": "coseBilkent_"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "cytoscape",
+          "declaration": {
+            "name": "cytoscape",
+            "module": "src/vendors.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "coseBilkent",
+          "declaration": {
+            "name": "coseBilkent",
+            "module": "src/vendors.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "coverage/lcov-report/block-navigation.js",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "coverage/lcov-report/prettify.js",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "coverage/lcov-report/sorter.js",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "out-tsc/src/LwvApp.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "LwvApp",
+          "members": [
+            {
+              "kind": "field",
+              "name": "scopedElements",
+              "static": true
+            },
+            {
+              "kind": "field",
+              "name": "_baseHref"
+            },
+            {
+              "kind": "field",
+              "name": "routeDepth",
+              "type": {
+                "text": "number"
+              },
+              "default": "0"
+            }
+          ],
+          "mixins": [
+            {
+              "name": "ScopedElementsMixin",
+              "package": "@open-wc/scoped-elements"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "lwv-app",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "LwvApp",
+          "declaration": {
+            "name": "LwvApp",
+            "module": "out-tsc/src/LwvApp.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "out-tsc/src/index.js",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "router",
+          "default": "new Router(outlet)"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "router",
+          "declaration": {
+            "name": "router",
+            "module": "out-tsc/src/index.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "out-tsc/src/lwv-app.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "lwv-app",
+          "declaration": {
+            "name": "LwvApp",
+            "module": "/out-tsc/src/LwvApp.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/LwvCollapsible.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "LwvCollapsible",
+          "members": [
+            {
+              "kind": "field",
+              "name": "heading",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "heading"
+            },
+            {
+              "kind": "field",
+              "name": "show",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "show"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "heading",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "heading"
+            },
+            {
+              "name": "show",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "show"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "lwv-collapsible",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "LwvCollapsible",
+          "declaration": {
+            "name": "LwvCollapsible",
+            "module": "src/components/LwvCollapsible.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/LwvGraph.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "LwvGraph",
+          "members": [
+            {
+              "kind": "field",
+              "name": "graph",
+              "type": {
+                "text": "CommunityGraph"
+              },
+              "default": "{\n    nodes: [],\n    matrix: [],\n    communities: [],\n  }"
+            },
+            {
+              "kind": "method",
+              "name": "renderGraph"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "lwv-graph",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "LwvGraph",
+          "declaration": {
+            "name": "LwvGraph",
+            "module": "src/components/LwvGraph.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/LwvJsonEditor.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "LwvJsonEditor",
+          "members": [
+            {
+              "kind": "field",
+              "name": "json",
+              "type": {
+                "text": "any"
+              },
+              "default": "{}"
+            },
+            {
+              "kind": "field",
+              "name": "jsonEditor",
+              "type": {
+                "text": "JSONEditor | null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "_ajvValidator",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "_validator",
+              "privacy": "private",
+              "default": "(json: any): ValidationError[] => {\n    const errors: ValidationError[] = this._ajvValidator(json);\n\n    if (errors.length) {\n      return errors;\n    }\n\n    const graph = json as Graph;\n\n    for (const [i, edge] of json.edges.entries()) {\n      if (!graph.nodes.includes(edge.source)) {\n        errors.push({\n          message: `Edge ${i} has invalid source node`,\n          path: ['edges', `${i}`, 'source'],\n        });\n      }\n\n      if (!graph.nodes.includes(edge.target)) {\n        errors.push({\n          message: `Edge ${i} has invalid target node. Must be one of \"${graph.nodes.join(\n            '\", \"'\n          )}\"`,\n          path: ['edges', `${i}`, 'target'],\n        });\n      }\n    }\n\n    return errors;\n  }"
+            }
+          ],
+          "events": [
+            {
+              "name": "json-editor-change",
+              "type": {
+                "text": "CustomEvent"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "lwv-json-editor",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "LwvJsonEditor",
+          "declaration": {
+            "name": "LwvJsonEditor",
+            "module": "src/components/LwvJsonEditor.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/lwv-collapsible.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "lwv-collapsible",
+          "declaration": {
+            "name": "LwvCollapsible",
+            "module": "/src/components/LwvCollapsible.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/lwv-graph.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "lwv-graph",
+          "declaration": {
+            "name": "LwvGraph",
+            "module": "/src/components/LwvGraph.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/lwv-json-editor.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "lwv-json-editor",
+          "declaration": {
+            "name": "LwvJsonEditor",
+            "module": "/src/components/LwvJsonEditor.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/lib/graph.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "graphToCommunityGraph",
+          "return": {
+            "type": {
+              "text": "CommunityGraph"
+            }
+          },
+          "parameters": [
+            {
+              "name": "graph",
+              "type": {
+                "text": "Graph"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "communityGraphToGraph",
+          "return": {
+            "type": {
+              "text": "Graph"
+            }
+          },
+          "parameters": [
+            {
+              "name": "communityGraph",
+              "type": {
+                "text": "CommunityGraph"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "renderGraph",
+          "parameters": [
+            {
+              "name": "graph",
+              "type": {
+                "text": "Graph"
+              }
+            },
+            {
+              "name": "el",
+              "type": {
+                "text": "Element"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "generateRandomGraph",
+          "return": {
+            "type": {
+              "text": "Graph"
+            }
+          },
+          "parameters": [
+            {
+              "name": "nNodes",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "nEdges",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "minWeight",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "maxWeight",
+              "type": {
+                "text": "number"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "graphToCommunityGraph",
+          "declaration": {
+            "name": "graphToCommunityGraph",
+            "module": "src/lib/graph.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "communityGraphToGraph",
+          "declaration": {
+            "name": "communityGraphToGraph",
+            "module": "src/lib/graph.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "renderGraph",
+          "declaration": {
+            "name": "renderGraph",
+            "module": "src/lib/graph.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "generateRandomGraph",
+          "declaration": {
+            "name": "generateRandomGraph",
+            "module": "src/lib/graph.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/lib/louvain.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "initLouvainState",
+          "return": {
+            "type": {
+              "text": "LouvainState"
+            }
+          },
+          "parameters": [
+            {
+              "name": "graph",
+              "type": {
+                "text": "CommunityGraph"
+              }
+            },
+            {
+              "name": "nodeIndex",
+              "default": "0"
+            },
+            {
+              "name": "communitiesChanged",
+              "default": "false"
+            },
+            {
+              "name": "finished",
+              "default": "false"
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "louvainStep",
+          "return": {
+            "type": {
+              "text": "LouvainState"
+            }
+          },
+          "parameters": [
+            {
+              "name": "state",
+              "type": {
+                "text": "LouvainState"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "communityAggregation",
+          "return": {
+            "type": {
+              "text": "CommunityGraph"
+            }
+          },
+          "parameters": [
+            {
+              "name": "graph",
+              "type": {
+                "text": "CommunityGraph"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "initLouvainState",
+          "declaration": {
+            "name": "initLouvainState",
+            "module": "src/lib/louvain.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "louvainStep",
+          "declaration": {
+            "name": "louvainStep",
+            "module": "src/lib/louvain.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "communityAggregation",
+          "declaration": {
+            "name": "communityAggregation",
+            "module": "src/lib/louvain.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/lib/util.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "cartesianProduct",
+          "parameters": [
+            {
+              "name": "args",
+              "type": {
+                "text": "any[][]"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "cartesianProduct",
+          "declaration": {
+            "name": "cartesianProduct",
+            "module": "src/lib/util.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/pages/lwv-page-home.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "LwvPageHome",
+          "members": [
+            {
+              "kind": "field",
+              "name": "scopedElements",
+              "static": true
+            }
+          ],
+          "mixins": [
+            {
+              "name": "ScopedElementsMixin",
+              "package": "@open-wc/scoped-elements"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "lwv-page-home",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "LwvPageHome",
+          "declaration": {
+            "name": "LwvPageHome",
+            "module": "src/pages/lwv-page-home.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "lwv-page-home",
+          "declaration": {
+            "name": "LwvPageHome",
+            "module": "src/pages/lwv-page-home.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "out-tsc/src/components/LwvCollapsible.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "LwvCollapsible",
+          "members": [
+            {
+              "kind": "field",
+              "name": "heading",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "kind": "field",
+              "name": "show",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "lwv-collapsible",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "LwvCollapsible",
+          "declaration": {
+            "name": "LwvCollapsible",
+            "module": "out-tsc/src/components/LwvCollapsible.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "out-tsc/src/components/LwvGraph.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "LwvGraph",
+          "members": [
+            {
+              "kind": "method",
+              "name": "renderGraph"
+            },
+            {
+              "kind": "field",
+              "name": "graph",
+              "type": {
+                "text": "object"
+              },
+              "default": "{\n            nodes: [],\n            matrix: [],\n            communities: [],\n        }"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "lwv-graph",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "LwvGraph",
+          "declaration": {
+            "name": "LwvGraph",
+            "module": "out-tsc/src/components/LwvGraph.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "out-tsc/src/components/LwvJsonEditor.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "LwvJsonEditor",
+          "members": [
+            {
+              "kind": "field",
+              "name": "json",
+              "type": {
+                "text": "object"
+              },
+              "default": "{}"
+            },
+            {
+              "kind": "field",
+              "name": "jsonEditor",
+              "type": {
+                "text": "null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "_ajvValidator"
+            },
+            {
+              "kind": "field",
+              "name": "_validator",
+              "default": "(json) => {\n            const errors = this._ajvValidator(json);\n            if (errors.length) {\n                return errors;\n            }\n            const graph = json;\n            for (const [i, edge] of json.edges.entries()) {\n                if (!graph.nodes.includes(edge.source)) {\n                    errors.push({\n                        message: `Edge ${i} has invalid source node`,\n                        path: ['edges', `${i}`, 'source'],\n                    });\n                }\n                if (!graph.nodes.includes(edge.target)) {\n                    errors.push({\n                        message: `Edge ${i} has invalid target node. Must be one of \"${graph.nodes.join('\", \"')}\"`,\n                        path: ['edges', `${i}`, 'target'],\n                    });\n                }\n            }\n            return errors;\n        }"
+            }
+          ],
+          "events": [
+            {
+              "name": "json-editor-change",
+              "type": {
+                "text": "CustomEvent"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "lwv-json-editor",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "LwvJsonEditor",
+          "declaration": {
+            "name": "LwvJsonEditor",
+            "module": "out-tsc/src/components/LwvJsonEditor.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "out-tsc/src/components/lwv-collapsible.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "lwv-collapsible",
+          "declaration": {
+            "name": "LwvCollapsible",
+            "module": "/out-tsc/src/components/LwvCollapsible.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "out-tsc/src/components/lwv-graph.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "lwv-graph",
+          "declaration": {
+            "name": "LwvGraph",
+            "module": "/out-tsc/src/components/LwvGraph.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "out-tsc/src/components/lwv-json-editor.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "lwv-json-editor",
+          "declaration": {
+            "name": "LwvJsonEditor",
+            "module": "/out-tsc/src/components/LwvJsonEditor.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "out-tsc/src/lib/graph.js",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "graphToCommunityGraph",
+          "parameters": [
+            {
+              "name": "graph"
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "communityGraphToGraph",
+          "parameters": [
+            {
+              "name": "communityGraph"
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "renderGraph",
+          "parameters": [
+            {
+              "name": "graph"
+            },
+            {
+              "name": "el"
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "generateRandomGraph",
+          "parameters": [
+            {
+              "name": "nNodes"
+            },
+            {
+              "name": "nEdges"
+            },
+            {
+              "name": "minWeight"
+            },
+            {
+              "name": "maxWeight"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "graphToCommunityGraph",
+          "declaration": {
+            "name": "graphToCommunityGraph",
+            "module": "out-tsc/src/lib/graph.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "communityGraphToGraph",
+          "declaration": {
+            "name": "communityGraphToGraph",
+            "module": "out-tsc/src/lib/graph.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "renderGraph",
+          "declaration": {
+            "name": "renderGraph",
+            "module": "out-tsc/src/lib/graph.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "generateRandomGraph",
+          "declaration": {
+            "name": "generateRandomGraph",
+            "module": "out-tsc/src/lib/graph.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "out-tsc/src/lib/louvain.js",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "initLouvainState",
+          "parameters": [
+            {
+              "name": "graph"
+            },
+            {
+              "name": "nodeIndex",
+              "default": "0"
+            },
+            {
+              "name": "communitiesChanged",
+              "default": "false"
+            },
+            {
+              "name": "finished",
+              "default": "false"
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "louvainStep",
+          "parameters": [
+            {
+              "name": "state"
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "communityAggregation",
+          "parameters": [
+            {
+              "name": "graph"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "initLouvainState",
+          "declaration": {
+            "name": "initLouvainState",
+            "module": "out-tsc/src/lib/louvain.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "louvainStep",
+          "declaration": {
+            "name": "louvainStep",
+            "module": "out-tsc/src/lib/louvain.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "communityAggregation",
+          "declaration": {
+            "name": "communityAggregation",
+            "module": "out-tsc/src/lib/louvain.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "out-tsc/src/lib/util.js",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "cartesianProduct",
+          "parameters": [
+            {
+              "name": "args"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "cartesianProduct",
+          "declaration": {
+            "name": "cartesianProduct",
+            "module": "out-tsc/src/lib/util.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "out-tsc/src/pages/LwvVisualisation.js",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "defaultGraph",
+          "type": {
+            "text": "object"
+          },
+          "default": "{\n    nodes: ['A', 'B', 'C', 'D', 'E', 'F'],\n    edges: [\n        { source: 'A', target: 'B', weight: 5 },\n        { source: 'A', target: 'C', weight: 4 },\n        { source: 'A', target: 'E', weight: 1 },\n        { source: 'B', target: 'C', weight: 2 },\n        { source: 'C', target: 'D', weight: 7 },\n        { source: 'D', target: 'F', weight: 3 },\n        { source: 'E', target: 'F', weight: 8 },\n    ],\n}"
+        },
+        {
+          "kind": "class",
+          "description": "",
+          "name": "LwvVisualization",
+          "members": [
+            {
+              "kind": "field",
+              "name": "scopedElements",
+              "static": true
+            },
+            {
+              "kind": "field",
+              "name": "graph",
+              "default": "{\n    nodes: ['A', 'B', 'C', 'D', 'E', 'F'],\n    edges: [\n        { source: 'A', target: 'B', weight: 5 },\n        { source: 'A', target: 'C', weight: 4 },\n        { source: 'A', target: 'E', weight: 1 },\n        { source: 'B', target: 'C', weight: 2 },\n        { source: 'C', target: 'D', weight: 7 },\n        { source: 'D', target: 'F', weight: 3 },\n        { source: 'E', target: 'F', weight: 8 },\n    ],\n}",
+              "type": {
+                "text": "object"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "currentState"
+            },
+            {
+              "kind": "field",
+              "name": "_rndGenNodes"
+            },
+            {
+              "kind": "field",
+              "name": "_rndGenMaxEdges"
+            },
+            {
+              "kind": "method",
+              "name": "_handleStep"
+            },
+            {
+              "kind": "method",
+              "name": "_handleGenerateRandomGraph"
+            },
+            {
+              "kind": "method",
+              "name": "_handleCommunityAggregation"
+            },
+            {
+              "kind": "method",
+              "name": "_handleJsonEditorChange",
+              "parameters": [
+                {
+                  "name": "e"
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "_graph",
+              "default": "{\n    nodes: ['A', 'B', 'C', 'D', 'E', 'F'],\n    edges: [\n        { source: 'A', target: 'B', weight: 5 },\n        { source: 'A', target: 'C', weight: 4 },\n        { source: 'A', target: 'E', weight: 1 },\n        { source: 'B', target: 'C', weight: 2 },\n        { source: 'C', target: 'D', weight: 7 },\n        { source: 'D', target: 'F', weight: 3 },\n        { source: 'E', target: 'F', weight: 8 },\n    ],\n}",
+              "type": {
+                "text": "object"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "_stateHistory",
+              "type": {
+                "text": "array"
+              },
+              "default": "[\n            initLouvainState(graphToCommunityGraph(this._graph)),\n        ]"
+            },
+            {
+              "kind": "field",
+              "name": "_currentState",
+              "default": "this._stateHistory[0]"
+            },
+            {
+              "kind": "field",
+              "name": "_currentGraph",
+              "type": {
+                "text": "object"
+              },
+              "default": "{\n            nodes: [],\n            matrix: [],\n            communities: [],\n        }"
+            },
+            {
+              "kind": "field",
+              "name": "_currentNode",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "kind": "field",
+              "name": "_currentDeltaModularities",
+              "type": {
+                "text": "array"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "_currentNeighbourCommunities",
+              "type": {
+                "text": "array"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "__rndGenNodes",
+              "type": {
+                "text": "number"
+              },
+              "default": "10"
+            },
+            {
+              "kind": "field",
+              "name": "_rndGenMaxNodes",
+              "type": {
+                "text": "number"
+              },
+              "default": "20"
+            },
+            {
+              "kind": "field",
+              "name": "_rndGenEdges",
+              "type": {
+                "text": "number"
+              },
+              "default": "10"
+            },
+            {
+              "kind": "field",
+              "name": "_rndGenMinWeight",
+              "type": {
+                "text": "number"
+              },
+              "default": "1"
+            },
+            {
+              "kind": "field",
+              "name": "_rndGenMaxWeight",
+              "type": {
+                "text": "number"
+              },
+              "default": "20"
+            }
+          ],
+          "mixins": [
+            {
+              "name": "ScopedElementsMixin",
+              "package": "@open-wc/scoped-elements"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "defaultGraph",
+          "declaration": {
+            "name": "defaultGraph",
+            "module": "out-tsc/src/pages/LwvVisualisation.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "LwvVisualization",
+          "declaration": {
+            "name": "LwvVisualization",
+            "module": "out-tsc/src/pages/LwvVisualisation.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "out-tsc/src/pages/lwv-page-home.js",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "LwvPageHome",
+          "default": "class LwvPageHome extends ScopedElementsMixin(LitElement) {\n    static get scopedElements() {\n        return {\n            'mwc-button': Button,\n        };\n    }\n    render() {\n        return html ``;\n    }\n}"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "LwvPageHome",
+          "declaration": {
+            "name": "LwvPageHome",
+            "module": "out-tsc/src/pages/lwv-page-home.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "out-tsc/src/pages/lwv-page-visualization.js",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "defaultGraph",
+          "type": {
+            "text": "object"
+          },
+          "default": "{\n    nodes: ['A', 'B', 'C', 'D', 'E', 'F'],\n    edges: [\n        { source: 'A', target: 'B', weight: 5 },\n        { source: 'A', target: 'C', weight: 4 },\n        { source: 'A', target: 'E', weight: 1 },\n        { source: 'B', target: 'C', weight: 2 },\n        { source: 'C', target: 'D', weight: 7 },\n        { source: 'D', target: 'F', weight: 3 },\n        { source: 'E', target: 'F', weight: 8 },\n    ],\n}"
+        },
+        {
+          "kind": "variable",
+          "name": "LwvPageVisualization",
+          "default": "class LwvPageVisualization extends ScopedElementsMixin(LitElement) {\n    constructor() {\n        super();\n        this._graph = defaultGraph;\n        this._stateHistory = [\n            initLouvainState(graphToCommunityGraph(this._graph)),\n        ];\n        this._currentState = this._stateHistory[0];\n        this._currentGraph = {\n            nodes: [],\n            matrix: [],\n            communities: [],\n        };\n        this._currentNode = '';\n        this._currentDeltaModularities = [];\n        this._currentNeighbourCommunities = [];\n        this.__rndGenNodes = 10;\n        this._rndGenMaxNodes = 20;\n        this._rndGenEdges = 10;\n        this._rndGenMinWeight = 1;\n        this._rndGenMaxWeight = 20;\n        this.graph = defaultGraph;\n    }\n    static get scopedElements() {\n        return {\n            'lwv-graph': LwvGraph,\n            'lwv-collapsible': LwvCollapsible,\n            'lwv-json-editor': LwvJsonEditor,\n            'mwc-button': Button,\n            'mwc-slider': Slider,\n            'mwc-formfield': Formfield,\n            'mwc-textfield': TextField,\n            'mwc-slider-range': SliderRange,\n        };\n    }\n    get graph() {\n        return this._graph;\n    }\n    set graph(graph) {\n        this._graph = graph;\n        this._stateHistory = [initLouvainState(graphToCommunityGraph(graph))];\n        // eslint-disable-next-line prefer-destructuring\n        this.currentState = this._stateHistory[0];\n    }\n    get currentState() {\n        return this._currentState;\n    }\n    set currentState(s) {\n        // need to spread all nested objects to make sure lit updates\n        this._currentState = { ...s };\n        this._currentNode = s.graph.nodes[s.currentNodeIndex];\n        this._currentGraph = { ...s.graph };\n        this._currentDeltaModularities = [...s.deltaModularities];\n        this._currentNeighbourCommunities = [...s.neighbourCommunities];\n    }\n    get _rndGenNodes() {\n        return this.__rndGenNodes;\n    }\n    set _rndGenNodes(value) {\n        this.__rndGenNodes = value;\n        if (this._rndGenMaxEdges < this._rndGenEdges) {\n            this._rndGenEdges = this._rndGenMaxEdges;\n        }\n    }\n    get _rndGenMaxEdges() {\n        return (this._rndGenNodes * (this._rndGenNodes - 1)) / 2;\n    }\n    render() {\n        return html `\n      <div class=\"left-sidebar\">\n        <lwv-collapsible\n          heading=\"Generate random graph\"\n          class=\"mb-1 rndgen-collapsible\"\n        >\n          <span class=\"label\">Number of nodes</span>\n          <div class=\"slider-group mb-1 rndgen-nodes-group\">\n            <mwc-slider\n              discrete\n              step=\"1\"\n              min=\"3\"\n              max=\"${this._rndGenMaxNodes}\"\n              value=\"${this._rndGenNodes}\"\n              @input=\"${(e) => {\n            this._rndGenNodes = e.detail.value;\n        }}\"\n              class=\"slider\"\n            >\n            </mwc-slider>\n            <mwc-textfield\n              type=\"number\"\n              outlined\n              value=\"${this._rndGenNodes}\"\n              class=\"slider-input\"\n              @input=\"${(e) => {\n            this._rndGenNodes = parseInt(e.target.value, 10);\n        }}\"\n            ></mwc-textfield>\n          </div>\n\n          <span class=\"label\">Number of edges</span>\n          <div class=\"slider-group mb-1 rndgen-edges-group\">\n            <mwc-slider\n              discrete\n              step=\"1\"\n              min=\"3\"\n              max=\"${this._rndGenMaxEdges}\"\n              value=\"${this._rndGenEdges}\"\n              @input=\"${(e) => {\n            this._rndGenEdges = e.detail.value;\n        }}\"\n              class=\"slider\"\n            >\n            </mwc-slider>\n            <mwc-textfield\n              type=\"number\"\n              outlined\n              min=\"3\"\n              value=\"${this._rndGenEdges}\"\n              class=\"slider-input\"\n              @input=\"${(e) => {\n            this._rndGenEdges = parseInt(e.target.value, 10);\n        }}\"\n            ></mwc-textfield>\n          </div>\n\n          <span class=\"label mb-1\">Range of edge weights</span>\n          <div class=\"slider-group mb-1 rndgen-range-group\">\n            <mwc-textfield\n              type=\"number\"\n              min=\"1\"\n              max=\"100\"\n              label=\"min\"\n              outlined\n              value=\"${this._rndGenMinWeight}\"\n              class=\"slider-input\"\n              @change=\"${(e) => {\n            this._rndGenMinWeight = parseInt(e.target.value, 10);\n        }}\"\n            ></mwc-textfield>\n            <mwc-slider-range\n              min=\"1\"\n              max=\"100\"\n              valueStart=\"${this._rndGenMinWeight}\"\n              valueEnd=\"${this._rndGenMaxWeight}\"\n              class=\"slider mb-1\"\n              @input=\"${(e) => {\n            const { value, thumb } = e.detail;\n            if (thumb === 1) {\n                this._rndGenMinWeight = value;\n            }\n            if (thumb === 2) {\n                this._rndGenMaxWeight = value;\n            }\n        }}\"\n            >\n            </mwc-slider-range>\n            <mwc-textfield\n              type=\"number\"\n              min=\"1\"\n              max=\"100\"\n              label=\"max\"\n              outlined\n              value=\"${this._rndGenMaxWeight}\"\n              class=\"slider-input\"\n              @change=\"${(e) => {\n            this._rndGenMaxWeight = parseInt(e.target.value, 10);\n        }}\"\n            ></mwc-textfield>\n          </div>\n\n          <mwc-button\n            @click=${this._handleGenerateRandomGraph}\n            class=\"mb-1\"\n            outlined\n          >\n            Generate random graph\n          </mwc-button>\n        </lwv-collapsible>\n\n        <lwv-collapsible heading=\"Edit graph JSON\" class=\"mb-2\">\n          <lwv-json-editor\n            .json=\"${this.graph}\"\n            @json-editor-change=\"${this._handleJsonEditorChange}\"\n          ></lwv-json-editor>\n        </lwv-collapsible>\n\n        <mwc-button\n          @click=${this._handleStep}\n          ?disabled=${this._currentState.finished}\n          raised\n          class=\"mb-0_5 step-button\"\n        >\n          ${this._currentState.finished ? 'Finished' : 'Step'}\n        </mwc-button>\n\n        <mwc-button\n          @click=${this._handleCommunityAggregation}\n          ?disabled=${!this._currentState.finished}\n          raised\n          class=\"mb-1 aggregate-button\"\n        >\n          Community Aggregation\n        </mwc-button>\n\n        ${!this._currentState.finished\n            ? html `\n              <div class=\"sidebar-panel\">\n                <span>Current node: <strong>${this._currentNode}</strong></span>\n                ${this._currentDeltaModularities.map((deltaModularity, i) => html `\n                    <span>\n                      ${this._currentNode}&rarr;c${this\n                ._currentNeighbourCommunities[i]}:\n                      &Delta;G =\n                      <strong\n                        >${Math.round(deltaModularity * 1000) / 1000}</strong\n                      >\n                    </span>\n                  `)}\n              </div>\n            `\n            : html ``}\n      </div>\n      <div class=\"graph-container\">\n        <lwv-graph id=\"graph\" .graph=${this._currentGraph}></lwv-graph>\n      </div>\n    `;\n    }\n    _handleStep() {\n        this._stateHistory = [\n            ...this._stateHistory,\n            { ...louvainStep(this._currentState) },\n        ];\n        this.currentState = this._stateHistory[this._stateHistory.length - 1];\n    }\n    _handleGenerateRandomGraph() {\n        this.graph = generateRandomGraph(this._rndGenNodes, this._rndGenEdges, this._rndGenMinWeight, this._rndGenMaxWeight);\n    }\n    _handleCommunityAggregation() {\n        this._stateHistory = [\n            ...this._stateHistory,\n            {\n                ...initLouvainState({\n                    ...communityAggregation(this._currentState.graph),\n                }),\n            },\n        ];\n        this.currentState = this._stateHistory[this._stateHistory.length - 1];\n    }\n    _handleJsonEditorChange(e) {\n        this.graph = e.detail.json;\n    }\n}"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "defaultGraph",
+          "declaration": {
+            "name": "defaultGraph",
+            "module": "out-tsc/src/pages/lwv-page-visualization.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "LwvPageVisualization",
+          "declaration": {
+            "name": "LwvPageVisualization",
+            "module": "out-tsc/src/pages/lwv-page-visualization.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/pages/visualization/lwv-page-visualization.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "defaultGraph",
+          "type": {
+            "text": "Graph"
+          },
+          "default": "{\n  nodes: ['A', 'B', 'C', 'D', 'E', 'F'],\n  edges: [\n    { source: 'A', target: 'B', weight: 5 },\n    { source: 'A', target: 'C', weight: 4 },\n    { source: 'A', target: 'E', weight: 1 },\n    { source: 'B', target: 'C', weight: 2 },\n    { source: 'C', target: 'D', weight: 7 },\n    { source: 'D', target: 'F', weight: 3 },\n    { source: 'E', target: 'F', weight: 8 },\n  ],\n}"
+        },
+        {
+          "kind": "class",
+          "description": "",
+          "name": "LwvPageVisualization",
           "members": [
             {
               "kind": "field",
@@ -216,1122 +1618,70 @@
             "name": "LitElement",
             "package": "lit"
           },
-          "tagName": "louvain-webviz",
+          "tagName": "lwv-page-visualization",
           "customElement": true
         }
       ],
       "exports": [
         {
           "kind": "js",
-          "name": "LouvainWebviz",
+          "name": "defaultGraph",
           "declaration": {
-            "name": "LouvainWebviz",
-            "module": "src/LouvainWebviz.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/LouvainWebvizCollapsible.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "LouvainWebvizCollapsible",
-          "members": [
-            {
-              "kind": "field",
-              "name": "heading",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "attribute": "heading"
-            },
-            {
-              "kind": "field",
-              "name": "show",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "attribute": "show"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "heading",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "fieldName": "heading"
-            },
-            {
-              "name": "show",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "fieldName": "show"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "louvain-webviz-collapsible",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "LouvainWebvizCollapsible",
-          "declaration": {
-            "name": "LouvainWebvizCollapsible",
-            "module": "src/LouvainWebvizCollapsible.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/LouvainWebvizGraph.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "LouvainWebvizGraph",
-          "members": [
-            {
-              "kind": "field",
-              "name": "graph",
-              "type": {
-                "text": "CommunityGraph"
-              },
-              "default": "{\n    nodes: [],\n    matrix: [],\n    communities: [],\n  }"
-            },
-            {
-              "kind": "method",
-              "name": "renderGraph"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "louvain-webviz-graph",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "LouvainWebvizGraph",
-          "declaration": {
-            "name": "LouvainWebvizGraph",
-            "module": "src/LouvainWebvizGraph.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/LouvainWebvizJsonEditor.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "LouvainWebvizJsonEditor",
-          "members": [
-            {
-              "kind": "field",
-              "name": "json",
-              "type": {
-                "text": "any"
-              },
-              "default": "{}"
-            },
-            {
-              "kind": "field",
-              "name": "_editor",
-              "type": {
-                "text": "JSONEditor | null"
-              },
-              "privacy": "private",
-              "default": "null"
-            },
-            {
-              "kind": "field",
-              "name": "_ajvValidator",
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "_validator",
-              "privacy": "private",
-              "default": "(json: any): ValidationError[] => {\n    const errors: ValidationError[] = this._ajvValidator(json);\n\n    if (errors.length) {\n      return errors;\n    }\n\n    const graph = json as Graph;\n\n    for (const [i, edge] of json.edges.entries()) {\n      if (!graph.nodes.includes(edge.source)) {\n        errors.push({\n          message: `Edge ${i} has invalid source node`,\n          path: ['edges', `${i}`, 'source'],\n        });\n      }\n\n      if (!graph.nodes.includes(edge.target)) {\n        errors.push({\n          message: `Edge ${i} has invalid target node. Must be one of \"${graph.nodes.join(\n            '\", \"'\n          )}\"`,\n          path: ['edges', `${i}`, 'target'],\n        });\n      }\n    }\n\n    return errors;\n  }"
-            }
-          ],
-          "events": [
-            {
-              "name": "json-editor-change",
-              "type": {
-                "text": "CustomEvent"
-              }
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "LouvainWebvizJsonEditor",
-          "declaration": {
-            "name": "LouvainWebvizJsonEditor",
-            "module": "src/LouvainWebvizJsonEditor.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/graph.ts",
-      "declarations": [
-        {
-          "kind": "function",
-          "name": "graphToCommunityGraph",
-          "return": {
-            "type": {
-              "text": "CommunityGraph"
-            }
-          },
-          "parameters": [
-            {
-              "name": "graph",
-              "type": {
-                "text": "Graph"
-              }
-            }
-          ]
-        },
-        {
-          "kind": "function",
-          "name": "communityGraphToGraph",
-          "return": {
-            "type": {
-              "text": "Graph"
-            }
-          },
-          "parameters": [
-            {
-              "name": "communityGraph",
-              "type": {
-                "text": "CommunityGraph"
-              }
-            }
-          ]
-        },
-        {
-          "kind": "function",
-          "name": "renderGraph",
-          "parameters": [
-            {
-              "name": "graph",
-              "type": {
-                "text": "Graph"
-              }
-            },
-            {
-              "name": "el",
-              "type": {
-                "text": "Element"
-              }
-            }
-          ]
-        },
-        {
-          "kind": "function",
-          "name": "generateRandomGraph",
-          "return": {
-            "type": {
-              "text": "Graph"
-            }
-          },
-          "parameters": [
-            {
-              "name": "nNodes",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "name": "nEdges",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "name": "minWeight",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "name": "maxWeight",
-              "type": {
-                "text": "number"
-              }
-            }
-          ]
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "graphToCommunityGraph",
-          "declaration": {
-            "name": "graphToCommunityGraph",
-            "module": "src/graph.ts"
+            "name": "defaultGraph",
+            "module": "src/pages/visualization/lwv-page-visualization.ts"
           }
         },
         {
           "kind": "js",
-          "name": "communityGraphToGraph",
+          "name": "LwvPageVisualization",
           "declaration": {
-            "name": "communityGraphToGraph",
-            "module": "src/graph.ts"
+            "name": "LwvPageVisualization",
+            "module": "src/pages/visualization/lwv-page-visualization.ts"
           }
         },
-        {
-          "kind": "js",
-          "name": "renderGraph",
-          "declaration": {
-            "name": "renderGraph",
-            "module": "src/graph.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "generateRandomGraph",
-          "declaration": {
-            "name": "generateRandomGraph",
-            "module": "src/graph.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/louvain-webviz-collapsible.ts",
-      "declarations": [],
-      "exports": [
         {
           "kind": "custom-element-definition",
-          "name": "louvain-webviz-collapsible",
+          "name": "lwv-page-visualization",
           "declaration": {
-            "name": "LouvainWebvizCollapsible",
-            "module": "/src/LouvainWebvizCollapsible.js"
+            "name": "LwvPageVisualization",
+            "module": "src/pages/visualization/lwv-page-visualization.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/louvain-webviz-graph.ts",
-      "declarations": [],
-      "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "louvain-webviz-graph",
-          "declaration": {
-            "name": "LouvainWebvizGraph",
-            "module": "/src/LouvainWebvizGraph.js"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/louvain-webviz.ts",
-      "declarations": [],
-      "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "louvain-webviz",
-          "declaration": {
-            "name": "LouvainWebviz",
-            "module": "/src/LouvainWebviz.js"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/louvain.ts",
-      "declarations": [
-        {
-          "kind": "function",
-          "name": "initLouvainState",
-          "return": {
-            "type": {
-              "text": "LouvainState"
-            }
-          },
-          "parameters": [
-            {
-              "name": "graph",
-              "type": {
-                "text": "CommunityGraph"
-              }
-            },
-            {
-              "name": "nodeIndex",
-              "default": "0"
-            },
-            {
-              "name": "communitiesChanged",
-              "default": "false"
-            },
-            {
-              "name": "finished",
-              "default": "false"
-            }
-          ]
-        },
-        {
-          "kind": "function",
-          "name": "louvainStep",
-          "return": {
-            "type": {
-              "text": "LouvainState"
-            }
-          },
-          "parameters": [
-            {
-              "name": "state",
-              "type": {
-                "text": "LouvainState"
-              }
-            }
-          ]
-        },
-        {
-          "kind": "function",
-          "name": "communityAggregation",
-          "return": {
-            "type": {
-              "text": "CommunityGraph"
-            }
-          },
-          "parameters": [
-            {
-              "name": "graph",
-              "type": {
-                "text": "CommunityGraph"
-              }
-            }
-          ]
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "initLouvainState",
-          "declaration": {
-            "name": "initLouvainState",
-            "module": "src/louvain.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "louvainStep",
-          "declaration": {
-            "name": "louvainStep",
-            "module": "src/louvain.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "communityAggregation",
-          "declaration": {
-            "name": "communityAggregation",
-            "module": "src/louvain.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/util.ts",
-      "declarations": [
-        {
-          "kind": "function",
-          "name": "cartesianProduct",
-          "parameters": [
-            {
-              "name": "args",
-              "type": {
-                "text": "any[][]"
-              }
-            }
-          ]
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "cartesianProduct",
-          "declaration": {
-            "name": "cartesianProduct",
-            "module": "src/util.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/vendors.d.ts",
+      "path": "out-tsc/src/pages/visualization/lwv-page-visualization.js",
       "declarations": [
         {
           "kind": "variable",
-          "name": "cytoscape",
+          "name": "defaultGraph",
           "type": {
-            "text": "any"
-          }
+            "text": "object"
+          },
+          "default": "{\n    nodes: ['A', 'B', 'C', 'D', 'E', 'F'],\n    edges: [\n        { source: 'A', target: 'B', weight: 5 },\n        { source: 'A', target: 'C', weight: 4 },\n        { source: 'A', target: 'E', weight: 1 },\n        { source: 'B', target: 'C', weight: 2 },\n        { source: 'C', target: 'D', weight: 7 },\n        { source: 'D', target: 'F', weight: 3 },\n        { source: 'E', target: 'F', weight: 8 },\n    ],\n}"
         },
         {
           "kind": "variable",
-          "name": "coseBilkent",
-          "type": {
-            "text": "any"
-          }
+          "name": "LwvPageVisualization",
+          "default": "class LwvPageVisualization extends ScopedElementsMixin(LitElement) {\n    constructor() {\n        super();\n        this._graph = defaultGraph;\n        this._stateHistory = [\n            initLouvainState(graphToCommunityGraph(this._graph)),\n        ];\n        this._currentState = this._stateHistory[0];\n        this._currentGraph = {\n            nodes: [],\n            matrix: [],\n            communities: [],\n        };\n        this._currentNode = '';\n        this._currentDeltaModularities = [];\n        this._currentNeighbourCommunities = [];\n        this.__rndGenNodes = 10;\n        this._rndGenMaxNodes = 20;\n        this._rndGenEdges = 10;\n        this._rndGenMinWeight = 1;\n        this._rndGenMaxWeight = 20;\n        this.graph = defaultGraph;\n    }\n    static get scopedElements() {\n        return {\n            'lwv-graph': LwvGraph,\n            'lwv-collapsible': LwvCollapsible,\n            'lwv-json-editor': LwvJsonEditor,\n            'mwc-button': Button,\n            'mwc-slider': Slider,\n            'mwc-formfield': Formfield,\n            'mwc-textfield': TextField,\n            'mwc-slider-range': SliderRange,\n        };\n    }\n    get graph() {\n        return this._graph;\n    }\n    set graph(graph) {\n        this._graph = graph;\n        this._stateHistory = [initLouvainState(graphToCommunityGraph(graph))];\n        // eslint-disable-next-line prefer-destructuring\n        this.currentState = this._stateHistory[0];\n    }\n    get currentState() {\n        return this._currentState;\n    }\n    set currentState(s) {\n        // need to spread all nested objects to make sure lit updates\n        this._currentState = { ...s };\n        this._currentNode = s.graph.nodes[s.currentNodeIndex];\n        this._currentGraph = { ...s.graph };\n        this._currentDeltaModularities = [...s.deltaModularities];\n        this._currentNeighbourCommunities = [...s.neighbourCommunities];\n    }\n    get _rndGenNodes() {\n        return this.__rndGenNodes;\n    }\n    set _rndGenNodes(value) {\n        this.__rndGenNodes = value;\n        if (this._rndGenMaxEdges < this._rndGenEdges) {\n            this._rndGenEdges = this._rndGenMaxEdges;\n        }\n    }\n    get _rndGenMaxEdges() {\n        return (this._rndGenNodes * (this._rndGenNodes - 1)) / 2;\n    }\n    render() {\n        return html `\n      <div class=\"left-sidebar\">\n        <lwv-collapsible\n          heading=\"Generate random graph\"\n          class=\"mb-1 rndgen-collapsible\"\n        >\n          <span class=\"label\">Number of nodes</span>\n          <div class=\"slider-group mb-1 rndgen-nodes-group\">\n            <mwc-slider\n              discrete\n              step=\"1\"\n              min=\"3\"\n              max=\"${this._rndGenMaxNodes}\"\n              value=\"${this._rndGenNodes}\"\n              @input=\"${(e) => {\n            this._rndGenNodes = e.detail.value;\n        }}\"\n              class=\"slider\"\n            >\n            </mwc-slider>\n            <mwc-textfield\n              type=\"number\"\n              outlined\n              value=\"${this._rndGenNodes}\"\n              class=\"slider-input\"\n              @input=\"${(e) => {\n            this._rndGenNodes = parseInt(e.target.value, 10);\n        }}\"\n            ></mwc-textfield>\n          </div>\n\n          <span class=\"label\">Number of edges</span>\n          <div class=\"slider-group mb-1 rndgen-edges-group\">\n            <mwc-slider\n              discrete\n              step=\"1\"\n              min=\"3\"\n              max=\"${this._rndGenMaxEdges}\"\n              value=\"${this._rndGenEdges}\"\n              @input=\"${(e) => {\n            this._rndGenEdges = e.detail.value;\n        }}\"\n              class=\"slider\"\n            >\n            </mwc-slider>\n            <mwc-textfield\n              type=\"number\"\n              outlined\n              min=\"3\"\n              value=\"${this._rndGenEdges}\"\n              class=\"slider-input\"\n              @input=\"${(e) => {\n            this._rndGenEdges = parseInt(e.target.value, 10);\n        }}\"\n            ></mwc-textfield>\n          </div>\n\n          <span class=\"label mb-1\">Range of edge weights</span>\n          <div class=\"slider-group mb-1 rndgen-range-group\">\n            <mwc-textfield\n              type=\"number\"\n              min=\"1\"\n              max=\"100\"\n              label=\"min\"\n              outlined\n              value=\"${this._rndGenMinWeight}\"\n              class=\"slider-input\"\n              @change=\"${(e) => {\n            this._rndGenMinWeight = parseInt(e.target.value, 10);\n        }}\"\n            ></mwc-textfield>\n            <mwc-slider-range\n              min=\"1\"\n              max=\"100\"\n              valueStart=\"${this._rndGenMinWeight}\"\n              valueEnd=\"${this._rndGenMaxWeight}\"\n              class=\"slider mb-1\"\n              @input=\"${(e) => {\n            const { value, thumb } = e.detail;\n            if (thumb === 1) {\n                this._rndGenMinWeight = value;\n            }\n            if (thumb === 2) {\n                this._rndGenMaxWeight = value;\n            }\n        }}\"\n            >\n            </mwc-slider-range>\n            <mwc-textfield\n              type=\"number\"\n              min=\"1\"\n              max=\"100\"\n              label=\"max\"\n              outlined\n              value=\"${this._rndGenMaxWeight}\"\n              class=\"slider-input\"\n              @change=\"${(e) => {\n            this._rndGenMaxWeight = parseInt(e.target.value, 10);\n        }}\"\n            ></mwc-textfield>\n          </div>\n\n          <mwc-button\n            @click=${this._handleGenerateRandomGraph}\n            class=\"mb-1\"\n            outlined\n          >\n            Generate random graph\n          </mwc-button>\n        </lwv-collapsible>\n\n        <lwv-collapsible heading=\"Edit graph JSON\" class=\"mb-2\">\n          <lwv-json-editor\n            .json=\"${this.graph}\"\n            @json-editor-change=\"${this._handleJsonEditorChange}\"\n          ></lwv-json-editor>\n        </lwv-collapsible>\n\n        <mwc-button\n          @click=${this._handleStep}\n          ?disabled=${this._currentState.finished}\n          raised\n          class=\"mb-0_5 step-button\"\n        >\n          ${this._currentState.finished ? 'Finished' : 'Step'}\n        </mwc-button>\n\n        <mwc-button\n          @click=${this._handleCommunityAggregation}\n          ?disabled=${!this._currentState.finished}\n          raised\n          class=\"mb-1 aggregate-button\"\n        >\n          Community Aggregation\n        </mwc-button>\n\n        ${!this._currentState.finished\n            ? html `\n              <div class=\"sidebar-panel\">\n                <span>Current node: <strong>${this._currentNode}</strong></span>\n                ${this._currentDeltaModularities.map((deltaModularity, i) => html `\n                    <span>\n                      ${this._currentNode}&rarr;c${this\n                ._currentNeighbourCommunities[i]}:\n                      &Delta;G =\n                      <strong\n                        >${Math.round(deltaModularity * 1000) / 1000}</strong\n                      >\n                    </span>\n                  `)}\n              </div>\n            `\n            : html ``}\n      </div>\n      <div class=\"graph-container\">\n        <lwv-graph id=\"graph\" .graph=${this._currentGraph}></lwv-graph>\n      </div>\n    `;\n    }\n    _handleStep() {\n        this._stateHistory = [\n            ...this._stateHistory,\n            { ...louvainStep(this._currentState) },\n        ];\n        this.currentState = this._stateHistory[this._stateHistory.length - 1];\n    }\n    _handleGenerateRandomGraph() {\n        this.graph = generateRandomGraph(this._rndGenNodes, this._rndGenEdges, this._rndGenMinWeight, this._rndGenMaxWeight);\n    }\n    _handleCommunityAggregation() {\n        this._stateHistory = [\n            ...this._stateHistory,\n            {\n                ...initLouvainState({\n                    ...communityAggregation(this._currentState.graph),\n                }),\n            },\n        ];\n        this.currentState = this._stateHistory[this._stateHistory.length - 1];\n    }\n    _handleJsonEditorChange(e) {\n        this.graph = e.detail.json;\n    }\n}"
         }
       ],
       "exports": [
         {
           "kind": "js",
-          "name": "cytoscape",
+          "name": "defaultGraph",
           "declaration": {
-            "name": "cytoscape",
-            "module": "src/vendors.d.ts"
+            "name": "defaultGraph",
+            "module": "out-tsc/src/pages/visualization/lwv-page-visualization.js"
           }
         },
         {
           "kind": "js",
-          "name": "coseBilkent",
+          "name": "LwvPageVisualization",
           "declaration": {
-            "name": "coseBilkent",
-            "module": "src/vendors.d.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/vendors.js",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "cytoscape",
-          "default": "cytoscape_"
-        },
-        {
-          "kind": "variable",
-          "name": "coseBilkent",
-          "default": "coseBilkent_"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "cytoscape",
-          "declaration": {
-            "name": "cytoscape",
-            "module": "src/vendors.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "coseBilkent",
-          "declaration": {
-            "name": "coseBilkent",
-            "module": "src/vendors.js"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "coverage/lcov-report/block-navigation.js",
-      "declarations": [],
-      "exports": []
-    },
-    {
-      "kind": "javascript-module",
-      "path": "coverage/lcov-report/prettify.js",
-      "declarations": [],
-      "exports": []
-    },
-    {
-      "kind": "javascript-module",
-      "path": "coverage/lcov-report/sorter.js",
-      "declarations": [],
-      "exports": []
-    },
-    {
-      "kind": "javascript-module",
-      "path": "out-tsc/src/LouvainWebviz.js",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "LouvainWebviz",
-          "members": [
-            {
-              "kind": "field",
-              "name": "scopedElements",
-              "static": true
-            },
-            {
-              "kind": "field",
-              "name": "graph",
-              "default": "{\n    nodes: ['A', 'B', 'C', 'D', 'E', 'F'],\n    edges: [\n        { source: 'A', target: 'B', weight: 5 },\n        { source: 'A', target: 'C', weight: 4 },\n        { source: 'A', target: 'E', weight: 1 },\n        { source: 'B', target: 'C', weight: 2 },\n        { source: 'C', target: 'D', weight: 7 },\n        { source: 'D', target: 'F', weight: 3 },\n        { source: 'E', target: 'F', weight: 8 },\n    ],\n}",
-              "type": {
-                "text": "object"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "currentState"
-            },
-            {
-              "kind": "field",
-              "name": "_rndGenNodes"
-            },
-            {
-              "kind": "field",
-              "name": "_rndGenMaxEdges"
-            },
-            {
-              "kind": "method",
-              "name": "_handleStep"
-            },
-            {
-              "kind": "method",
-              "name": "_handleGenerateRandomGraph"
-            },
-            {
-              "kind": "method",
-              "name": "_handleCommunityAggregation"
-            },
-            {
-              "kind": "method",
-              "name": "_handleJsonEditorChange",
-              "parameters": [
-                {
-                  "name": "e"
-                }
-              ]
-            },
-            {
-              "kind": "field",
-              "name": "_graph",
-              "default": "{\n    nodes: ['A', 'B', 'C', 'D', 'E', 'F'],\n    edges: [\n        { source: 'A', target: 'B', weight: 5 },\n        { source: 'A', target: 'C', weight: 4 },\n        { source: 'A', target: 'E', weight: 1 },\n        { source: 'B', target: 'C', weight: 2 },\n        { source: 'C', target: 'D', weight: 7 },\n        { source: 'D', target: 'F', weight: 3 },\n        { source: 'E', target: 'F', weight: 8 },\n    ],\n}",
-              "type": {
-                "text": "object"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "_stateHistory",
-              "type": {
-                "text": "array"
-              },
-              "default": "[\n            initLouvainState(graphToCommunityGraph(this._graph)),\n        ]"
-            },
-            {
-              "kind": "field",
-              "name": "_currentState",
-              "default": "this._stateHistory[0]"
-            },
-            {
-              "kind": "field",
-              "name": "_currentGraph",
-              "type": {
-                "text": "object"
-              },
-              "default": "{\n            nodes: [],\n            matrix: [],\n            communities: [],\n        }"
-            },
-            {
-              "kind": "field",
-              "name": "_currentNode",
-              "type": {
-                "text": "string"
-              },
-              "default": "''"
-            },
-            {
-              "kind": "field",
-              "name": "_currentDeltaModularities",
-              "type": {
-                "text": "array"
-              },
-              "default": "[]"
-            },
-            {
-              "kind": "field",
-              "name": "_currentNeighbourCommunities",
-              "type": {
-                "text": "array"
-              },
-              "default": "[]"
-            },
-            {
-              "kind": "field",
-              "name": "__rndGenNodes",
-              "type": {
-                "text": "number"
-              },
-              "default": "10"
-            },
-            {
-              "kind": "field",
-              "name": "_rndGenMaxNodes",
-              "type": {
-                "text": "number"
-              },
-              "default": "20"
-            },
-            {
-              "kind": "field",
-              "name": "_rndGenEdges",
-              "type": {
-                "text": "number"
-              },
-              "default": "10"
-            },
-            {
-              "kind": "field",
-              "name": "_rndGenMinWeight",
-              "type": {
-                "text": "number"
-              },
-              "default": "1"
-            },
-            {
-              "kind": "field",
-              "name": "_rndGenMaxWeight",
-              "type": {
-                "text": "number"
-              },
-              "default": "20"
-            }
-          ],
-          "mixins": [
-            {
-              "name": "ScopedElementsMixin",
-              "package": "@open-wc/scoped-elements"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "louvain-webviz",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "LouvainWebviz",
-          "declaration": {
-            "name": "LouvainWebviz",
-            "module": "out-tsc/src/LouvainWebviz.js"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "out-tsc/src/LouvainWebvizCollapsible.js",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "LouvainWebvizCollapsible",
-          "members": [
-            {
-              "kind": "field",
-              "name": "heading",
-              "type": {
-                "text": "string"
-              },
-              "default": "''"
-            },
-            {
-              "kind": "field",
-              "name": "show",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "louvain-webviz-collapsible",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "LouvainWebvizCollapsible",
-          "declaration": {
-            "name": "LouvainWebvizCollapsible",
-            "module": "out-tsc/src/LouvainWebvizCollapsible.js"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "out-tsc/src/LouvainWebvizGraph.js",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "LouvainWebvizGraph",
-          "members": [
-            {
-              "kind": "method",
-              "name": "renderGraph"
-            },
-            {
-              "kind": "field",
-              "name": "graph",
-              "type": {
-                "text": "object"
-              },
-              "default": "{\n            nodes: [],\n            matrix: [],\n            communities: [],\n        }"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "louvain-webviz-graph",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "LouvainWebvizGraph",
-          "declaration": {
-            "name": "LouvainWebvizGraph",
-            "module": "out-tsc/src/LouvainWebvizGraph.js"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "out-tsc/src/LouvainWebvizJsonEditor.js",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "LouvainWebvizJsonEditor",
-          "members": [
-            {
-              "kind": "field",
-              "name": "json",
-              "type": {
-                "text": "object"
-              },
-              "default": "{}"
-            },
-            {
-              "kind": "field",
-              "name": "_editor",
-              "type": {
-                "text": "null"
-              },
-              "default": "null"
-            },
-            {
-              "kind": "field",
-              "name": "_ajvValidator"
-            },
-            {
-              "kind": "field",
-              "name": "_validator",
-              "default": "(json) => {\n            const errors = this._ajvValidator(json);\n            if (errors.length) {\n                return errors;\n            }\n            const graph = json;\n            for (const [i, edge] of json.edges.entries()) {\n                if (!graph.nodes.includes(edge.source)) {\n                    errors.push({\n                        message: `Edge ${i} has invalid source node`,\n                        path: ['edges', `${i}`, 'source'],\n                    });\n                }\n                if (!graph.nodes.includes(edge.target)) {\n                    errors.push({\n                        message: `Edge ${i} has invalid target node. Must be one of \"${graph.nodes.join('\", \"')}\"`,\n                        path: ['edges', `${i}`, 'target'],\n                    });\n                }\n            }\n            return errors;\n        }"
-            }
-          ],
-          "events": [
-            {
-              "name": "json-editor-change",
-              "type": {
-                "text": "CustomEvent"
-              }
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "LouvainWebvizJsonEditor",
-          "declaration": {
-            "name": "LouvainWebvizJsonEditor",
-            "module": "out-tsc/src/LouvainWebvizJsonEditor.js"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "out-tsc/src/graph.js",
-      "declarations": [
-        {
-          "kind": "function",
-          "name": "graphToCommunityGraph",
-          "parameters": [
-            {
-              "name": "graph"
-            }
-          ]
-        },
-        {
-          "kind": "function",
-          "name": "communityGraphToGraph",
-          "parameters": [
-            {
-              "name": "communityGraph"
-            }
-          ]
-        },
-        {
-          "kind": "function",
-          "name": "renderGraph",
-          "parameters": [
-            {
-              "name": "graph"
-            },
-            {
-              "name": "el"
-            }
-          ]
-        },
-        {
-          "kind": "function",
-          "name": "generateRandomGraph",
-          "parameters": [
-            {
-              "name": "nNodes"
-            },
-            {
-              "name": "nEdges"
-            },
-            {
-              "name": "minWeight"
-            },
-            {
-              "name": "maxWeight"
-            }
-          ]
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "graphToCommunityGraph",
-          "declaration": {
-            "name": "graphToCommunityGraph",
-            "module": "out-tsc/src/graph.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "communityGraphToGraph",
-          "declaration": {
-            "name": "communityGraphToGraph",
-            "module": "out-tsc/src/graph.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "renderGraph",
-          "declaration": {
-            "name": "renderGraph",
-            "module": "out-tsc/src/graph.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "generateRandomGraph",
-          "declaration": {
-            "name": "generateRandomGraph",
-            "module": "out-tsc/src/graph.js"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "out-tsc/src/louvain-webviz-collapsible.js",
-      "declarations": [],
-      "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "louvain-webviz-collapsible",
-          "declaration": {
-            "name": "LouvainWebvizCollapsible",
-            "module": "/out-tsc/src/LouvainWebvizCollapsible.js"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "out-tsc/src/louvain-webviz-graph.js",
-      "declarations": [],
-      "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "louvain-webviz-graph",
-          "declaration": {
-            "name": "LouvainWebvizGraph",
-            "module": "/out-tsc/src/LouvainWebvizGraph.js"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "out-tsc/src/louvain-webviz.js",
-      "declarations": [],
-      "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "louvain-webviz",
-          "declaration": {
-            "name": "LouvainWebviz",
-            "module": "/out-tsc/src/LouvainWebviz.js"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "out-tsc/src/louvain.js",
-      "declarations": [
-        {
-          "kind": "function",
-          "name": "initLouvainState",
-          "parameters": [
-            {
-              "name": "graph"
-            },
-            {
-              "name": "nodeIndex",
-              "default": "0"
-            },
-            {
-              "name": "communitiesChanged",
-              "default": "false"
-            },
-            {
-              "name": "finished",
-              "default": "false"
-            }
-          ]
-        },
-        {
-          "kind": "function",
-          "name": "louvainStep",
-          "parameters": [
-            {
-              "name": "state"
-            }
-          ]
-        },
-        {
-          "kind": "function",
-          "name": "communityAggregation",
-          "parameters": [
-            {
-              "name": "graph"
-            }
-          ]
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "initLouvainState",
-          "declaration": {
-            "name": "initLouvainState",
-            "module": "out-tsc/src/louvain.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "louvainStep",
-          "declaration": {
-            "name": "louvainStep",
-            "module": "out-tsc/src/louvain.js"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "communityAggregation",
-          "declaration": {
-            "name": "communityAggregation",
-            "module": "out-tsc/src/louvain.js"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "out-tsc/src/util.js",
-      "declarations": [
-        {
-          "kind": "function",
-          "name": "cartesianProduct",
-          "parameters": [
-            {
-              "name": "args"
-            }
-          ]
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "cartesianProduct",
-          "declaration": {
-            "name": "cartesianProduct",
-            "module": "out-tsc/src/util.js"
+            "name": "LwvPageVisualization",
+            "module": "out-tsc/src/pages/visualization/lwv-page-visualization.js"
           }
         }
       ]

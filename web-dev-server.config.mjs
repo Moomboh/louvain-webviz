@@ -6,11 +6,24 @@ import alias from '@rollup/plugin-alias';
 const hmr = process.argv.includes('--hmr');
 
 export default /** @type {import('@web/dev-server').DevServerConfig} */ ({
-  open: '/src',
   watch: !hmr,
   nodeResolve: {
     exportConditions: ['browser', 'development'],
   },
+
+  middleware: [
+    (context, next) => {
+      // match urls with no file extension or `.html` and serve those from `src/pages`
+      if (
+        context.url.match(/^(\/(\w+))*\/?(\.\w{5,})?\??([^.]+)?$/) ||
+        context.url.match(/.*\.html$/)
+      ) {
+        context.url = `src/pages${context.url}`;
+      }
+
+      return next();
+    },
+  ],
 
   esbuildTarget: 'auto',
 
