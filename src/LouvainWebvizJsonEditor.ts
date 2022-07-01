@@ -157,10 +157,13 @@ export class LouvainWebvizJsonEditor extends LitElement {
   @property({ attribute: false })
   json: any = {};
 
-  private _editor: JSONEditor | null = null;
+  @property({ attribute: false })
+  jsonEditor: JSONEditor | null = null;
 
   private _ajvValidator = createAjvValidator({
     type: 'object',
+    required: ['nodes', 'edges'],
+    maxProperties: 2,
     properties: {
       nodes: {
         type: 'array',
@@ -227,14 +230,14 @@ export class LouvainWebvizJsonEditor extends LitElement {
   protected updated(
     _changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
   ): void {
-    if (_changedProperties.has('json') && this._editor === null) {
+    if (_changedProperties.has('json') && this.jsonEditor === null) {
       const jsonEditorEl = this.shadowRoot!.querySelector('#json-editor')!;
 
       const content = {
         text: JSON.stringify(this.json, null, 2),
       } as TextContent;
 
-      this._editor = new JSONEditor({
+      this.jsonEditor = new JSONEditor({
         target: jsonEditorEl,
         props: {
           mode: 'code',
@@ -260,13 +263,13 @@ export class LouvainWebvizJsonEditor extends LitElement {
       });
     }
 
-    if (_changedProperties.has('json') && this._editor !== null) {
+    if (_changedProperties.has('json') && this.jsonEditor !== null) {
       const content = {
         text: JSON.stringify(this.json, null, 2),
       } as TextContent;
 
-      if (content.text !== (this._editor.get() as TextContent).text) {
-        this._editor.set(content);
+      if (content.text !== (this.jsonEditor.get() as TextContent).text) {
+        this.jsonEditor.set(content);
       }
     }
   }

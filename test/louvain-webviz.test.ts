@@ -75,7 +75,7 @@ describe('LouvainWebviz', () => {
         edge => (edge.weight ?? 0) >= 2 && (edge.weight ?? Infinity) <= 30
       )
     ).to.be.true;
-  });
+  }).timeout(30000);
 
   it('produces the correct community aggregation when the buttons', async () => {
     const stepButton: HTMLButtonElement =
@@ -99,7 +99,7 @@ describe('LouvainWebviz', () => {
       [6, 7, 3],
       [1, 3, 8],
     ]);
-  });
+  }).timeout(30000);
 
   it('initializes state successfully', () => {
     const expectedInitialState: LouvainState = {
