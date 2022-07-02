@@ -56,8 +56,9 @@ export class LwvPageVisualization extends ScopedElementsMixin(LitElement) {
     }
 
     :host {
-      width: 100vw;
+      width: 100%;
       display: flex;
+      flex-direction: column;
     }
 
     h1 {
@@ -68,12 +69,7 @@ export class LwvPageVisualization extends ScopedElementsMixin(LitElement) {
       display: block;
       width: 99%; /* 99% because otherwise we get weird overflow issues */
       height: 99%; /* 99% because otherwise we get weird overflow issues */
-    }
-
-    .main {
-      flex: 1;
-      display: flex;
-      flex-wrap: wrap;
+      min-height: 50vh;
     }
 
     .left-sidebar {
@@ -94,10 +90,13 @@ export class LwvPageVisualization extends ScopedElementsMixin(LitElement) {
       pointer-events: none;
       padding: 1em;
       flex: 1;
-      height: 80vh;
     }
 
-    @media (min-width: 1200px) {
+    @media (min-width: 900px) {
+      :host {
+        flex-direction: row;
+      }
+
       .left-sidebar {
         width: 400px;
       }
