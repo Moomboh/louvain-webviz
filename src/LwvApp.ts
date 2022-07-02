@@ -31,6 +31,18 @@ export class LwvApp extends ScopedElementsMixin(LitElement) {
       text-decoration: none;
       font-weight: normal;
     }
+
+    .app-footer {
+      display: flex;
+      justify-content: end;
+      padding: 0.5rem;
+    }
+
+    .app-footer a {
+      font-size: 0.8rem;
+      text-decoration: none;
+      margin-right: 0.5rem;
+    }
   `;
 
   // TODO: this is also a workaround for the multi HTML-file setup, which should be
@@ -52,6 +64,10 @@ export class LwvApp extends ScopedElementsMixin(LitElement) {
       <main>
         <slot></slot>
       </main>
+      <div class="app-footer">
+        <a href="${this._baseHref}imprint">Imprint</a>
+        <a href="${this._baseHref}privacy">Privacy Policy</a>
+      </div>
     `;
   }
 }
