@@ -5,7 +5,7 @@
       "name": "Debug demo Chrome",
       "type": "pwa-chrome",
       "request": "launch",
-      "url": "http://localhost:8000/src",
+      "url": "http://localhost:8000",
       "webRoot": "${workspaceFolder}",
       "sourceMaps": true
     }
