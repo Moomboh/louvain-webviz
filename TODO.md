@@ -1,6 +1,6 @@
 - [x] Community aggregation
 - [x] enter graph json
-- [ ] add explanation text and citation (Louvain and cytoscape.js)
+- [x] add explanation text and citation (Louvain and cytoscape.js)
 - [x] legal stuff (Imprint, Privacy)
 - [x] testing
 - [ ] dedupe html files
