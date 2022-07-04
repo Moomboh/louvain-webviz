@@ -78,7 +78,7 @@ export class LwvPageHome extends ScopedElementsMixin(LitElement) {
           <a href="#explanation" class="hero-actions-link">
             <mwc-button
               outlined
-              class="hero-actions-button-outlined"
+              class="hero-actions-button-outlined hero-actions-button-explanation"
               icon="arrow_downward"
               @click="${() => this._scrollToExplanation()}"
             >
@@ -242,7 +242,7 @@ export class LwvPageHome extends ScopedElementsMixin(LitElement) {
 
   private _scrollToExplanation() {
     setTimeout(() => {
-      const explanationElement = this.shadowRoot?.getElementById('explanation');
+      const explanationElement = this.shadowRoot!.getElementById('explanation');
 
       if (explanationElement) {
         window.scroll({
