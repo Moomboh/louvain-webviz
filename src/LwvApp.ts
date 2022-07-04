@@ -19,10 +19,19 @@ export class LwvApp extends ScopedElementsMixin(LitElement) {
     :host {
       font-size: 18px;
       font-family: sans-serif;
+
+      --mdc-theme-primary: #0070f3;
     }
 
     .app-title {
       text-decoration: none;
+      display: none;
+    }
+
+    @media (min-width: 900px) {
+      .app-title {
+        display: block;
+      }
     }
 
     .app-title h1 {
@@ -33,6 +42,7 @@ export class LwvApp extends ScopedElementsMixin(LitElement) {
     }
 
     .app-footer {
+      margin-top: 4rem;
       display: flex;
       justify-content: end;
       padding: 0.5rem;
@@ -49,6 +59,10 @@ export class LwvApp extends ScopedElementsMixin(LitElement) {
       text-decoration: none;
       margin-left: 1.5rem;
     }
+
+    .app-bar-link-right {
+      margin-right: 0.5rem;
+    }
   `;
 
   // TODO: this is also a workaround for the multi HTML-file setup, which should be
@@ -62,28 +76,24 @@ export class LwvApp extends ScopedElementsMixin(LitElement) {
 
   render() {
     return html`
-      <mwc-top-app-bar>
-        <a slot="title" class="app-title" href="${this._baseHref}">
+      <mwc-top-app-bar centerTitle>
+        <a slot="navigationIcon" class="app-title" href="${this._baseHref}">
           <h1>Louvain Method Visualization</h1></a
         >
         <a
-          slot="actionItems"
+          slot="title"
           href="${this._baseHref}visualization"
           class="app-bar-link"
           >Visualization</a
         >
         <a
-          slot="actionItems"
+          slot="title"
           href="${this._baseHref}#explanation"
           class="app-bar-link"
           >Explanation</a
         >
 
-        <a
-          slot="actionItems"
-          href="${this._baseHref}#explanation"
-          class="app-bar-link"
-        >
+        <a slot="actionItems" href="" class="app-bar-link app-bar-link-right">
           <img
             src="${this._baseHref}assets/svg/github-logo.svg"
             alt="GitHub logo"
