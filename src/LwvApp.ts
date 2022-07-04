@@ -93,7 +93,11 @@ export class LwvApp extends ScopedElementsMixin(LitElement) {
           >Explanation</a
         >
 
-        <a slot="actionItems" href="" class="app-bar-link app-bar-link-right">
+        <a
+          slot="actionItems"
+          href="https://github.com/Moomboh/louvain-webviz"
+          class="app-bar-link app-bar-link-right"
+        >
           <img
             src="${this._baseHref}assets/svg/github-logo.svg"
             alt="GitHub logo"

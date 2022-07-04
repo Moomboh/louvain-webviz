@@ -22,6 +22,7 @@
     "@material/mwc-slider": "^0.26.1",
     "@material/mwc-textfield": "^0.26.1",
     "@material/mwc-top-app-bar": "^0.26.1",
+    "@navsnpm/katex-expression": "^1.0.8",
     "@open-wc/scoped-elements": "^2.1.1",
     "cytoscape": "^3.21.1",
     "cytoscape-cose-bilkent": "^4.1.0",
