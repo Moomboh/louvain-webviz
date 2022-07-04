@@ -43,6 +43,12 @@ export class LwvApp extends ScopedElementsMixin(LitElement) {
       text-decoration: none;
       margin-right: 0.5rem;
     }
+
+    .app-bar-link {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 1.5rem;
+    }
   `;
 
   // TODO: this is also a workaround for the multi HTML-file setup, which should be
@@ -60,14 +66,37 @@ export class LwvApp extends ScopedElementsMixin(LitElement) {
         <a slot="title" class="app-title" href="${this._baseHref}">
           <h1>Louvain Method Visualization</h1></a
         >
+        <a
+          slot="actionItems"
+          href="${this._baseHref}visualization"
+          class="app-bar-link"
+          >Visualization</a
+        >
+        <a
+          slot="actionItems"
+          href="${this._baseHref}#explanation"
+          class="app-bar-link"
+          >Explanation</a
+        >
+
+        <a
+          slot="actionItems"
+          href="${this._baseHref}#explanation"
+          class="app-bar-link"
+        >
+          <img
+            src="${this._baseHref}assets/svg/github-logo.svg"
+            alt="GitHub logo"
+          />
+        </a>
       </mwc-top-app-bar>
       <main>
         <slot></slot>
       </main>
-      <div class="app-footer">
+      <footer class="app-footer">
         <a href="${this._baseHref}imprint">Imprint</a>
         <a href="${this._baseHref}privacy">Privacy Policy</a>
-      </div>
+      </footer>
     `;
   }
 }
