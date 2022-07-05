@@ -47,6 +47,10 @@ export default [
             src: 'assets/fonts/material-icons/MaterialIcons-Regular.woff2',
             dest: 'dist/assets',
           },
+          {
+            src: 'node_modules/katex/dist/fonts/*',
+            dest: 'dist/assets/fonts',
+          },
         ],
       }),
       /** Resolve bare module imports */

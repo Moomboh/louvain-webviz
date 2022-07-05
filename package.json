@@ -26,6 +26,7 @@
     "@open-wc/scoped-elements": "^2.1.1",
     "cytoscape": "^3.21.1",
     "cytoscape-cose-bilkent": "^4.1.0",
+    "katex": "^0.16.0",
     "lit": "^2.2.6",
     "normalize.css": "^8.0.1",
     "svelte-jsoneditor": "^0.3.60"
@@ -45,6 +46,7 @@
     "@rollup/plugin-commonjs": "^22.0.0",
     "@rollup/plugin-node-resolve": "^13.0.6",
     "@rollup/plugin-replace": "^4.0.0",
+    "@types/katex": "^0.14.0",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
     "@web/dev-server": "^0.1.28",

@@ -465,6 +465,81 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/LwvKatex.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "LwvKatex",
+          "members": [
+            {
+              "kind": "field",
+              "name": "expression",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "expression"
+            },
+            {
+              "kind": "field",
+              "name": "displayMode",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "display-mode"
+            },
+            {
+              "kind": "method",
+              "name": "createRenderRoot",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "Element | ShadowRoot"
+                }
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "expression",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "expression"
+            },
+            {
+              "name": "display-mode",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "displayMode"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "lwv-katex",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "LwvKatex",
+          "declaration": {
+            "name": "LwvKatex",
+            "module": "src/components/LwvKatex.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/lwv-collapsible.ts",
       "declarations": [],
       "exports": [
@@ -504,6 +579,21 @@
           "declaration": {
             "name": "LwvJsonEditor",
             "module": "/src/components/LwvJsonEditor.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/lwv-katex.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "lwv-katex",
+          "declaration": {
+            "name": "LwvKatex",
+            "module": "/src/components/LwvKatex.js"
           }
         }
       ]
@@ -760,54 +850,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/pages/lwv-page-home.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "LwvPageHome",
-          "members": [
-            {
-              "kind": "field",
-              "name": "scopedElements",
-              "static": true
-            }
-          ],
-          "mixins": [
-            {
-              "name": "ScopedElementsMixin",
-              "package": "@open-wc/scoped-elements"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "lwv-page-home",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "LwvPageHome",
-          "declaration": {
-            "name": "LwvPageHome",
-            "module": "src/pages/lwv-page-home.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "lwv-page-home",
-          "declaration": {
-            "name": "LwvPageHome",
-            "module": "src/pages/lwv-page-home.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "out-tsc/src/components/LwvCollapsible.js",
       "declarations": [
         {
@@ -956,6 +998,55 @@
     },
     {
       "kind": "javascript-module",
+      "path": "out-tsc/src/components/LwvKatex.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "LwvKatex",
+          "members": [
+            {
+              "kind": "method",
+              "name": "createRenderRoot"
+            },
+            {
+              "kind": "field",
+              "name": "expression",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "kind": "field",
+              "name": "displayMode",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "lwv-katex",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "LwvKatex",
+          "declaration": {
+            "name": "LwvKatex",
+            "module": "out-tsc/src/components/LwvKatex.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "out-tsc/src/components/lwv-collapsible.js",
       "declarations": [],
       "exports": [
@@ -995,6 +1086,21 @@
           "declaration": {
             "name": "LwvJsonEditor",
             "module": "/out-tsc/src/components/LwvJsonEditor.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "out-tsc/src/components/lwv-katex.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "lwv-katex",
+          "declaration": {
+            "name": "LwvKatex",
+            "module": "/out-tsc/src/components/LwvKatex.js"
           }
         }
       ]
@@ -1379,7 +1485,7 @@
         {
           "kind": "variable",
           "name": "LwvPageHome",
-          "default": "class LwvPageHome extends ScopedElementsMixin(LitElement) {\n    static get scopedElements() {\n        return {\n            'mwc-button': Button,\n        };\n    }\n    render() {\n        return html ``;\n    }\n}"
+          "default": "class LwvPageHome extends ScopedElementsMixin(LitElement) {\n    constructor() {\n        super(...arguments);\n        // TODO: workaround, because lit-plugin considers `@import` as invalid css also inside\n        //       <style> tags, where it is valid, just because is invalid inside the css``\n        //       template-literal.\n        this._styleImportStatement = `@import 'assets/css/style.css';`;\n    }\n    static get scopedElements() {\n        return {\n            'mwc-button': Button,\n        };\n    }\n    render() {\n        return html `\n      <style>\n        ${this._styleImportStatement}\n      </style>\n      <div class=\"hero-container\">\n        <div class=\"hero-actions\">\n          <a href=\"visualization\" class=\"hero-actions-link\">\n            <mwc-button raised>Start visualization</mwc-button>\n          </a>\n          <a href=\"#explanation\" class=\"hero-actions-link\">\n            <mwc-button\n              outlined\n              class=\"hero-actions-button-outlined hero-actions-button-explanation\"\n              icon=\"arrow_downward\"\n              @click=\"${() => this._scrollToExplanation()}\"\n            >\n              More about Louvain Method</mwc-button\n            >\n          </a>\n        </div>\n      </div>\n      <article id=\"explanation\" class=\"content-container\">\n        <h2>What is the Louvain Method?</h2>\n        <p>\n          The\n          <a href=\"https://en.wikipedia.org/wiki/Louvain_method\"\n            >Louvain Method</a\n          >\n          is an efficient algorithm for hierarchical clustering of nodes in a\n          graph into communities which are strongly connected internally and\n          weakly connected to other communities. The Louvain method was first\n          introduced in this paper:\n        </p>\n        <p class=\"citation\">\n          Blondel, V. D., Guillaume, J.-L., Lambiotte, R., & Lefebvre, E.\n          (2008). Fast unfolding of communities in large networks. In Journal of\n          Statistical Mechanics: Theory and Experiment (Vol. 2008, Issue 10, p.\n          P10008). IOP Publishing. DOI:\n          <a href=\"https://doi.org/10.1088/1742-5468/2008/10/p10008\"\n            >10.1088/1742-5468/2008/10/p10008</a\n          >\n        </p>\n        <h2>How does the Louvain Method work?</h2>\n        <p>\n          The Louvain Method has two phases which are executed repeatedly:\n          <strong>Modularity Optimization</strong> and\n          <strong>Community Aggregation</strong>. In Modularity Optimization\n          nodes are assigned to communities and in Community Aggregation these\n          communities are merged into single nodes.\n        </p>\n\n        <figure>\n          <img\n            src=\"assets/img/louvain-method-overview.jpg\"\n            alt=\"Diagram showing an overview of the steps of the Louvain Method method\"\n            width=\"100%\"\n          />\n          <figcaption>\n            Overview of the two phases of the Louvain Method. First Modularity\n            is optimized to find a partition then the resulting communities are\n            merged into single nodes. (Figure from: Blondel et. al, 2008).\n          </figcaption>\n        </figure>\n\n        <h3>Modularity Optimization</h3>\n\n        <p>\n          During Modularity Optimization the Louvain Method tries to find a\n          partition (i.e. the assignment of nodes to communities), which\n          optimizes the modularity of the graph.\n          <strong>Modularity</strong> of the graph. \"The modularity of a\n          partition is a scalar value between -1 and 1 that measures the density\n          of links inside communities as compared to links between communities.\"\n          (Blondel et. al, 2008). The formula for the modularity is:\n        </p>\n        <p>\n          <katex-expression\n            expression=\"G = \\\\frac{1}{2m}\\\\sum_{p,q} \\\\left(A_{pq} - \\\\frac{k_p k_q}{2m}\\\\right) \\\\delta(C_p, C_q)\"\n            .katexOptions=\"${JSON.stringify({ displayMode: true })}\"\n          >\n          </katex-expression>\n        </p>\n        <p>\n          <katex-expression expression=\"A_{pq}\"></katex-expression>: weight of\n          edge between <katex-expression expression=\"p\"></katex-expression> and\n          <katex-expression expression=\"q\"></katex-expression>\n          <br />\n\n          <katex-expression expression=\"k_p = \\\\sum_i A_{pi}\"></katex-expression\n          >: sum of weights of all edges originating from\n          <katex-expression expression=\"p\"></katex-expression>\n          <br />\n\n          <katex-expression expression=\"C_p\"></katex-expression>: community to\n          which <katex-expression expression=\"p\"></katex-expression> has been\n          assigned\n          <br />\n\n          <katex-expression expression=\"\\\\delta(C_p, C_q)\"></katex-expression>:\n          Kronecker delta function,\n          <katex-expression expression=\"1\"></katex-expression> if\n          <katex-expression expression=\"C_p = C_q\"></katex-expression>,\n          <katex-expression expression=\"0\"></katex-expression> otherwise\n          <br />\n\n          <katex-expression\n            expression=\"m = \\\\frac{1}{2} \\\\sum_{p,q} A_{pq}\"\n          ></katex-expression\n          >: sum of all weights of all edges\n          <br />\n        </p>\n\n        <p>\n          For initialization each node is first assigned to a community\n          containing only it self. Then for each node and each of its\n          neighbouring communities the change in modularity\n          <katex-expression expression=\"\\\\Delta G\"></katex-expression> for the\n          node being removed from its current community and added to the\n          neighbouring community is calculated. The node is then reassigned to\n          the community with the highest change in modularity or not moved if no\n          change is greater than zero. This is then repeated for every node\n          until no node move can further improve modularity - potentially moving\n          some nodes many times.\n        </p>\n\n        <h3>Community Aggregation</h3>\n        <p>\n          After the Modularity Optimization is finished, the communities are\n          merged into single nodes. The merging is done by adding the weights of\n          edges between any pair of nodes inside the community and creating a\n          new node for the community with an edge to itself having the sum as\n          weight. Analogously, the weights of edges between any pair of nodes of\n          two different communities are summed up and an edge with this sum as\n          weight is added between the new nodes corresponding to the respective\n          communities.\n        </p>\n\n        <p>\n          With the resulting new graph, the whole process can be repeated\n          starting with Modularity Optimization, successively building up a\n          hierarchy of communities.\n        </p>\n\n        <h2>Visualization</h2>\n        <p>\n          In the <a href=\"visualization\">visualization</a> you can explore the\n          Louvain Method step-by-step with examples. There is a default example\n          loaded but you can also generate a random graph or edit and create\n          your on graph in a JSON format.\n        </p>\n        <p>\n          The visualization is based on\n          <a href=\"https://js.cytoscape.org/\">Cytoscape.js</a> a JavaScript\n          graph visualization library introduced in the paper:\n        </p>\n        <p class=\"citation\">\n          Franz, M., Lopes, C. T., Huck, G., Dong, Y., Sumer, O., & Bader, G. D.\n          (2015). Cytoscape.js: a graph theory library for visualisation and\n          analysis. In Bioinformatics (p. btv557). Oxford University Press\n          (OUP). DOI:\n          <a href=\"https://doi.org/10.1093/bioinformatics/btv557\"\n            >10.1093/bioinformatics/btv557</a\n          >\n        </p>\n      </article>\n    `;\n    }\n    firstUpdated() {\n        if (window.location.href.endsWith('#explanation')) {\n            this._scrollToExplanation();\n        }\n    }\n    _scrollToExplanation() {\n        setTimeout(() => {\n            const explanationElement = this.shadowRoot.getElementById('explanation');\n            if (explanationElement) {\n                window.scroll({\n                    top: explanationElement.offsetTop,\n                    behavior: 'smooth',\n                });\n            }\n        }, 50);\n    }\n}"
         }
       ],
       "exports": [
@@ -1429,6 +1535,12 @@
           }
         }
       ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "out-tsc/src/pages/page-home.js",
+      "declarations": [],
+      "exports": []
     },
     {
       "kind": "javascript-module",
