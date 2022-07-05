@@ -5,8 +5,9 @@ import { importMetaAssets } from '@web/rollup-plugin-import-meta-assets';
 import { terser } from 'rollup-plugin-terser';
 import commonjs from '@rollup/plugin-commonjs';
 import alias from '@rollup/plugin-alias';
-import copy from 'rollup-plugin-copy';
 import url from '@rollup/plugin-url';
+import postcssUrl from 'postcss-url';
+import postcss from 'postcss';
 import path from 'path';
 
 export default [
@@ -23,7 +24,13 @@ export default [
   },
   {
     input: '**/*.html',
-    output: { dir: 'dist' },
+    output: {
+      entryFileNames: '[name]-[hash].js',
+      chunkFileNames: '[name]-[hash].js',
+      assetFileNames: '[name]-[hash][extname]',
+      format: 'es',
+      dir: 'dist',
+    },
 
     plugins: [
       alias({
@@ -58,18 +65,28 @@ export default [
 
           return htmlContent;
         },
-      }),
-      copy({
-        targets: [
-          {
-            src: 'assets/fonts/material-icons/MaterialIcons-Regular.woff2',
-            dest: 'dist/assets',
-          },
-          {
-            src: 'node_modules/katex/dist/fonts/*',
-            dest: 'dist/assets/fonts',
-          },
-        ],
+        transformAsset: async (content, filePath) => {
+          if (filePath.endsWith('.css')) {
+            const result = await postcss()
+              .use(
+                postcssUrl({
+                  url: 'copy',
+                  assetsPath: 'dist',
+                  useHash: true,
+                })
+              )
+              .process(content, {
+                from: filePath,
+                to: 'dist/',
+              });
+
+            // TODO: this replace is a workaround. postcss-url should be configured
+            //       to not have the `assetsPath` as prefix in the `url()`
+            return result.css.replaceAll('url(dist/', 'url(');
+          }
+
+          return content;
+        },
       }),
       url(),
       /** Resolve bare module imports */

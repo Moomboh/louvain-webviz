@@ -11,7 +11,6 @@
     "test:dev": "tsc && wtr --coverage",
     "test:watch": "tsc && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wtr --watch\"",
     "build": "rimraf dist && tsc && rollup -c rollup.config.js && npm run analyze",
-    "build:dev": "export BASE_URL=/dist/; npm run build",
     "start:build": "web-dev-server --root-dir dist --app-index index.html --open",
     "analyze": "cem analyze --litelement --exclude coverage out-vendors dist",
     "start": "tsc && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wds\""
@@ -64,11 +63,12 @@
     "eslint-config-prettier": "^8.3.0",
     "husky": "^4.3.8",
     "lint-staged": "^10.5.4",
+    "postcss": "^8.4.14",
+    "postcss-url": "^10.1.3",
     "prettier": "^2.4.1",
     "rimraf": "^3.0.2",
     "rollup": "^2.60.0",
-    "rollup-plugin-copy": "^3.4.0",
-    "rollup-plugin-import-css": "^3.0.3",
+    "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-terser": "^7.0.2",
     "tslib": "^2.3.1",
     "typescript": "^4.5.2"
