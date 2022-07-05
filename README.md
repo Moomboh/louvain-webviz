@@ -1,6 +1,6 @@
 # Louvain Method Visualization
 
-![Test and Deploy Status](https://github.com/Moomboh/louvain-webviz/actions/workflows/test_and_deploy.yml/badge.svg?branch=main)
+[![Test and Deploy Status](https://github.com/Moomboh/louvain-webviz/actions/workflows/test_and_deploy.yml/badge.svg?branch=main)](https://github.com/Moomboh/louvain-webviz/actions)
 [![License MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 [![Coverage Status](https://coveralls.io/repos/github/Moomboh/louvain-webviz/badge.svg?branch=main)](https://coveralls.io/github/Moomboh/louvain-webviz?branch=main)
 
