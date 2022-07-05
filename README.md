@@ -1,13 +1,16 @@
 # Louvain Method Visualization
 
-![](https://github.com/Moomboh/louvain-webviz/actions/workflows/test_and_deploy.yml/badge.svg?branch=main)
-[![](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+![Test and Deploy Status](https://github.com/Moomboh/louvain-webviz/actions/workflows/test_and_deploy.yml/badge.svg?branch=main)
+[![License MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+[![Coverage Status](https://coveralls.io/repos/github/Moomboh/louvain-webviz/badge.svg?branch=main)](https://coveralls.io/github/Moomboh/louvain-webviz?branch=main)
 
 An interactive visualization of the
 [Louvain Method](https://en.wikipedia.org/wiki/Louvain_method) for educational purposes
 running in the browser.
 
-[Check it out!](https://moomboh.github.io/louvain-webviz/)
+## [Check it out!](https://moomboh.github.io/louvain-webviz/)
+
+<hr/>
 
 ## Contributing
 
