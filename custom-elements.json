@@ -681,6 +681,41 @@
       "declarations": [
         {
           "kind": "function",
+          "name": "moveDeltaModularity",
+          "return": {
+            "type": {
+              "text": "number"
+            }
+          },
+          "parameters": [
+            {
+              "name": "graph",
+              "type": {
+                "text": "CommunityGraph"
+              }
+            },
+            {
+              "name": "moveNode",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "fromCommunity",
+              "type": {
+                "text": "Set<string>"
+              }
+            },
+            {
+              "name": "toCommunity",
+              "type": {
+                "text": "Set<string>"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
           "name": "initLouvainState",
           "return": {
             "type": {
@@ -744,6 +779,14 @@
         }
       ],
       "exports": [
+        {
+          "kind": "js",
+          "name": "moveDeltaModularity",
+          "declaration": {
+            "name": "moveDeltaModularity",
+            "module": "src/lib/louvain.ts"
+          }
+        },
         {
           "kind": "js",
           "name": "initLouvainState",
@@ -1149,6 +1192,24 @@
       "declarations": [
         {
           "kind": "function",
+          "name": "moveDeltaModularity",
+          "parameters": [
+            {
+              "name": "graph"
+            },
+            {
+              "name": "moveNode"
+            },
+            {
+              "name": "fromCommunity"
+            },
+            {
+              "name": "toCommunity"
+            }
+          ]
+        },
+        {
+          "kind": "function",
           "name": "initLouvainState",
           "parameters": [
             {
@@ -1188,6 +1249,14 @@
         }
       ],
       "exports": [
+        {
+          "kind": "js",
+          "name": "moveDeltaModularity",
+          "declaration": {
+            "name": "moveDeltaModularity",
+            "module": "out-tsc/src/lib/louvain.js"
+          }
+        },
         {
           "kind": "js",
           "name": "initLouvainState",

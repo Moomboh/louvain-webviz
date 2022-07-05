@@ -8,6 +8,7 @@ import {
   communityAggregation,
   initLouvainState,
   louvainStep,
+  moveDeltaModularity,
 } from '../src/lib/louvain.js';
 
 describe('communityAggregation', () => {
@@ -62,5 +63,29 @@ describe('louvainStep', () => {
     ).to.deep.equal(
       new Set([new Set(['A', 'B']), new Set(['C', 'D']), new Set(['E', 'F'])])
     );
+  });
+});
+
+describe('moveDeltaModularity', () => {
+  it('correctly calculates modularity contribution', () => {
+    const graph: CommunityGraph = {
+      nodes: ['A', 'B', 'C', 'D'],
+      matrix: [
+        [0, 1, 2, 3],
+        [1, 0, 3, 2],
+        [2, 3, 0, 1],
+        [3, 2, 1, 0],
+      ],
+      communities: [new Set(['A', 'B']), new Set(['C', 'D'])],
+    };
+
+    const deltaModularity = moveDeltaModularity(
+      graph,
+      'B',
+      graph.communities[0],
+      graph.communities[1]
+    );
+
+    expect(deltaModularity).to.be.approximately(0.20833, 0.00001);
   });
 });

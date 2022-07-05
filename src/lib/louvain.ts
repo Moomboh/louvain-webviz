@@ -59,7 +59,7 @@ function modularityContrib(
   );
 }
 
-function moveDeltaModularity(
+export function moveDeltaModularity(
   graph: CommunityGraph,
   moveNode: string,
   fromCommunity: Set<string>,
@@ -73,13 +73,13 @@ function moveDeltaModularity(
       continue;
     }
 
-    deltaRemove -= modularityContrib(node, moveNode, graph);
+    deltaRemove -= 2 * modularityContrib(node, moveNode, graph);
   }
 
   let deltaAdd = 0;
 
   for (const node of toCommunity) {
-    deltaAdd += modularityContrib(node, moveNode, graph);
+    deltaAdd += 2 * modularityContrib(node, moveNode, graph);
   }
 
   return deltaRemove + deltaAdd;
