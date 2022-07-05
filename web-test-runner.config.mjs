@@ -47,13 +47,19 @@ export default /** @type {import("@web/test-runner").TestRunnerConfig} */ ({
   esbuildTarget: 'auto',
 
   /** Amount of browsers to run concurrently */
-  concurrentBrowsers: 3,
+  concurrentBrowsers: process.env.GITHUB_ACTIONS ? 1 : 3,
 
   /** Amount of test files per browser to test concurrently */
-  concurrency: 4,
+  concurrency: process.env.GITHUB_ACTIONS ? 2 : 4,
 
   coverageConfig: {
     exclude: ['**/node_modules/**/*', '**/out-vendors/**/*'],
+  },
+
+  testFramework: {
+    config: {
+      timeout: 10000,
+    },
   },
 
   /** Browsers to run tests on */
