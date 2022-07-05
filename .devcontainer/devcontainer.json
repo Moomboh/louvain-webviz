@@ -17,6 +17,5 @@
     "eamodio.gitlens",
     "ms-azuretools.vscode-docker",
     "ritwickdey.LiveServer"
-  ],
-  "postCreateCommand": "npx install playwright"
+  ]
 }
