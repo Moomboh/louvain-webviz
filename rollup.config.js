@@ -41,6 +41,23 @@ export default [
         flattenOutput: false,
         // TODO: find a way to dedupe or even better completely generate HTML files for
         //       all pages in src/pages
+        transformHtml: (htmlContent, file) => {
+          if (file.htmlFileName.includes('imprint')) {
+            return htmlContent.replace(
+              '__IMPRINT_CONTENT__',
+              process.env.LWV_IMPRINT_CONTENT || 'TESTEST'
+            );
+          }
+
+          if (file.htmlFileName.includes('privacy')) {
+            return htmlContent.replace(
+              '__PRIVACY_CONTENT__',
+              process.env.LWV_PRIVACY_CONTENT || 'TESTEST'
+            );
+          }
+
+          return htmlContent;
+        },
       }),
       copy({
         targets: [
