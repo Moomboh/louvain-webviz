@@ -1,6 +1,7 @@
 import { playwrightLauncher } from '@web/test-runner-playwright';
 import { rollupAdapter } from '@web/dev-server-rollup';
 import alias from '@rollup/plugin-alias';
+import url from '@rollup/plugin-url';
 
 const filteredLogs = [
   'Running in dev mode',
@@ -19,6 +20,7 @@ export default /** @type {import("@web/test-runner").TestRunnerConfig} */ ({
   },
 
   plugins: [
+    rollupAdapter(url()),
     rollupAdapter(
       alias({
         entries: [

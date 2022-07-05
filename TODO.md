@@ -5,4 +5,4 @@
 - [x] testing
 - [ ] dedupe html files
 - [ ] readme
-- [ ] CI/CD
+- [x] CI/CD
