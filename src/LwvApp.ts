@@ -3,6 +3,7 @@ import { LitElement, html, css } from 'lit';
 import { ScopedElementsMixin } from '@open-wc/scoped-elements';
 import { TopAppBar } from '@material/mwc-top-app-bar';
 import { property } from 'lit/decorators.js';
+import githubLogoSvg from '../../assets/svg/github-logo.svg';
 
 export class LwvApp extends ScopedElementsMixin(LitElement) {
   static get scopedElements() {
@@ -98,10 +99,7 @@ export class LwvApp extends ScopedElementsMixin(LitElement) {
           href="https://github.com/Moomboh/louvain-webviz"
           class="app-bar-link app-bar-link-right"
         >
-          <img
-            src="${this._baseHref}assets/svg/github-logo.svg"
-            alt="GitHub logo"
-          />
+          <img src="${githubLogoSvg}" alt="GitHub logo" />
         </a>
       </mwc-top-app-bar>
       <main>

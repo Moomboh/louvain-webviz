@@ -2,6 +2,7 @@ import { hmrPlugin, presets } from '@open-wc/dev-server-hmr';
 import { rollupAdapter } from '@web/dev-server-rollup';
 import commonjs from '@rollup/plugin-commonjs';
 import alias from '@rollup/plugin-alias';
+import url from '@rollup/plugin-url';
 
 const hmr = process.argv.includes('--hmr');
 
@@ -29,6 +30,11 @@ export default /** @type {import('@web/dev-server').DevServerConfig} */ ({
 
   plugins: [
     rollupAdapter(commonjs()),
+    rollupAdapter(
+      url({
+        exclude: ['assets/img/**/*'],
+      })
+    ),
     rollupAdapter(
       alias({
         entries: [

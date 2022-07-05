@@ -6,6 +6,7 @@ import { terser } from 'rollup-plugin-terser';
 import commonjs from '@rollup/plugin-commonjs';
 import alias from '@rollup/plugin-alias';
 import copy from 'rollup-plugin-copy';
+import url from '@rollup/plugin-url';
 import path from 'path';
 
 export default [
@@ -53,6 +54,7 @@ export default [
           },
         ],
       }),
+      url(),
       /** Resolve bare module imports */
       nodeResolve(),
       /** Minify JS */
